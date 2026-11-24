@@ -7,11 +7,14 @@ import { Text } from '@/components/primitives/Text'
 import { SectionCtas } from '@/components/sections/SectionCtas'
 import { SectionRenderer } from '@/components/sections/SectionRenderer'
 import { PageJsonLd } from '@/components/seo/JsonLd'
+import { ContentImage } from '@/components/primitives/ContentImage'
+import { RichText } from '@/lib/content'
 import type {
   FaqSection,
   HeroSection,
   Page,
   ProcessStepsSection,
+  Section,
   SiteSettings,
   TeamSection,
   TestimonialsSection,
@@ -28,7 +31,7 @@ type RumiDentHomeProps = {
   site: SiteSettings
 }
 
-const getSection = <T,>(sections: Page['sections'], type: string) =>
+const getSection = <T extends Section,>(sections: Page['sections'], type: T['type']) =>
   sections.find((section): section is T => section.type === type)
 
 function WaveBackdrop() {
@@ -80,6 +83,9 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
           aria-labelledby="rumi-hero-heading"
           className="relative isolate overflow-hidden bg-hero-bg pb-12 pt-10 sm:pb-16 lg:pb-0 lg:pt-16"
         >
+          <div aria-hidden="true" className="pointer-events-none absolute left-[34%] top-[17%] h-[83%] w-[92%] opacity-65">
+            <WaveBackdrop />
+          </div>
           <Container width="wide" className="relative z-10 grid items-center gap-8 lg:min-h-[38rem] lg:grid-cols-[minmax(0,0.93fr)_minmax(28rem,1.07fr)] lg:gap-0">
             <div className="max-w-2xl py-4 lg:py-12">
               <p className="mb-5 font-display text-step-0 font-bold tracking-[0.08em] text-primary uppercase">
@@ -112,7 +118,10 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
             </div>
 
             <div className="relative isolate min-h-[19rem] sm:min-h-[27rem] lg:min-h-[38rem]">
-              <WaveBackdrop />
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-[12%] bottom-[8%] top-[18%] rounded-full bg-hero-wave-soft/60 blur-3xl"
+              />
               <div className="absolute inset-x-[5%] bottom-0 top-0 z-10">
                 <Image
                   src="/images/hero-kid.png"
@@ -120,7 +129,7 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
                   fill
                   priority
                   sizes="(min-width: 1024px) 52vw, 96vw"
-                  className="object-contain object-bottom"
+                  className="rumi-hero-kid object-contain object-bottom"
                 />
               </div>
             </div>
@@ -137,18 +146,30 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
               </Heading>
               {services.intro ? <Text size="lead" tone="muted" className="max-w-2xl">{services.intro}</Text> : null}
             </div>
-            <ul className="mt-12 grid gap-x-8 border-y border-border lg:grid-cols-2">
+            <ul className="mt-12 border-t border-border">
               {services.items.map((service, index) => (
-                <li key={service.key} className={cn('group border-border py-7', index % 2 === 0 ? 'lg:border-r lg:pr-8' : 'lg:pl-8', index < services.items.length - 2 && 'border-b')}>
-                  <article className="grid grid-cols-[auto_1fr] gap-x-5">
-                    <span aria-hidden="true" className="font-display text-step-3 font-extrabold leading-none text-hero-wave">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <div>
+                <li key={service.key} className="border-b border-border">
+                  <details className="group py-1" open={index === 0}>
+                    <summary className="grid cursor-pointer list-none grid-cols-[auto_1fr_auto] items-center gap-4 py-5 marker:content-none sm:gap-8 sm:py-6">
+                      <span aria-hidden="true" className="font-display text-step-2 font-extrabold leading-none text-hero-wave">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
                       <Heading as="h3" size="step-1" className="text-fg">{service.title}</Heading>
-                      {service.teaser ? <Text tone="muted" className="mt-2 max-w-prose">{service.teaser}</Text> : null}
+                      <span
+                        aria-hidden="true"
+                        className="grid size-9 place-items-center rounded-full border border-border text-step-2 leading-none text-primary transition-transform duration-(--duration-base) group-open:rotate-45"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <div className="grid grid-cols-[auto_1fr] gap-x-4 pb-6 pl-[calc(var(--spacing)*14)] sm:pl-[calc(var(--spacing)*20)]">
+                      <span aria-hidden="true" className="w-px bg-hero-wave" />
+                      <div className="max-w-2xl">
+                        {service.teaser ? <Text size="lead" className="text-fg-muted">{service.teaser}</Text> : null}
+                        {service.body ? <div className="prose-theme mt-4 text-fg-muted"><RichText value={service.body} /></div> : null}
+                      </div>
                     </div>
-                  </article>
+                  </details>
                 </li>
               ))}
             </ul>
@@ -165,12 +186,19 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
               </Heading>
               {firstVisit.intro ? <Text size="lead" className="mt-4 text-primary-fg/75">{firstVisit.intro}</Text> : null}
             </div>
-            <ol className="relative mt-12 grid gap-8 md:grid-cols-3">
+            <ol className="relative mt-10 flex flex-col gap-0 md:flex-row md:items-start">
               {firstVisit.steps.map((step, index) => (
-                <li key={step.key} className="relative border-t border-primary-fg/30 pt-6">
-                  <span className="font-display text-step-4 font-extrabold text-accent">{String(index + 1).padStart(2, '0')}</span>
-                  <Heading as="h3" size="step-1" className="mt-4 text-primary-fg">{step.title}</Heading>
-                  {step.text ? <Text className="mt-3 max-w-xs text-primary-fg/75">{step.text}</Text> : null}
+                <li key={step.key} className="relative grid grid-cols-[3rem_1fr] gap-x-4 py-5 md:flex-1 md:grid-cols-none md:py-0 md:pr-8">
+                  <span className="relative z-10 grid size-12 place-items-center rounded-full bg-accent font-display text-step-1 font-extrabold text-accent-fg">
+                    {index + 1}
+                  </span>
+                  <div className="md:mt-5">
+                    <Heading as="h3" size="step-1" className="text-primary-fg">{step.title}</Heading>
+                    {step.text ? <Text size="small" className="mt-1 max-w-xs text-primary-fg/75">{step.text}</Text> : null}
+                  </div>
+                  {index < firstVisit.steps.length - 1 ? (
+                    <span aria-hidden="true" className="absolute left-6 top-14 h-[calc(100%-1.5rem)] w-px bg-primary-fg/30 md:left-12 md:top-6 md:h-px md:w-[calc(100%-3rem)]" />
+                  ) : null}
                 </li>
               ))}
             </ol>
@@ -195,10 +223,17 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
               {team.intro ? <Text size="lead" tone="muted" className="mt-4">{team.intro}</Text> : null}
             </div>
             <ul className="mt-12 grid gap-6 md:grid-cols-2">
-              {team.members.map((member, index) => (
+              {team.members.slice(0, 2).map((member, index) => (
                 <li key={member.id}>
-                  <article className={cn('grid min-h-72 overflow-hidden rounded-media', index % 2 === 0 ? 'bg-hero-wave-soft' : 'bg-accent-100')}>
-                    <div className="flex flex-col justify-end p-8">
+                  <article className={cn('grid overflow-hidden rounded-media', member.photo ? 'sm:grid-cols-2' : 'min-h-72', index % 2 === 0 ? 'bg-hero-wave-soft' : 'bg-accent-100')}>
+                    {member.photo ? (
+                      <ContentImage
+                        image={member.photo}
+                        sizes="(min-width: 768px) 40vw, 100vw"
+                        className="h-full min-h-64 w-full object-cover"
+                      />
+                    ) : null}
+                    <div className="flex min-h-72 flex-col justify-end p-8">
                       <p className="text-step--1 font-bold tracking-[0.08em] text-primary uppercase">{member.role}</p>
                       <Heading as="h3" size="step-3" className="mt-2">{member.name}</Heading>
                       <Text className="mt-4 max-w-md text-fg-muted">{member.bioShort}</Text>
@@ -213,10 +248,44 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
       ) : null}
 
       <SectionRenderer
-        sections={[...(testimonials ? [testimonials] : []), ...(faq ? [faq] : []), ...remaining]}
+        sections={[...(testimonials ? [testimonials] : []), ...remaining]}
         locale={locale}
         site={site}
       />
+
+      {faq ? (
+        <section className="relative overflow-hidden bg-hero-bg py-(--space-section)" aria-labelledby="rumi-faq-heading">
+          <Container width="wide" className="grid gap-10 lg:grid-cols-[minmax(16rem,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <div className="relative">
+              <Heading as="h2" id="rumi-faq-heading" size="step-4" className="max-w-[9ch]">{faq.heading}</Heading>
+              {faq.intro ? <Text size="lead" tone="muted" className="mt-5 max-w-sm">{faq.intro}</Text> : null}
+              <Image
+                src="/images/tooth-mascot.png"
+                alt=""
+                width={682}
+                height={1024}
+                aria-hidden="true"
+                className="pointer-events-none mt-8 w-24 rotate-[-7deg] opacity-85 lg:mt-12 lg:w-32"
+              />
+            </div>
+            <ul className="border-t border-border">
+              {faq.items.map((item, index) => (
+                <li key={item.id} className="border-b border-border">
+                  <details className="group" open={index === 0}>
+                    <summary className="grid cursor-pointer list-none grid-cols-[1fr_auto] items-center gap-5 py-6 marker:content-none">
+                      <Heading as="h3" size="step-1" className="text-left">{item.question}</Heading>
+                      <span aria-hidden="true" className="text-step-2 leading-none text-primary transition-transform duration-(--duration-base) group-open:rotate-45">+</span>
+                    </summary>
+                    <div className="prose-theme max-w-2xl pb-7 text-fg-muted">
+                      <RichText value={item.answer} />
+                    </div>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+      ) : null}
 
       <PageJsonLd
         locale={locale}

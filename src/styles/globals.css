@@ -140,6 +140,11 @@
 }
 
 @layer components {
+  .rumi-hero-kid {
+    mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 100%);
+  }
+
   .hero-cutout-mask {
     clip-path: ellipse(88% 92% at 52% 48%);
   }
