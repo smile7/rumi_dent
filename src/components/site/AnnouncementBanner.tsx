@@ -12,7 +12,7 @@ const BANNER_ID = 'announcement'
 
 const toneClass: Record<Announcement['tone'], string> = {
   info: 'bg-tone-soft-bg text-tone-soft-fg',
-  promo: 'bg-tone-accent-bg text-tone-accent-fg',
+  promo: 'promo-banner text-tone-accent-fg',
   warning: 'bg-warning text-warning-fg',
 }
 

@@ -1,4 +1,4 @@
-import { Heading } from '@/components/primitives/Heading'
+import { SectionTitle } from '@/components/primitives/SectionTitle'
 import type { TestimonialsSection as TestimonialsModel } from '@/lib/content'
 
 import { SectionShell, sectionTitleId } from './SectionShell'
@@ -18,9 +18,9 @@ export function TestimonialsSection({
   return (
     <SectionShell section={section} labelledBy={section.heading ? titleId : undefined}>
       {section.heading ? (
-        <Heading as={level} size="step-3" id={titleId}>
+        <SectionTitle as={level} id={titleId}>
           {section.heading}
-        </Heading>
+        </SectionTitle>
       ) : null}
       <TestimonialsRow items={section.items} showRating={section.showRating} />
     </SectionShell>

@@ -12,7 +12,8 @@ import { addressLines, hoursRows } from '@/lib/site/footer'
 import { NavLink } from './NavLink'
 import { Wordmark } from './Wordmark'
 
-const linkClass = 'inline-block py-1 underline-offset-4 hover:text-link hover:underline'
+const linkClass =
+  'inline-block rounded-pill px-1 py-1 underline-offset-4 hover:bg-primary-fg/10 hover:underline'
 const headingClass = 'mb-3 font-display text-step-0 font-bold'
 
 export type SiteFooterProps = {
@@ -41,16 +42,26 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
   ].filter(Boolean)
 
   return (
-    <footer className="bg-tone-soft-bg text-tone-soft-fg">
+    <footer className="mt-8 bg-tone-brand-bg text-tone-brand-fg">
+      <svg
+        className="footer-wave -mt-8 block h-12 w-full text-tone-brand-bg"
+        viewBox="0 0 1440 48"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d="M0,24 C240,48 480,0 720,24 C960,48 1200,8 1440,28 L1440,48 L0,48 Z" />
+      </svg>
       <Container
         width="wide"
         className="grid gap-10 py-12 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:py-16"
       >
         <div>
           <Link href="/" className="inline-flex min-h-11 items-center rounded-sm">
-            <Wordmark name={settings.brandName} variant="compact" />
+            <Wordmark name={settings.brandName} variant="compact" onDark />
           </Link>
-          {settings.tagline ? <p className="mt-2 text-fg-muted">{settings.tagline}</p> : null}
+          {settings.tagline ? (
+            <p className="mt-2 text-step--1 text-tone-brand-fg/90">{settings.tagline}</p>
+          ) : null}
           <address className="mt-4 flex flex-col gap-1 not-italic">
             {addressLines(settings.address).map((line) => (
               <span key={line}>{line}</span>
@@ -62,8 +73,8 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
                 className={`${linkClass} inline-flex items-center gap-2`}
               >
                 <PhoneIcon aria-hidden="true" className="size-4 shrink-0" />
-                <span className="whitespace-nowrap">{phone.display}</span>
-                {phone.label ? <span className="text-fg-muted">({phone.label})</span> : null}
+                <span className="whitespace-nowrap tabular-nums">{phone.display}</span>
+                {phone.label ? <span className="text-tone-brand-fg/80">({phone.label})</span> : null}
               </a>
             ))}
             {settings.email ? (
@@ -84,10 +95,12 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
             <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
               {hours.map((row) => (
                 <div key={row.days} className="contents">
-                  <dt className="text-fg-muted">{row.days}</dt>
-                  <dd>
+                  <dt className="text-tone-brand-fg/80">{row.days}</dt>
+                  <dd className="tabular-nums">
                     {row.time ?? t('closed')}
-                    {row.note ? <span className="block text-fg-muted">{row.note}</span> : null}
+                    {row.note ? (
+                      <span className="block text-tone-brand-fg/80">{row.note}</span>
+                    ) : null}
                   </dd>
                 </div>
               ))}
@@ -128,18 +141,18 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
         ) : null}
       </Container>
 
-      <div className="border-t border-border">
-        <Container width="wide" className="flex flex-col gap-3 py-6 text-step--1 text-fg-muted">
+      <div className="border-t border-primary-fg/15">
+        <Container width="wide" className="flex flex-col gap-3 py-6 text-step--1 text-tone-brand-fg/85">
           <nav aria-label={t('legal')}>
             <ul className="flex flex-wrap gap-x-6">
               {settings.legalLinks.map((link) => (
                 <li key={link.href}>
-                  <NavLink link={link} className={`${linkClass} text-fg`} />
+                  <NavLink link={link} className={linkClass} />
                 </li>
               ))}
               {privacyEmail ? (
                 <li>
-                  <a href={`mailto:${privacyEmail}`} className={`${linkClass} text-fg`}>
+                  <a href={`mailto:${privacyEmail}`} className={linkClass}>
                     {t('privacyContact', { email: privacyEmail })}
                   </a>
                 </li>
@@ -147,7 +160,7 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
               <li>
                 <CookieSettingsButton
                   label={t('cookieSettings')}
-                  className={`${linkClass} cursor-pointer text-fg`}
+                  className={`${linkClass} cursor-pointer`}
                 />
               </li>
             </ul>

@@ -88,6 +88,12 @@
   body {
     @apply bg-bg font-body text-step-0 text-fg;
     line-height: var(--leading-body);
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--color-brand-200) 0.75px,
+      transparent 0
+    );
+    background-size: 24px 24px;
   }
 
   h1,
@@ -140,11 +146,122 @@
 }
 
 @layer components {
-  .hero-cutout-mask {
-    clip-path: ellipse(88% 92% at 52% 48%);
+  .hero-band {
+    background-color: var(--color-tone-soft-bg);
+    background-image:
+      radial-gradient(ellipse 100% 80% at 0% 0%, var(--color-brand-200), transparent 58%),
+      radial-gradient(ellipse 80% 60% at 100% 100%, var(--color-accent-200), transparent 55%),
+      linear-gradient(
+        165deg,
+        var(--color-brand-50) 0%,
+        var(--color-bg) 45%,
+        var(--color-accent-50) 100%
+      );
   }
 
-  html.js [data-tile-panel][data-open='false'] {
+  [data-tone='soft'] {
+    background-image: radial-gradient(
+      ellipse 130% 90% at 50% -20%,
+      var(--color-brand-100),
+      transparent 50%
+    );
+  }
+
+  [data-tone='accent'] {
+    background-image: radial-gradient(
+      ellipse 100% 70% at 100% 0%,
+      var(--color-accent-200),
+      transparent 55%
+    );
+  }
+
+  .hero-cutout-mask {
+    clip-path: url(#hero-blob-clip);
+  }
+
+  .hero-media-frame {
+    box-shadow: var(--shadow-play);
+  }
+
+  .hero-trust-pill {
+    @apply inline-flex max-w-full items-center gap-2 rounded-pill border-2 border-brand-200/80 bg-surface px-4 py-2.5 text-step--1 font-bold shadow-sm;
+  }
+
+  .tile-icon-well {
+    @apply flex size-14 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-fg shadow-sm;
+  }
+
+  .tile-surface-children {
+    @apply bg-surface-play;
+  }
+
+  .tile-surface-adults {
+    @apply bg-surface-calm;
+  }
+
+  .tile-surface-everyone {
+    @apply bg-surface;
+  }
+
+  .tile-bento-feature {
+    @apply min-[30rem]:col-span-2 min-[30rem]:row-span-1;
+  }
+
+  .faq-accordion-cards [data-slot='accordion-item'] {
+    @apply mb-3 rounded-card border-2 border-border/80 bg-surface px-4 shadow-sm;
+    border-bottom-width: 2px;
+  }
+
+  .faq-accordion-cards [data-slot='accordion-item']:last-child {
+    @apply mb-0;
+  }
+
+  .promo-banner {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-brand-100),
+      var(--color-accent-100),
+      var(--color-brand-100)
+    );
+  }
+
+  .footer-wave path {
+    fill: var(--color-tone-brand-bg);
+  }
+
+  .process-step-card {
+    @apply relative;
+  }
+
+  @media (width >= 48rem) {
+  .process-timeline .process-step-card:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 2.25rem;
+    inset-inline-end: -1.25rem;
+    width: 2.5rem;
+    height: 3px;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent-400);
+  }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-decor-blob {
+      animation: hero-drift 18s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes hero-drift {
+    from {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    to {
+      transform: translate(-1.5rem, 1rem) rotate(-4deg);
+    }
+  }
+
+  html.js [data-tile-panel][data-open='false']:not([hidden]) {
     display: none;
   }
 

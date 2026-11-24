@@ -3,7 +3,7 @@
 import { ChevronDownIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import type { ReactNode } from 'react'
-import { useCallback, useEffect, useId, useState } from 'react'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 
 import { Heading } from '@/components/primitives/Heading'
 import { ContentIcon } from '@/components/primitives/ContentIcon'
@@ -18,6 +18,12 @@ const audienceFilterClass: Record<NonNullable<TileItem['audience']>, string> = {
   children: 'in-data-[audience-filter=adults]:hidden',
   adults: 'in-data-[audience-filter=children]:hidden',
   everyone: '',
+}
+
+const tileSurfaceClass: Record<NonNullable<TileItem['audience']>, string> = {
+  children: 'tile-surface-children',
+  adults: 'tile-surface-adults',
+  everyone: 'tile-surface-everyone',
 }
 
 type TilesGridProps = {
@@ -41,6 +47,7 @@ export function TilesGrid({
 }: TilesGridProps) {
   const t = useTranslations('Sections')
   const listId = useId()
+  const listRef = useRef<HTMLUListElement>(null)
   const [openKeys, setOpenKeys] = useState<Set<string>>(() => new Set())
 
   const toggle = useCallback(
@@ -82,20 +89,51 @@ export function TilesGrid({
     })
   }, [openKeys, items])
 
+  // React 19.3 serializes `hidden` as a boolean and has no `onBeforeMatch`, so
+  // `until-found` (browser find-in-page) is applied and listened to on the DOM.
+  useEffect(() => {
+    const panels = listRef.current?.querySelectorAll<HTMLElement>('[data-tile-panel]') ?? []
+    for (const panel of panels) {
+      const key = panel.dataset.tileKey
+      if (key && openKeys.has(key)) panel.removeAttribute('hidden')
+      else panel.setAttribute('hidden', 'until-found')
+    }
+  }, [openKeys])
+
+  useEffect(() => {
+    const list = listRef.current
+    if (!list) return
+    const onBeforeMatch = (event: Event) => {
+      if (!(event.target instanceof HTMLElement)) return
+      const key = event.target.dataset.tileKey
+      if (!key) return
+      setOpenKeys((prev) => new Set(allowMultiple ? prev : []).add(key))
+    }
+    list.addEventListener('beforematch', onBeforeMatch)
+    return () => list.removeEventListener('beforematch', onBeforeMatch)
+  }, [allowMultiple])
+
   const cols =
     density === 'compact'
       ? 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
       : 'min-[30rem]:grid-cols-2 lg:grid-cols-3'
 
   return (
-    <ul className={cn('grid grid-flow-dense gap-4', cols)} id={listId}>
-      {items.map((item) => {
+    <ul ref={listRef} className={cn('grid grid-flow-dense gap-5', cols)} id={listId}>
+      {items.map((item, itemIndex) => {
         const isOpen = openKeys.has(item.key)
         const panelId = `tile-panel-${item.key}`
         const buttonId = `tile-${item.key}`
         const body = bodies[item.key]
         return (
-          <li key={item.key} className={cn('contents', audienceFilterClass[item.audience ?? 'everyone'])}>
+          <li
+            key={item.key}
+            className={cn(
+              'contents',
+              audienceFilterClass[item.audience ?? 'everyone'],
+              itemIndex === 0 && density !== 'compact' && 'tile-bento-feature',
+            )}
+          >
             <Heading as={tileHeadingLevel} size="step-0" className="m-0">
               <button
                 type="button"
@@ -109,14 +147,20 @@ export function TilesGrid({
                   toggle(item)
                 }}
                 className={cn(
-                  'flex min-h-30 w-full flex-col items-start gap-3 rounded-tile border border-border bg-surface p-5 text-left shadow-sm transition-[box-shadow,transform] duration-(--duration-base) ease-standard hover:shadow-md',
-                  isOpen && 'shadow-md',
+                  'flex min-h-36 w-full flex-col items-start gap-3 rounded-tile border-2 border-border/60 p-6 text-left shadow-sm transition-[border-color,box-shadow,transform] duration-(--duration-base) ease-emphasized hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-md motion-reduce:hover:translate-y-0',
+                  tileSurfaceClass[item.audience ?? 'everyone'],
+                  isOpen && 'border-primary/40 shadow-md',
+                  itemIndex === 0 && density !== 'compact' && 'min-h-40 lg:min-h-44',
                 )}
               >
                 <span className="flex w-full items-start justify-between gap-3">
-                  <span className="flex flex-col gap-2">
-                    {item.icon ? <ContentIcon name={item.icon} className="text-accent" /> : null}
-                    <span className="font-display text-step-1 font-bold">{item.title}</span>
+                  <span className="flex flex-col gap-3">
+                    {item.icon ? (
+                      <span className="tile-icon-well" aria-hidden="true">
+                        <ContentIcon name={item.icon} />
+                      </span>
+                    ) : null}
+                    <span className="font-display text-step-1 font-extrabold">{item.title}</span>
                     {item.teaser ? (
                       <span className="text-step--1 text-fg-muted">{item.teaser}</span>
                     ) : null}
@@ -136,11 +180,9 @@ export function TilesGrid({
               role="region"
               aria-labelledby={buttonId}
               data-tile-panel=""
+              data-tile-key={item.key}
               data-open={isOpen ? 'true' : 'false'}
-              // @ts-expect-error React 19.3: until-found for find-in-page
-              hidden={isOpen ? undefined : 'until-found'}
               className="col-span-full rounded-card border border-border bg-surface-muted p-6"
-              onBeforeMatch={() => setOpenKeys((prev) => new Set(prev).add(item.key))}
             >
               {body}
               {item.cta?.link ? (

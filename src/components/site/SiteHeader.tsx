@@ -37,7 +37,7 @@ export async function SiteHeader({ brandName, nav, phone, menu }: SiteHeaderProp
       <HeaderScrollState targetId={HEADER_ID} />
       <header
         id={HEADER_ID}
-        className="group/header sticky top-0 z-40 h-(--header-h-mobile) bg-bg transition-[background-color,box-shadow] duration-(--duration-base) ease-standard data-compact:bg-bg/95 data-compact:shadow-sm data-compact:backdrop-blur-md md:-top-(--header-shrink) md:flex md:h-(--header-h-expanded) md:items-end print:hidden"
+        className="group/header sticky top-0 z-40 h-(--header-h-mobile) border-b border-transparent bg-bg/90 backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-(--duration-base) ease-standard data-compact:border-border/60 data-compact:bg-bg/95 data-compact:shadow-sm md:-top-(--header-shrink) md:flex md:h-(--header-h-expanded) md:items-end print:hidden"
       >
         <Container
           width="wide"
@@ -57,7 +57,7 @@ export async function SiteHeader({ brandName, nav, phone, menu }: SiteHeaderProp
                   <li key={item.href}>
                     <NavLink
                       link={item}
-                      className="inline-flex min-h-11 items-center rounded-button px-3 font-semibold text-fg decoration-primary decoration-2 underline-offset-8 hover:bg-muted aria-[current=page]:text-primary aria-[current=page]:underline"
+                      className="inline-flex min-h-11 items-center rounded-pill px-4 font-semibold text-fg decoration-primary decoration-2 underline-offset-8 transition-colors hover:bg-accent/40 aria-[current=page]:bg-primary aria-[current=page]:text-primary-fg aria-[current=page]:no-underline"
                     />
                   </li>
                 ))}

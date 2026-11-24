@@ -17,7 +17,7 @@ type FaqAccordionProps = {
 
 export function FaqAccordion({ items, idPrefix }: FaqAccordionProps) {
   return (
-    <Accordion className="mt-8">
+    <Accordion className="faq-accordion-cards mt-8 max-w-(--container-content)">
       {items.map((item) => (
         <AccordionItem key={item.id} value={item.id}>
           <AccordionTrigger id={`${idPrefix}-${item.id}`}>{item.question}</AccordionTrigger>

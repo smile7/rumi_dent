@@ -1,5 +1,5 @@
-import { Heading } from '@/components/primitives/Heading'
 import { Text } from '@/components/primitives/Text'
+import { SectionTitle } from '@/components/primitives/SectionTitle'
 import { RichText } from '@/lib/content'
 import type { TilesSection as TilesModel } from '@/lib/content'
 
@@ -22,12 +22,21 @@ export function TilesSection({
   return (
     <SectionShell section={section} labelledBy={section.heading ? titleId : undefined}>
       {section.heading ? (
-        <Heading as={level} size="step-3" id={titleId}>
+        <SectionTitle
+          as={level}
+          id={titleId}
+          intro={
+            section.intro ? (
+              <Text tone="muted" className="max-w-(--container-prose)">
+                {section.intro}
+              </Text>
+            ) : null
+          }
+        >
           {section.heading}
-        </Heading>
-      ) : null}
-      {section.intro ? (
-        <Text tone="muted" className="mt-4 max-w-(--container-prose)">
+        </SectionTitle>
+      ) : section.intro ? (
+        <Text tone="muted" className="max-w-(--container-prose)">
           {section.intro}
         </Text>
       ) : null}

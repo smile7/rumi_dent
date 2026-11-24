@@ -1,7 +1,7 @@
 // Static only (ADR-012): no R2/D1/Durable Objects/KV, nothing that needs a payment card.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "site-starter-demo",
+  "name": "rumi-dent-site",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-11-18",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -12,7 +12,7 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "site-starter-demo",
+      "service": "rumi-dent-site",
     },
   ],
   "images": {

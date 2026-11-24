@@ -1,12 +1,13 @@
 /*
  * Client fonts (DESIGN-SYSTEM §3). Every family must ship the Cyrillic subset.
- * Rumi Dent: rounded, friendly display face + neutral body. Alternatives are compared in /styleguide.
+ * Rumi Dent: M PLUS Rounded 1c (playful display) + Onest (clean body).
  */
-import { Nunito, Onest } from 'next/font/google'
+import { M_PLUS_Rounded_1c, Onest } from 'next/font/google'
 
-export const displayFont = Nunito({
+export const displayFont = M_PLUS_Rounded_1c({
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
+  weight: ['500', '700', '800'],
   variable: '--font-display-family',
   adjustFontFallback: true,
   preload: false,

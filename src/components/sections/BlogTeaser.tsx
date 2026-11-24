@@ -1,4 +1,5 @@
 import { ContentImage } from '@/components/primitives/ContentImage'
+import { SectionTitle } from '@/components/primitives/SectionTitle'
 import { Heading } from '@/components/primitives/Heading'
 import { Text } from '@/components/primitives/Text'
 import NextLink from 'next/link'
@@ -24,14 +25,14 @@ export async function BlogTeaserSection({
   return (
     <SectionShell section={section} labelledBy={section.heading ? titleId : undefined}>
       {section.heading ? (
-        <Heading as={level} size="step-3" id={titleId}>
+        <SectionTitle as={level} id={titleId}>
           {section.heading}
-        </Heading>
+        </SectionTitle>
       ) : null}
       <ul className="mt-10 grid gap-6 md:grid-cols-3">
         {section.articles.map((article) => (
           <li key={article.id}>
-            <article className="flex h-full flex-col overflow-hidden rounded-card border border-border bg-surface">
+            <article className="flex h-full flex-col overflow-hidden rounded-card border-2 border-border/70 bg-surface shadow-sm transition-[box-shadow,transform] duration-(--duration-base) ease-standard hover:-translate-y-1 hover:shadow-md motion-reduce:hover:translate-y-0">
               {article.cover ? (
                 <ContentImage
                   image={article.cover}

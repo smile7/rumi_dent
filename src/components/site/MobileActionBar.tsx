@@ -33,7 +33,7 @@ export function MobileActionBar({ actions }: MobileActionBarProps) {
   return (
     <nav
       aria-label={t('label')}
-      className="fixed inset-x-0 bottom-0 z-40 border-t bg-bg/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden print:hidden [[data-menu-open]_&]:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t-4 border-accent bg-bg/95 pb-[env(safe-area-inset-bottom)] shadow-lg backdrop-blur-md md:hidden print:hidden [[data-menu-open]_&]:hidden"
     >
       <ul className="grid h-(--action-bar-h) auto-cols-fr grid-flow-col gap-2 p-2">
         {actions.map((action) => {

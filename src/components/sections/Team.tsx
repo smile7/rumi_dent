@@ -1,4 +1,5 @@
 import { ContentImage } from '@/components/primitives/ContentImage'
+import { SectionTitle } from '@/components/primitives/SectionTitle'
 import { Heading } from '@/components/primitives/Heading'
 import { Text } from '@/components/primitives/Text'
 import { Link } from '@/i18n/navigation'
@@ -13,7 +14,7 @@ function TeamCard({ member, featured }: { member: TeamMember; featured?: boolean
   return (
     <article
       className={cn(
-        'flex flex-col overflow-hidden rounded-card border border-border bg-surface',
+        'flex flex-col overflow-hidden rounded-card border-2 border-border/80 bg-surface shadow-sm',
         featured && 'md:grid md:grid-cols-2',
       )}
     >
@@ -54,12 +55,21 @@ export function TeamSection({
   return (
     <SectionShell section={section} labelledBy={section.heading ? titleId : undefined}>
       {section.heading ? (
-        <Heading as={level} size="step-3" id={titleId}>
+        <SectionTitle
+          as={level}
+          id={titleId}
+          intro={
+            section.intro ? (
+              <Text tone="muted" className="max-w-(--container-prose)">
+                {section.intro}
+              </Text>
+            ) : null
+          }
+        >
           {section.heading}
-        </Heading>
-      ) : null}
-      {section.intro ? (
-        <Text tone="muted" className="mt-4 max-w-(--container-prose)">
+        </SectionTitle>
+      ) : section.intro ? (
+        <Text tone="muted" className="max-w-(--container-prose)">
           {section.intro}
         </Text>
       ) : null}

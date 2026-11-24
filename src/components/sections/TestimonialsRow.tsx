@@ -67,7 +67,7 @@ export function TestimonialsRow({ items, showRating }: TestimonialsRowProps) {
         {items.map((item) => (
           <li
             key={item.id}
-            className="w-[min(100%,22rem)] shrink-0 snap-start rounded-card border border-border bg-surface p-6"
+            className="w-[min(100%,22rem)] shrink-0 snap-start rounded-card border-2 border-border/80 bg-surface p-6 shadow-sm"
           >
             <blockquote className="flex h-full flex-col gap-4">
               <Text className="text-pretty">

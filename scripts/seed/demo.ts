@@ -631,7 +631,8 @@ export function demoDocuments(images: SeedImages) {
               bg: 'Майка и дете се усмихват в кабинета',
               en: 'A mother and child smiling in the treatment room',
             }),
-            variant: 'split',
+            variant: 'cutout',
+            tone: 'soft',
             trustItems: keyed(
               [
                 {
@@ -662,6 +663,7 @@ export function demoDocuments(images: SeedImages) {
             source: 'services',
             allowMultiple: false,
             density: 'comfortable',
+            tone: 'base',
           }),
           section('section.processSteps', {
             heading: { bg: 'Първото посещение', en: 'Your first visit' }[locale],
@@ -713,6 +715,7 @@ export function demoDocuments(images: SeedImages) {
             heading: { bg: 'Често задавани въпроси', en: 'Frequently asked questions' }[locale],
             source: 'all',
             emitSchema: true,
+            tone: 'accent',
           }),
           section('section.blogTeaser', {
             heading: { bg: 'От блога', en: 'From the blog' }[locale],

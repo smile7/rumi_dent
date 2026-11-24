@@ -1,4 +1,4 @@
-import { Heading } from '@/components/primitives/Heading'
+import { SectionTitle } from '@/components/primitives/SectionTitle'
 import { Text } from '@/components/primitives/Text'
 import { RichText } from '@/lib/content'
 import type { FaqSection as FaqModel } from '@/lib/content'
@@ -18,14 +18,23 @@ export function FaqSection({
   const level = sectionHeadingLevel(index, sections)
 
   return (
-    <SectionShell section={section} labelledBy={section.heading ? titleId : undefined} width="prose">
+    <SectionShell section={section} labelledBy={section.heading ? titleId : undefined} width="content">
       {section.heading ? (
-        <Heading as={level} size="step-3" id={titleId}>
+        <SectionTitle
+          as={level}
+          id={titleId}
+          intro={
+            section.intro ? (
+              <Text tone="muted" className="max-w-(--container-prose)">
+                {section.intro}
+              </Text>
+            ) : null
+          }
+        >
           {section.heading}
-        </Heading>
-      ) : null}
-      {section.intro ? (
-        <Text tone="muted" className="mt-4">
+        </SectionTitle>
+      ) : section.intro ? (
+        <Text tone="muted" className="max-w-(--container-prose)">
           {section.intro}
         </Text>
       ) : null}
