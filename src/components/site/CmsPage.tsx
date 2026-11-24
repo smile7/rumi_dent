@@ -10,6 +10,7 @@ import type { WebPageType } from '@/lib/seo/jsonld/webPage'
 
 import { PageHeader } from './PageHeader'
 import { SetPageTranslations } from './PageTranslations'
+import { RumiDentHome } from './RumiDentHome'
 
 export type CmsPageProps = {
   page: Page
@@ -43,6 +44,10 @@ export function CmsPage({
   headerActions,
   children,
 }: CmsPageProps) {
+  if (page.pageKey === 'home' && !wrapSections && !children) {
+    return <RumiDentHome page={page} locale={locale} site={site} />
+  }
+
   const faq = page.sections.find(
     (section): section is FaqSection => section.type === 'faq' && section.emitSchema,
   )

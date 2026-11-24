@@ -9,17 +9,17 @@
   --color-*: initial;
 
   /* ---------- Layer 1: primitives ---------- */
-  --color-brand-50: oklch(0.975 0.018 186);
-  --color-brand-100: oklch(0.948 0.036 186);
-  --color-brand-200: oklch(0.9 0.062 186);
-  --color-brand-300: oklch(0.83 0.09 186);
-  --color-brand-400: oklch(0.74 0.105 186);
-  --color-brand-500: oklch(0.64 0.105 186);
-  --color-brand-600: oklch(0.55 0.095 186);
-  --color-brand-700: oklch(0.47 0.085 186);
-  --color-brand-800: oklch(0.39 0.07 188);
-  --color-brand-900: oklch(0.31 0.055 190);
-  --color-brand-950: oklch(0.23 0.04 192);
+  --color-brand-50: oklch(0.975 0.014 238);
+  --color-brand-100: oklch(0.947 0.032 238);
+  --color-brand-200: oklch(0.9 0.06 238);
+  --color-brand-300: oklch(0.83 0.1 238);
+  --color-brand-400: oklch(0.74 0.13 238);
+  --color-brand-500: oklch(0.64 0.14 238);
+  --color-brand-600: oklch(0.53 0.125 242);
+  --color-brand-700: oklch(0.39 0.095 250);
+  --color-brand-800: oklch(0.31 0.075 253);
+  --color-brand-900: oklch(0.25 0.06 255);
+  --color-brand-950: oklch(0.19 0.045 258);
 
   --color-accent-50: oklch(0.982 0.018 78);
   --color-accent-100: oklch(0.958 0.042 76);
@@ -82,6 +82,13 @@
   --color-tone-accent-fg: var(--color-fg);
   --color-tone-inverse-bg: var(--color-brand-950);
   --color-tone-inverse-fg: var(--color-neutral-50);
+
+  /* Hero illustration layers: continuous curves behind the cutout, never a cropped image panel. */
+  --color-hero-bg: oklch(0.975 0.011 240);
+  --color-hero-wave-soft: oklch(0.89 0.06 232 / 0.62);
+  --color-hero-wave: oklch(0.74 0.13 228 / 0.72);
+  --color-hero-wave-light: oklch(0.92 0.045 230 / 0.86);
+  --color-hero-wave-apricot: oklch(0.8 0.13 62 / 0.82);
 
   /* ---------- Typography ---------- */
   /* --font-*-family are set by next/font in src/config/fonts.ts. */
