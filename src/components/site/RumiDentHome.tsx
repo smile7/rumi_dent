@@ -90,7 +90,7 @@ function ServiceColumn({
                 +
               </span>
             </summary>
-            <div className="ml-10 border-l border-hero-wave pb-5 pl-4 sm:ml-12">
+            <div className="service-reveal ml-10 border-l border-hero-wave pb-5 pl-4 sm:ml-12">
               {service.teaser ? <Text size="small" className="text-fg-muted">{service.teaser}</Text> : null}
               {service.body ? <div className="prose-theme mt-3 text-fg-muted"><RichText value={service.body} /></div> : null}
             </div>
@@ -122,7 +122,9 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
           aria-labelledby="rumi-hero-heading"
           className="relative isolate overflow-hidden bg-hero-bg pb-12 pt-10 sm:pb-16 lg:pb-0 lg:pt-16"
         >
-          <div aria-hidden="true" className="pointer-events-none absolute left-[28%] top-[10%] h-[90%] w-[104%] opacity-50">
+          <div aria-hidden="true" className="pointer-events-none absolute -right-[22rem] bottom-[-24rem] size-[58rem] rounded-full bg-hero-wave-soft" />
+          <div aria-hidden="true" className="pointer-events-none absolute -right-[12rem] bottom-[-28rem] size-[46rem] rounded-full bg-hero-wave" />
+          <div aria-hidden="true" className="pointer-events-none absolute left-[21%] top-[4%] h-[96%] w-[112%] opacity-50">
             <WaveBackdrop />
           </div>
           <Container width="wide" className="relative z-10 grid items-center gap-8 lg:min-h-[38rem] lg:grid-cols-[minmax(0,0.93fr)_minmax(28rem,1.07fr)] lg:gap-0">
@@ -156,9 +158,9 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
               ) : null}
             </div>
 
-            <div className="relative isolate min-h-[19rem] sm:min-h-[27rem] lg:min-h-[38rem]">
-              <div aria-hidden="true" className="absolute inset-x-[5%] bottom-[-6%] top-[12%] rounded-full bg-hero-wave-soft/60 blur-3xl" />
-              <div aria-hidden="true" className="absolute inset-x-[2%] bottom-[-10%] top-0 z-0 opacity-35 blur-xl">
+            <div className="relative min-h-[19rem] sm:min-h-[27rem] lg:min-h-[38rem]">
+              <div aria-hidden="true" className="absolute inset-x-[-4%] bottom-[-8%] top-[6%] rounded-full bg-hero-wave-soft/45 blur-3xl" />
+              <div aria-hidden="true" className="absolute inset-x-[-4%] bottom-[-13%] top-0 z-0 opacity-35 blur-2xl">
                 <Image
                   src="/images/hero-kid.png"
                   alt=""

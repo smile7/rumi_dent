@@ -145,6 +145,25 @@
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 57%, transparent 98%);
   }
 
+  .service-reveal {
+    transform-origin: top center;
+  }
+
+  details[open] .service-reveal {
+    animation: service-reveal var(--duration-base) var(--ease-emphasized);
+  }
+
+  @keyframes service-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(-0.35rem) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
   .hero-cutout-mask {
     clip-path: ellipse(88% 92% at 52% 48%);
   }
