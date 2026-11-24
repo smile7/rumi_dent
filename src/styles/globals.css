@@ -141,8 +141,8 @@
 
 @layer components {
   .rumi-hero-kid {
-    mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 57%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 57%, transparent 98%);
   }
 
   .hero-cutout-mask {

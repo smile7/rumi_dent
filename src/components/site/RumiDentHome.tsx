@@ -18,6 +18,7 @@ import type {
   SiteSettings,
   TeamSection,
   TestimonialsSection,
+  TileItem,
   TilesSection,
 } from '@/lib/content'
 import type { Locale } from '@/config/i18n'
@@ -63,6 +64,43 @@ function WaveBackdrop() {
   )
 }
 
+function ServiceColumn({
+  items,
+  offset,
+  className,
+}: {
+  items: TileItem[]
+  offset: number
+  className?: string
+}) {
+  return (
+    <ul className={cn('border-t border-border', className)}>
+      {items.map((service, index) => (
+        <li key={service.key} className="border-b border-border">
+          <details className="group py-1" open={offset + index === 0}>
+            <summary className="grid cursor-pointer list-none grid-cols-[auto_1fr_auto] items-center gap-3 py-4 marker:content-none sm:gap-5">
+              <span aria-hidden="true" className="font-display text-step-1 font-extrabold leading-none text-hero-wave">
+                {String(offset + index + 1).padStart(2, '0')}
+              </span>
+              <Heading as="h3" size="step-0" className="text-fg">{service.title}</Heading>
+              <span
+                aria-hidden="true"
+                className="grid size-8 place-items-center rounded-full border border-border text-step-1 leading-none text-primary transition-transform duration-(--duration-base) group-open:rotate-45"
+              >
+                +
+              </span>
+            </summary>
+            <div className="ml-10 border-l border-hero-wave pb-5 pl-4 sm:ml-12">
+              {service.teaser ? <Text size="small" className="text-fg-muted">{service.teaser}</Text> : null}
+              {service.body ? <div className="prose-theme mt-3 text-fg-muted"><RichText value={service.body} /></div> : null}
+            </div>
+          </details>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
   const hero = getSection<HeroSection>(page.sections, 'hero')
   const services = getSection<TilesSection>(page.sections, 'tiles')
@@ -70,6 +108,7 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
   const team = getSection<TeamSection>(page.sections, 'team')
   const testimonials = getSection<TestimonialsSection>(page.sections, 'testimonials')
   const faq = getSection<FaqSection>(page.sections, 'faq')
+  const serviceSplit = services ? Math.ceil(services.items.length / 2) : 0
   const remaining = page.sections.filter(
     (section) => !['hero', 'tiles', 'processSteps', 'team', 'testimonials', 'faq'].includes(section.type),
   )
@@ -83,7 +122,7 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
           aria-labelledby="rumi-hero-heading"
           className="relative isolate overflow-hidden bg-hero-bg pb-12 pt-10 sm:pb-16 lg:pb-0 lg:pt-16"
         >
-          <div aria-hidden="true" className="pointer-events-none absolute left-[34%] top-[17%] h-[83%] w-[92%] opacity-65">
+          <div aria-hidden="true" className="pointer-events-none absolute left-[28%] top-[10%] h-[90%] w-[104%] opacity-50">
             <WaveBackdrop />
           </div>
           <Container width="wide" className="relative z-10 grid items-center gap-8 lg:min-h-[38rem] lg:grid-cols-[minmax(0,0.93fr)_minmax(28rem,1.07fr)] lg:gap-0">
@@ -118,10 +157,16 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
             </div>
 
             <div className="relative isolate min-h-[19rem] sm:min-h-[27rem] lg:min-h-[38rem]">
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-[12%] bottom-[8%] top-[18%] rounded-full bg-hero-wave-soft/60 blur-3xl"
-              />
+              <div aria-hidden="true" className="absolute inset-x-[5%] bottom-[-6%] top-[12%] rounded-full bg-hero-wave-soft/60 blur-3xl" />
+              <div aria-hidden="true" className="absolute inset-x-[2%] bottom-[-10%] top-0 z-0 opacity-35 blur-xl">
+                <Image
+                  src="/images/hero-kid.png"
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 52vw, 96vw"
+                  className="rumi-hero-kid scale-105 object-contain object-bottom"
+                />
+              </div>
               <div className="absolute inset-x-[5%] bottom-0 top-0 z-10">
                 <Image
                   src="/images/hero-kid.png"
@@ -146,33 +191,22 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
               </Heading>
               {services.intro ? <Text size="lead" tone="muted" className="max-w-2xl">{services.intro}</Text> : null}
             </div>
-            <ul className="mt-12 border-t border-border">
-              {services.items.map((service, index) => (
-                <li key={service.key} className="border-b border-border">
-                  <details className="group py-1" open={index === 0}>
-                    <summary className="grid cursor-pointer list-none grid-cols-[auto_1fr_auto] items-center gap-4 py-5 marker:content-none sm:gap-8 sm:py-6">
-                      <span aria-hidden="true" className="font-display text-step-2 font-extrabold leading-none text-hero-wave">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <Heading as="h3" size="step-1" className="text-fg">{service.title}</Heading>
-                      <span
-                        aria-hidden="true"
-                        className="grid size-9 place-items-center rounded-full border border-border text-step-2 leading-none text-primary transition-transform duration-(--duration-base) group-open:rotate-45"
-                      >
-                        +
-                      </span>
-                    </summary>
-                    <div className="grid grid-cols-[auto_1fr] gap-x-4 pb-6 pl-[calc(var(--spacing)*14)] sm:pl-[calc(var(--spacing)*20)]">
-                      <span aria-hidden="true" className="w-px bg-hero-wave" />
-                      <div className="max-w-2xl">
-                        {service.teaser ? <Text size="lead" className="text-fg-muted">{service.teaser}</Text> : null}
-                        {service.body ? <div className="prose-theme mt-4 text-fg-muted"><RichText value={service.body} /></div> : null}
-                      </div>
-                    </div>
-                  </details>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-12 grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(14rem,0.55fr)_minmax(0,1fr)] lg:gap-10">
+              <ServiceColumn items={services.items.slice(0, serviceSplit)} offset={0} />
+              <figure className="relative order-first mx-auto grid aspect-square w-full max-w-64 place-items-center rounded-full bg-hero-bg lg:order-none">
+                <span aria-hidden="true" className="absolute inset-[10%] rounded-full border border-hero-wave" />
+                <span aria-hidden="true" className="absolute inset-[20%] rounded-full bg-hero-wave-soft" />
+                <Image
+                  src="/images/tooth-mascot.png"
+                  alt=""
+                  width={682}
+                  height={1024}
+                  aria-hidden="true"
+                  className="relative z-10 h-[82%] w-auto object-contain"
+                />
+              </figure>
+              <ServiceColumn items={services.items.slice(serviceSplit)} offset={serviceSplit} />
+            </div>
           </Container>
         </section>
       ) : null}
@@ -210,7 +244,7 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-28 right-0 hidden w-44 rotate-[-8deg] opacity-20 xl:block"
             />
-            {firstVisit.cta ? await SectionCtas({ ctas: [firstVisit.cta], site, className: 'mt-10' }) : null}
+            {firstVisit.cta ? await SectionCtas({ ctas: [firstVisit.cta], site, className: 'mt-10 [&>a]:border-primary-fg [&>a]:bg-primary-fg [&>a]:text-primary [&>a:hover]:bg-hero-bg' }) : null}
           </Container>
         </section>
       ) : null}
