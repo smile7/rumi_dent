@@ -85,8 +85,9 @@
 
   /* Hero illustration layers: continuous curves behind the cutout, never a cropped image panel. */
   --color-hero-bg: oklch(0.975 0.011 240);
-  --color-hero-wave-soft: oklch(0.89 0.06 232 / 0.38);
-  --color-hero-wave: oklch(0.74 0.13 228 / 0.4);
+  --color-hero-stage: oklch(0.85 0.075 228 / 0.82);
+  --color-hero-wave-soft: oklch(0.89 0.06 232 / 0.36);
+  --color-hero-wave: oklch(0.74 0.13 228 / 0.3);
   --color-hero-wave-light: oklch(0.92 0.045 230 / 0.64);
   --color-hero-wave-apricot: oklch(0.8 0.13 62 / 0.48);
 

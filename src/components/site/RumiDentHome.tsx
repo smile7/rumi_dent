@@ -42,22 +42,26 @@ function WaveBackdrop() {
       focusable="false"
       viewBox="0 0 1000 640"
       preserveAspectRatio="none"
-      className="absolute inset-x-0 bottom-0 h-[84%] w-full overflow-visible"
+      className="absolute inset-0 h-full w-full overflow-visible"
     >
       <path
-        d="M0 250C138 184 250 195 366 250s224 65 354 14c107-42 194-47 280-12v388H0Z"
+        d="M285 0C390 48 462 58 575 32 705 2 818 13 1000 78v562H0V505c134-21 223-66 293-137C354 304 354 128 285 0Z"
+        className="fill-hero-stage"
+      />
+      <path
+        d="M0 318C138 252 250 263 366 318s224 65 354 14c107-42 194-47 280-12v320H0Z"
         className="fill-hero-wave-soft"
       />
       <path
-        d="M0 340c120-50 230-38 343 2 129 46 254 47 387-6 91-36 181-49 270-22v326H0Z"
+        d="M0 408c120-50 230-38 343 2 129 46 254 47 387-6 91-36 181-49 270-22v258H0Z"
         className="fill-hero-wave"
       />
       <path
-        d="M0 448c138-42 263-38 385 16 99 44 211 38 326-13 109-48 204-61 289-35v224H0Z"
+        d="M0 478c138-42 263-38 385 16 99 44 211 38 326-13 109-48 204-61 289-35v154H0Z"
         className="fill-hero-wave-apricot"
       />
       <path
-        d="M0 504c134-34 256-27 366 19 124 52 245 48 365-2 103-43 193-54 269-32v151H0Z"
+        d="M0 536c134-34 256-27 366 19 124 52 245 48 365-2 103-43 193-54 269-32v119H0Z"
         className="fill-hero-wave-light"
       />
     </svg>
@@ -122,9 +126,7 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
           aria-labelledby="rumi-hero-heading"
           className="relative isolate overflow-hidden bg-hero-bg pb-12 pt-10 sm:pb-16 lg:pb-0 lg:pt-16"
         >
-          <div aria-hidden="true" className="pointer-events-none absolute -right-[22rem] bottom-[-24rem] size-[58rem] rounded-full bg-hero-wave-soft" />
-          <div aria-hidden="true" className="pointer-events-none absolute -right-[12rem] bottom-[-28rem] size-[46rem] rounded-full bg-hero-wave" />
-          <div aria-hidden="true" className="pointer-events-none absolute left-[21%] top-[4%] h-[96%] w-[112%] opacity-50">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <WaveBackdrop />
           </div>
           <Container width="wide" className="relative z-10 grid items-center gap-8 lg:min-h-[38rem] lg:grid-cols-[minmax(0,0.93fr)_minmax(28rem,1.07fr)] lg:gap-0">
@@ -159,8 +161,7 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
             </div>
 
             <div className="relative min-h-[19rem] sm:min-h-[27rem] lg:min-h-[38rem]">
-              <div aria-hidden="true" className="absolute inset-x-[-4%] bottom-[-8%] top-[6%] rounded-full bg-hero-wave-soft/45 blur-3xl" />
-              <div aria-hidden="true" className="absolute inset-x-[-4%] bottom-[-13%] top-0 z-0 opacity-35 blur-2xl">
+              <div aria-hidden="true" className="absolute inset-x-[-7%] bottom-[-18%] top-[2%] z-0 opacity-35 blur-2xl">
                 <Image
                   src="/images/hero-kid.png"
                   alt=""
@@ -169,7 +170,7 @@ export async function RumiDentHome({ page, locale, site }: RumiDentHomeProps) {
                   className="rumi-hero-kid scale-105 object-contain object-bottom"
                 />
               </div>
-              <div className="absolute inset-x-[5%] bottom-0 top-0 z-10">
+              <div className="absolute inset-x-[-2%] bottom-[-6%] top-0 z-10">
                 <Image
                   src="/images/hero-kid.png"
                   alt={hero.image?.alt ?? ''}
