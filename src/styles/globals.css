@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import './tokens.css';
+@plugin '@tailwindcss/typography';
+
+/* Light theme only in v1; token names already allow a [data-theme='dark'] override. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * shadcn bridge: shadcn components use these names. They point at our semantic tokens so there is
+ * no second palette. shadcn's `accent` (menu hover) is NOT bridged, because our `accent` is the
+ * brand accent; restyled components use `bg-muted` for hover states instead.
+ */
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-fg);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-fg);
+  --color-popover: var(--color-surface-raised);
+  --color-popover-foreground: var(--color-fg);
+  --color-primary-foreground: var(--color-primary-fg);
+  --color-secondary: var(--color-tone-soft-bg);
+  --color-secondary-foreground: var(--color-fg);
+  --color-muted: var(--color-surface-muted);
+  --color-muted-foreground: var(--color-fg-muted);
+  --color-accent-foreground: var(--color-accent-fg);
+  --color-destructive: var(--color-danger);
+  --color-input: var(--color-border-strong);
+  --color-ring: var(--color-focus);
+  --radius: var(--radius-md);
+}
+
+/* Typography plugin colors → semantic tokens (used by the Prose primitive). */
+@utility prose-theme {
+  --tw-prose-body: var(--color-fg);
+  --tw-prose-headings: var(--color-fg);
+  --tw-prose-lead: var(--color-fg-muted);
+  --tw-prose-links: var(--color-link);
+  --tw-prose-bold: var(--color-fg);
+  --tw-prose-counters: var(--color-fg-muted);
+  --tw-prose-bullets: var(--color-brand-400);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-fg);
+  --tw-prose-quote-borders: var(--color-accent-400);
+  --tw-prose-captions: var(--color-fg-muted);
+  --tw-prose-code: var(--color-fg);
+  --tw-prose-th-borders: var(--color-border-strong);
+  --tw-prose-td-borders: var(--color-border);
+  font-size: var(--text-step-0);
+  line-height: var(--leading-body);
+
+  & :where(h1, h2, h3, h4) {
+    font-family: var(--font-display);
+    line-height: var(--leading-heading);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--header-h-compact) + 1rem);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+  }
+
+  /* The mobile action bar (below md) must never cover a focused element (WCAG 2.4.11). */
+  @media (width < 48rem) {
+    html {
+      scroll-padding-bottom: calc(var(--action-bar-h) + env(safe-area-inset-bottom) + 1rem);
+    }
+  }
+
+  /* Same for the cookie banner (at most 40dvh tall) while it is shown. */
+  html:has([data-consent-banner]) {
+    scroll-padding-bottom: calc(40dvh + 1rem);
+  }
+  @media (width < 48rem) {
+    html:has([data-consent-banner]) {
+      scroll-padding-bottom: calc(40dvh + var(--action-bar-h) + env(safe-area-inset-bottom) + 1rem);
+    }
+  }
+
+  body {
+    @apply bg-bg font-body text-step-0 text-fg;
+    line-height: var(--leading-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    line-height: var(--leading-heading);
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  figcaption {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-200);
+    color: var(--color-fg);
+  }
+
+  @media (width < 48rem) {
+    html {
+      scroll-padding-top: calc(var(--header-h-mobile) + 1rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .hero-cutout-mask {
+    clip-path: ellipse(88% 92% at 52% 48%);
+  }
+
+  html.js [data-tile-panel][data-open='false'] {
+    display: none;
+  }
+
+  html:not(.js) [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

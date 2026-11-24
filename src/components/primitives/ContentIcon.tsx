@@ -1,0 +1,112 @@
+import {
+  AccessibilityIcon,
+  AwardIcon,
+  BabyIcon,
+  BadgeCheckIcon,
+  BoneIcon,
+  BrushIcon,
+  CalendarCheckIcon,
+  CarIcon,
+  CircleCheckIcon,
+  ClipboardListIcon,
+  ClockIcon,
+  CreditCardIcon,
+  DropletsIcon,
+  GemIcon,
+  GraduationCapIcon,
+  HandHeartIcon,
+  HeartIcon,
+  HeartPulseIcon,
+  HouseIcon,
+  LanguagesIcon,
+  LayersIcon,
+  LeafIcon,
+  type LucideIcon,
+  MessageCircleIcon,
+  MicroscopeIcon,
+  PhoneIcon,
+  PillIcon,
+  PuzzleIcon,
+  RulerIcon,
+  ScanFaceIcon,
+  ScanLineIcon,
+  ShieldCheckIcon,
+  ShieldPlusIcon,
+  SirenIcon,
+  SmileIcon,
+  SmilePlusIcon,
+  SparklesIcon,
+  SquareParkingIcon,
+  StarIcon,
+  StethoscopeIcon,
+  SyringeIcon,
+  ToothbrushIcon,
+  UsersIcon,
+  WalletIcon,
+  WandSparklesIcon,
+  ZapIcon,
+} from 'lucide-react'
+
+import type { ContentIcon as ContentIconName } from '@/config/icons'
+
+import { Icon } from './Icon'
+
+/** Named imports keep lucide tree-shaken; a name lookup on `icons` would ship the whole set. */
+const contentIconMap: Record<ContentIconName, LucideIcon> = {
+  smile: SmileIcon,
+  'smile-plus': SmilePlusIcon,
+  baby: BabyIcon,
+  toothbrush: ToothbrushIcon,
+  sparkles: SparklesIcon,
+  'wand-sparkles': WandSparklesIcon,
+  gem: GemIcon,
+  'shield-check': ShieldCheckIcon,
+  'shield-plus': ShieldPlusIcon,
+  stethoscope: StethoscopeIcon,
+  syringe: SyringeIcon,
+  pill: PillIcon,
+  bone: BoneIcon,
+  microscope: MicroscopeIcon,
+  'scan-face': ScanFaceIcon,
+  'scan-line': ScanLineIcon,
+  layers: LayersIcon,
+  ruler: RulerIcon,
+  brush: BrushIcon,
+  droplets: DropletsIcon,
+  siren: SirenIcon,
+  heart: HeartIcon,
+  'heart-pulse': HeartPulseIcon,
+  'hand-heart': HandHeartIcon,
+  puzzle: PuzzleIcon,
+  'graduation-cap': GraduationCapIcon,
+  award: AwardIcon,
+  'badge-check': BadgeCheckIcon,
+  star: StarIcon,
+  users: UsersIcon,
+  clock: ClockIcon,
+  'calendar-check': CalendarCheckIcon,
+  'clipboard-list': ClipboardListIcon,
+  'message-circle': MessageCircleIcon,
+  phone: PhoneIcon,
+  languages: LanguagesIcon,
+  accessibility: AccessibilityIcon,
+  'square-parking': SquareParkingIcon,
+  car: CarIcon,
+  'credit-card': CreditCardIcon,
+  wallet: WalletIcon,
+  leaf: LeafIcon,
+  house: HouseIcon,
+  'circle-check': CircleCheckIcon,
+  zap: ZapIcon,
+}
+
+type ContentIconProps = {
+  name: ContentIconName
+  className?: string
+}
+
+export function ContentIcon({ name, className }: ContentIconProps) {
+  const lucide = contentIconMap[name] as LucideIcon | undefined
+  if (!lucide) return null
+  return <Icon icon={lucide} className={className} />
+}

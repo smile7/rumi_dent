@@ -1,0 +1,17 @@
+---
+description: Internationalization rules (next-intl + Sanity hybrid i18n). Apply when touching routes, links, UI strings, messages or locale logic.
+globs: src/app/**,src/i18n/**,src/config/i18n.ts,src/components/**,messages/**,src/lib/i18n/**,src/lib/seo/**
+alwaysApply: false
+---
+# i18n rules
+
+- Locales come only from `src/config/i18n.ts` (`locales`, `defaultLocale`, `localeMeta`). Never hardcode `'bg' | 'en'` lists elsewhere. Import the `Locale` type.
+- **No user-visible string literals in components.** UI strings live in `messages/{bg,en}.json` (typed keys via next-intl `AppConfig`). CMS text comes from the content layer. Exceptions: brand-neutral symbols and punctuation.
+- Keys: namespaced by component/area (`Header.menu`, `Contact.form.errors.phone`). Add every key to **both** files; the parity test must pass. BG copy is written natively, never machine-literal. EN is natural English.
+- Links: use `Link`, `redirect`, `usePathname`, `useRouter` and `getPathname` from `@/i18n/navigation`, never from `next/link` / `next/navigation` for internal pages. Use **internal** pathnames (`/services`), and next-intl localizes them (`/bg/uslugi`).
+- The locale reaches next-intl through `next/root-params` in `src/i18n/request.ts`, so static rendering needs no `setRequestLocale`. Pages that need the locale value use `getLocale()` (typed `Locale`) or `await params` + `hasLocale`. Route handlers and Server Actions can't read root params: pass `locale` explicitly (`getTranslations({ locale, namespace })`).
+- Server components use `getTranslations`/`getFormatter`. Client components use `useTranslations` and receive only the namespaces they need via `NextIntlClientProvider`.
+- Dates, times, numbers, prices and phones go through `src/lib/i18n/format.ts` (24h time, EUR, en dash ranges). Never use `toLocaleString` ad hoc, and don't use next-intl's `useFormatter`/`getFormatter` for these either: they format `en` as US English, while `format.ts` uses `localeMeta[l].intl` (`en-GB`).
+- Sanity: routable docs (page/service/article/legalPage) are **document-level** translations (`language` field + `translation.metadata`). Everything else is **field-level** (internationalized-array, `language` key). GROQ uses `coalesce(field[language == $locale][0].value, field[language == $fallback][0].value)`.
+- Missing translation: never show the other language's routable page under the wrong locale. Omit the hreflang alternate and point the switcher to the nearest localized parent.
+- `<html lang>` = locale. Text in another language inside a page gets `lang` on its element (e.g. language switcher labels).

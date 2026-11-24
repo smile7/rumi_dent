@@ -1,0 +1,204 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`JSON-LD builders > faqPage: plain-text answers, nothing without emitSchema 1`] = `
+{
+  "@id": "https://example.com/en/about#faq",
+  "@type": "FAQPage",
+  "isPartOf": {
+    "@id": "https://example.com/en/about#webpage",
+  },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "From age 1.",
+      },
+      "name": "From what age?",
+    },
+  ],
+}
+`;
+
+exports[`JSON-LD builders > organization: business type, NAP, hours incl. special hours, sameAs (web URLs only) 1`] = `
+{
+  "@id": "https://example.com/#organization",
+  "@type": "Dentist",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "BG",
+    "addressLocality": "Ruse",
+    "addressRegion": undefined,
+    "postalCode": "7000",
+    "streetAddress": "1 Main St",
+  },
+  "areaServed": "Ruse and the region",
+  "currenciesAccepted": "EUR",
+  "email": "hello@example.com",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.85,
+    "longitude": 25.97,
+  },
+  "hasMap": "https://maps.google.com/?cid=1",
+  "image": "https://cdn.sanity.io/images/p/d/default-1600x900.jpg?w=1200&h=630&fit=crop&auto=format",
+  "legalName": "Demo Dental Ltd",
+  "logo": "https://cdn.sanity.io/images/p/d/logo-1600x900.jpg?w=600&q=75&auto=format&fit=max",
+  "name": "Demo Dental",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "closes": "18:00",
+      "dayOfWeek": [
+        "https://schema.org/Monday",
+        "https://schema.org/Tuesday",
+        "https://schema.org/Wednesday",
+        "https://schema.org/Thursday",
+        "https://schema.org/Friday",
+      ],
+      "opens": "09:00",
+    },
+  ],
+  "sameAs": [
+    "https://facebook.com/demo",
+    "https://maps.google.com/?cid=1",
+  ],
+  "specialOpeningHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "closes": "00:00",
+      "opens": "00:00",
+      "validFrom": "2027-01-01",
+      "validThrough": "2027-01-01",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "closes": "13:00",
+      "opens": "09:00",
+      "validFrom": "2026-12-24",
+      "validThrough": "2026-12-24",
+    },
+  ],
+  "telephone": "+35982000000",
+  "url": "https://example.com/bg",
+}
+`;
+
+exports[`JSON-LD builders > person, service, blogPosting 1`] = `
+{
+  "@id": "https://example.com/#person-team-1",
+  "@type": "Person",
+  "alternateName": undefined,
+  "honorificPrefix": "Dr.",
+  "image": "https://cdn.sanity.io/images/p/d/maria-1600x900.jpg?w=800&q=75&auto=format&fit=max",
+  "jobTitle": "Pediatric dentist",
+  "knowsAbout": [
+    "Pediatric dentistry",
+  ],
+  "name": "Dr. Maria Ivanova",
+  "sameAs": [
+    "https://example.org/maria",
+  ],
+  "worksFor": {
+    "@id": "https://example.com/#organization",
+  },
+}
+`;
+
+exports[`JSON-LD builders > person, service, blogPosting 2`] = `
+{
+  "@id": "https://example.com/en/services/children-s-check-up#service",
+  "@type": "Service",
+  "areaServed": "Ruse and the region",
+  "description": "A calm first visit.",
+  "image": undefined,
+  "name": "Children's check-up",
+  "provider": {
+    "@id": "https://example.com/#organization",
+  },
+  "serviceType": "Children's dentistry",
+  "url": "https://example.com/en/services/children-s-check-up",
+}
+`;
+
+exports[`JSON-LD builders > person, service, blogPosting 3`] = `
+{
+  "@id": "https://example.com/en/blog/first-visit#article",
+  "@type": "BlogPosting",
+  "author": {
+    "@id": "https://example.com/#person-team-1",
+  },
+  "dateModified": "2026-11-10",
+  "datePublished": "2026-11-01",
+  "description": "Earlier than most parents think.",
+  "headline": "When to see the dentist first",
+  "image": "https://cdn.sanity.io/images/p/d/cover-1600x900.jpg?w=1200&h=630&fit=crop&auto=format",
+  "inLanguage": "en",
+  "mainEntityOfPage": {
+    "@id": "https://example.com/en/blog/first-visit#webpage",
+  },
+  "publisher": {
+    "@id": "https://example.com/#organization",
+  },
+}
+`;
+
+exports[`JSON-LD builders > webPage and breadcrumbList 1`] = `
+{
+  "@id": "https://example.com/en/about#webpage",
+  "@type": "AboutPage",
+  "about": undefined,
+  "audience": {
+    "@type": "PeopleAudience",
+    "audienceType": "children",
+  },
+  "breadcrumb": {
+    "@id": "https://example.com/en/about#breadcrumb",
+  },
+  "description": undefined,
+  "inLanguage": "en",
+  "isPartOf": {
+    "@id": "https://example.com/#website",
+  },
+  "name": "About us",
+  "reviewedBy": undefined,
+  "url": "https://example.com/en/about",
+}
+`;
+
+exports[`JSON-LD builders > webPage and breadcrumbList 2`] = `
+{
+  "@id": "https://example.com/en/about#breadcrumb",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "item": "https://example.com/en",
+      "name": "Home",
+      "position": 1,
+    },
+    {
+      "@type": "ListItem",
+      "item": "https://example.com/en/about",
+      "name": "About us",
+      "position": 2,
+    },
+  ],
+}
+`;
+
+exports[`JSON-LD builders > website 1`] = `
+{
+  "@id": "https://example.com/#website",
+  "@type": "WebSite",
+  "inLanguage": [
+    "bg",
+    "en",
+  ],
+  "name": "Demo Dental",
+  "publisher": {
+    "@id": "https://example.com/#organization",
+  },
+  "url": "https://example.com/bg",
+}
+`;

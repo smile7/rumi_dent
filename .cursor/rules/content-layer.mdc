@@ -1,0 +1,15 @@
+---
+description: CMS boundary. Components and routes use the domain API in @/lib/content only. Apply when fetching data or touching Sanity client code.
+globs: src/lib/content/**,src/app/**,src/components/**,src/actions/**
+alwaysApply: false
+---
+# Content layer boundary
+
+- `src/lib/content/index.ts` is the **only** import surface for site code (`@/lib/content`). It exports `get*` functions and domain types from `types.ts`.
+- Forbidden outside `src/lib/content/**`, `src/sanity/**`, `src/app/admin/**`, `src/app/api/**`, `scripts/**`: imports of `next-sanity`, `@sanity/*`, `sanity`, `@/lib/content/sanity/*` and `sanity.types`. ESLint and `scripts/check-boundaries.ts` enforce this.
+- Domain types are CMS-agnostic: `ImageAsset`, `LinkTarget { href, external, label }`, `Section` discriminated union (`type: 'hero' | …`), `Translations`. No `_type`, `_ref`, `asset->` or Portable Text internals leak, except `RichTextValue`, which is opaque and rendered only via `<RichText>`.
+- Every query: `defineQuery` in `queries/*.ts` (typegen), parameters only (never string-concatenate user input), `stega: false` for metadata/JSON-LD/static params/sitemap/llms.txt. No cache tags (static only, ADR-012); data is read at build time.
+- Mappers: `stegaClean` every enum/variant string, resolve internal links to localized hrefs, drop unknown sections with a dev-only warning, return `null` for missing docs (routes call `notFound()`).
+- Wrap `get*` in React `cache()`. No fetching in client components. Pass serializable props down.
+- Draft mode: decided inside `sanityFetch` only. Routes never branch on draft mode for data.
+- After changing a query or schema: `pnpm typegen` and commit `sanity.types.ts` + `schema.json`.

@@ -1,0 +1,13 @@
+---
+description: Project workflow. One task per chat, plan first, verify, commit.
+alwaysApply: true
+---
+# Workflow (always on)
+
+- Source of truth: `AGENTS.md` → `docs/ARCHITECTURE.md` → the current task file in `docs/tasks/`. If code and docs disagree, stop and ask, or propose a doc change. Don't silently diverge.
+- Work on **one task ID** per chat. Start in Plan Mode: restate the task, list the files you will touch, name the risks, then implement.
+- Before using any library API, check the installed version's docs (`node_modules/next/dist/docs/`, the shadcn / Sanity / Cloudflare MCP servers, Context7-style lookups). Versions are pinned in ARCHITECTURE §1. Don't "upgrade while you're there".
+- Done = every acceptance criterion verified + `pnpm check` green + (UI) reviewed in the browser at 360/768/1280 + `docs/PROGRESS.md` ticked + one Conventional Commit (`feat(sections): tiles expand in place (T06.4)`).
+- Never commit secrets, `.env.local`, `.dev.vars` or tokens. Never print secrets into logs or docs.
+- Prefer deleting code over adding flags. No speculative abstractions beyond what the task asks (future features are reserved, not built).
+- If a decision is needed that the docs don't answer, write the options + a recommendation in `docs/PROGRESS.md` → Follow-ups and pick the most reversible one.

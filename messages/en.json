@@ -1,0 +1,332 @@
+{
+  "LanguageSwitcher": {
+    "label": "Language",
+    "missingTranslation": "(this page isn’t translated; the link goes to the closest translated page)"
+  },
+  "RichText": {
+    "opensInNewTab": "(opens in a new tab)"
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "This page doesn’t exist",
+    "description": "The address may be mistyped, or the page has moved. Start from the home page, or get in touch if you’re looking for something specific.",
+    "home": "Go to the home page",
+    "contact": "Contact us"
+  },
+  "Preview": {
+    "exit": "Exit preview"
+  },
+  "Header": {
+    "nav": "Main navigation",
+    "call": "Call",
+    "opensInNewTab": "(opens in a new tab)"
+  },
+  "MobileNav": {
+    "open": "Menu",
+    "close": "Close menu",
+    "title": "Menu",
+    "nav": "Main navigation",
+    "call": "Call",
+    "book": "Book a visit"
+  },
+  "ActionBar": {
+    "label": "Quick actions",
+    "call": "Call",
+    "directions": "Directions",
+    "book": "Book",
+    "viber": "Viber",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "opensInNewTab": "(opens in a new tab)"
+  },
+  "Announcement": {
+    "label": "Announcement",
+    "dismiss": "Dismiss announcement"
+  },
+  "Footer": {
+    "hours": "Opening hours",
+    "closed": "Closed",
+    "nav": "Footer navigation",
+    "social": "Follow us",
+    "legal": "Legal information",
+    "uic": "UIC {uic}",
+    "vat": "VAT No. {vat}",
+    "registeredAddress": "Registered address: {address}",
+    "professionalBody": "Professional body: {name}",
+    "supervisoryAuthority": "Supervisory authority: {name}",
+    "copyright": "© {year} {name}",
+    "platforms": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "linkedin": "LinkedIn",
+      "viber": "Viber",
+      "whatsapp": "WhatsApp",
+      "googleBusiness": "Google profile",
+      "other": "Website"
+    },
+    "cookieSettings": "Cookie settings",
+    "privacyContact": "Data protection: {email}"
+  },
+  "SkipLink": {
+    "label": "Skip to main content"
+  },
+  "Sections": {
+    "opensInNewTab": "(opens in a new tab)",
+    "readMore": "Read more",
+    "tileExpand": "Show details",
+    "tileCollapse": "Hide details",
+    "galleryAll": "All",
+    "galleryAlbum": {
+      "clinic": "Clinic",
+      "team": "Team",
+      "patients": "Patients",
+      "events": "Events",
+      "other": "Other"
+    },
+    "galleryPrev": "Previous photo",
+    "galleryNext": "Next photo",
+    "galleryClose": "Close",
+    "galleryCounter": "{current} / {total}",
+    "testimonialsList": "Customer reviews",
+    "testimonialsPrev": "Previous review",
+    "testimonialsNext": "Next review",
+    "ratingStars": "{rating} out of 5",
+    "hoursClosed": "Closed",
+    "hoursSpecial": "Special opening hours",
+    "mapTitle": "Map: {name}",
+    "mapLoad": "Load the map (Google)",
+    "mapNotice": "The map is loaded from Google Maps. When you press the button, Google receives your IP address and may set cookies.",
+    "mapDirections": "Directions in Google Maps",
+    "blogRead": "Read",
+    "teamBioExpand": "Show bio",
+    "teamBioCollapse": "Hide bio",
+    "mapAlwaysAllow": "Always load Google Maps"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "This page could not load. Try again in a moment or go back to the home page.",
+    "retry": "Try again",
+    "home": "Go to the home page"
+  },
+  "Breadcrumbs": {
+    "label": "Breadcrumb",
+    "home": "Home",
+    "services": "Services",
+    "blog": "Blog"
+  },
+  "Services": {
+    "filterLabel": "Show services for",
+    "all": "All",
+    "children": "For children",
+    "adults": "For adults",
+    "faqHeading": "Frequently asked questions",
+    "relatedHeading": "More services"
+  },
+  "BookingCta": {
+    "heading": "Book an appointment",
+    "book": "Book a visit",
+    "call": "Call us"
+  },
+  "Blog": {
+    "listHeading": "Articles",
+    "pageTitle": "{title} – page {page}",
+    "pageDescription": "{description} (page {page})",
+    "paginationLabel": "Blog pages",
+    "newer": "Newer articles",
+    "older": "Older articles",
+    "pageOf": "Page {page} of {pages}",
+    "updated": "Updated",
+    "readingTime": "{minutes} min read",
+    "aboutAuthor": "About the author",
+    "reviewedBy": "Medically reviewed by {name}",
+    "related": "More articles",
+    "empty": "Our first articles are coming soon."
+  },
+  "Legal": {
+    "lastUpdated": "Last updated: <date></date>",
+    "tocLabel": "Contents",
+    "placeholderWarning": "Draft: this text still has unreplaced fields. Fill them in the Studio — the page can't be published to production like this."
+  },
+  "ContactForm": {
+    "title": "Send us a message",
+    "required": "(required)",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "contactHint": "Fill in a phone number or an email so we can reply.",
+    "topic": "Topic",
+    "topics": {
+      "general": "General question",
+      "childAppointment": "Appointment for a child",
+      "adultAppointment": "Appointment for an adult",
+      "other": "Other"
+    },
+    "childAge": "Child's age",
+    "childAgeHint": "Optional, in years (0–17).",
+    "message": "Message",
+    "messageHint": "Please don't include medical details.",
+    "consent": "I agree that my data is processed so I can get a reply to my inquiry, as described in the <link>Privacy policy</link>.",
+    "notice": "By sending this form you agree that we process your data to answer your inquiry. Please don't include medical details.",
+    "privacyLink": "Privacy policy",
+    "opensInNewTab": "(opens in a new tab)",
+    "honeypot": "Leave this field empty",
+    "submit": "Send",
+    "summary": "Please fix {count, plural, one {# field} other {# fields}}:",
+    "successTitle": "Thank you!",
+    "successText": "Your message has been sent. We'll get back to you soon.",
+    "errors": {
+      "nameLength": "Enter a name between 2 and 80 characters.",
+      "phoneInvalid": "Enter a valid phone number, for example +359 888 123 456.",
+      "emailInvalid": "Enter a valid email, for example name@example.com.",
+      "contactRequired": "Enter a phone number or an email.",
+      "messageLength": "The message must be between 10 and 2000 characters.",
+      "topicRequired": "Choose a topic.",
+      "childAgeInvalid": "Enter an age from 0 to 17 years.",
+      "consentRequired": "We need your consent to send the message.",
+      "generic": "Check this field."
+    },
+    "formErrors": {
+      "invalid": "Some fields aren't filled in correctly.",
+      "verificationFailed": "We couldn't confirm you're not a robot. Please try again.",
+      "sendFailed": "Your message wasn't sent. Please try again later.",
+      "unavailable": "The form isn't working right now."
+    },
+    "phoneFallback": "You can call us on <phone></phone>."
+  },
+  "ContactEmail": {
+    "subject": "{prefix}: {topic}",
+    "heading": "New inquiry from the website",
+    "footer": "Sent from the contact form on {sentAt} (UTC). Consent to data processing: given, text version {version}."
+  },
+  "Consent": {
+    "banner": {
+      "title": "Cookies",
+      "text": "We only use necessary cookies unless you allow others, for example for statistics. “Accept all” also allows external content such as Google Maps. You can change your choice at any time with “Cookie settings” at the bottom of the page.",
+      "settings": "Settings"
+    },
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "policy": "Cookie policy",
+    "dialog": {
+      "title": "Cookie settings",
+      "description": "Choose which cookies and external services you allow. You can change your choice at any time.",
+      "save": "Save choices",
+      "close": "Close",
+      "alwaysOn": "(always on)"
+    }
+  },
+  "Cookies": {
+    "categories": {
+      "necessary": {
+        "title": "Necessary",
+        "description": "Needed for the site to work. They can't be switched off."
+      },
+      "preferences": {
+        "title": "Preferences",
+        "description": "Remember choices you make on the site."
+      },
+      "analytics": {
+        "title": "Statistics",
+        "description": "Help us understand how the site is used."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "Used for advertising and tracking across sites."
+      },
+      "embeds": {
+        "title": "External content",
+        "description": "Loads content from other sites, such as Google Maps, without asking each time."
+      }
+    },
+    "providers": {
+      "firstParty": "This website",
+      "cloudflare": "Cloudflare",
+      "umami": "Umami",
+      "google": "Google"
+    },
+    "items": {
+      "locale": {
+        "purpose": "Remembers the chosen language.",
+        "duration": "Until the browser is closed"
+      },
+      "consent": {
+        "purpose": "Stores your cookie choices.",
+        "duration": "6 months"
+      },
+      "announcement": {
+        "purpose": "Remembers that you closed the announcement at the top of the site.",
+        "duration": "Until the tab is closed"
+      },
+      "preview": {
+        "purpose": "Editors previewing drafts only. Never set for visitors.",
+        "duration": "Until the browser is closed"
+      },
+      "turnstile": {
+        "purpose": "Protects the contact form from bots. Loaded only on the page with the form.",
+        "duration": "Session"
+      },
+      "cfAnalytics": {
+        "purpose": "Anonymous visit statistics without cookies or personal profiles.",
+        "duration": "Nothing is stored on your device"
+      },
+      "umami": {
+        "purpose": "Anonymous visit statistics without cookies or personal profiles.",
+        "duration": "Nothing is stored on your device"
+      },
+      "ga4": {
+        "purpose": "Visit statistics in Google Analytics (pseudonymous identifiers).",
+        "duration": "Up to 2 years"
+      },
+      "googleMaps": {
+        "purpose": "Shows the location map after you load it.",
+        "duration": "Up to 6 months"
+      }
+    },
+    "table": {
+      "caption": "Cookies and storage items this site uses",
+      "name": "Name",
+      "provider": "Provider",
+      "purpose": "Purpose",
+      "duration": "Duration",
+      "category": "Category"
+    }
+  },
+  "Processors": {
+    "items": {
+      "cloudflare": {
+        "name": "Cloudflare, Inc.",
+        "purpose": "Hosting and delivery of the site, protection against attacks, and bot protection for the contact form (Turnstile)."
+      },
+      "cloudflareAnalytics": {
+        "name": "Cloudflare Web Analytics",
+        "purpose": "Anonymous visit statistics without cookies."
+      },
+      "umami": {
+        "name": "Umami Software, Inc.",
+        "purpose": "Anonymous visit statistics without cookies."
+      },
+      "googleAnalytics": {
+        "name": "Google Ireland Ltd. (Google Analytics)",
+        "purpose": "Visit statistics, only after you consent."
+      },
+      "resend": {
+        "name": "Resend, Inc.",
+        "purpose": "Delivers contact form messages to the clinic's mailbox."
+      },
+      "sanity": {
+        "name": "Sanity AS",
+        "purpose": "Stores the site's content (texts and photos). Receives no visitor data."
+      },
+      "googleMaps": {
+        "name": "Google Ireland Ltd. (Google Maps)",
+        "purpose": "Shows the map on the contact page, only after you load it."
+      },
+      "emailProvider": {
+        "name": "The clinic's email provider",
+        "purpose": "The mailbox where enquiries arrive and are kept."
+      }
+    }
+  }
+}

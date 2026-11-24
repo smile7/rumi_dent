@@ -1,0 +1,17 @@
+---
+description: SEO/AEO rules. Metadata, JSON-LD, sitemap, robots and llms.txt. Apply to routes and src/lib/seo.
+globs: src/app/**/page.tsx,src/app/**/layout.tsx,src/app/sitemap.ts,src/app/robots.ts,src/app/llms.txt/**,src/lib/seo/**,src/components/seo/**
+alwaysApply: false
+---
+# SEO / AEO rules
+
+- Every route exports `generateMetadata` that calls `buildMetadata()` from `@/lib/seo`. Never hand-roll `title`/`openGraph` objects in routes.
+- Canonical = the page's own localized URL (absolute via `metadataBase`). Alternates include every available translation + `x-default` (→ default locale). Never emit an alternate for a missing translation.
+- Non-production (`NEXT_PUBLIC_ENV !== 'production'`) is always `noindex` and robots disallow-all.
+- Data for metadata/JSON-LD is fetched with `stega: false`. A stega character in `<head>` is a bug.
+- JSON-LD: build with `src/lib/seo/jsonld/*` (`schema-dts` types). One `@graph` per page via `<JsonLd>`, stable `@id`s. Use `Dentist` / `MedicalBusiness` for the org, `MedicalWebPage` where appropriate, `FAQPage` only from a visible FAQ, `BlogPosting` with a real `Person` author. **No** `aggregateRating`/`Review` markup from the site's own testimonials.
+- Content must be visible to match structured data (no hidden FAQ or invisible text).
+- One `h1` per page, descriptive link text (no "click here"), images with alt text, `<time>` for dates.
+- AEO: the opening paragraph of service/article pages answers the main question in 1–2 sentences. Use question-style H2s where natural. FAQ answers are self-contained. `llms.txt` stays in sync (generated, never hand-edited).
+- OG images: Sanity CDN crops or the build-time fallback. Never generate `ImageResponse` per request (Worker CPU limit).
+- Performance is SEO: respect the budgets in `docs/SEO.md` §8 (LCP image `priority` + `sizes`, no CLS, minimal client JS).

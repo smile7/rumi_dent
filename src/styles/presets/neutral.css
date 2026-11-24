@@ -1,0 +1,143 @@
+/*
+ * THE theme file. A new client edits this file (+ src/config/fonts.ts) and nothing else.
+ * Preset: Neutral: slate-blue brand, warm sand accent, cool grays. A safe start before the client design.
+ * Components use semantic tokens (Layer 2) only. `pnpm contrast` checks the text/UI pairs.
+ * `static` keeps every token as a CSS variable, including those only read through var().
+ */
+@theme static {
+  /* Tailwind's default palette is removed: if a color isn't a token, it doesn't exist. */
+  --color-*: initial;
+
+  /* ---------- Layer 1: primitives ---------- */
+  --color-brand-50: oklch(0.975 0.018 250);
+  --color-brand-100: oklch(0.948 0.036 250);
+  --color-brand-200: oklch(0.9 0.062 250);
+  --color-brand-300: oklch(0.83 0.09 250);
+  --color-brand-400: oklch(0.74 0.105 250);
+  --color-brand-500: oklch(0.64 0.105 250);
+  --color-brand-600: oklch(0.55 0.095 250);
+  --color-brand-700: oklch(0.47 0.085 250);
+  --color-brand-800: oklch(0.39 0.07 250);
+  --color-brand-900: oklch(0.31 0.055 250);
+  --color-brand-950: oklch(0.23 0.04 250);
+
+  --color-accent-50: oklch(0.982 0.012 75);
+  --color-accent-100: oklch(0.958 0.026 75);
+  --color-accent-200: oklch(0.918 0.045 75);
+  --color-accent-300: oklch(0.87 0.065 75);
+  --color-accent-400: oklch(0.82 0.08 75);
+  --color-accent-500: oklch(0.75 0.09 75);
+  --color-accent-600: oklch(0.66 0.09 70);
+  --color-accent-700: oklch(0.56 0.08 65);
+  --color-accent-800: oklch(0.46 0.065 60);
+  --color-accent-900: oklch(0.37 0.05 60);
+  --color-accent-950: oklch(0.27 0.035 60);
+
+  --color-neutral-0: oklch(1 0 0);
+  --color-neutral-50: oklch(0.986 0.005 250);
+  --color-neutral-100: oklch(0.966 0.007 250);
+  --color-neutral-200: oklch(0.928 0.008 250);
+  --color-neutral-300: oklch(0.87 0.009 250);
+  --color-neutral-400: oklch(0.72 0.01 250);
+  --color-neutral-500: oklch(0.58 0.011 250);
+  --color-neutral-600: oklch(0.48 0.012 250);
+  --color-neutral-700: oklch(0.4 0.012 250);
+  --color-neutral-800: oklch(0.31 0.012 250);
+  --color-neutral-900: oklch(0.24 0.012 250);
+  --color-neutral-950: oklch(0.18 0.01 250);
+
+  /* ---------- Layer 2: semantic (what components use) ---------- */
+  --color-bg: var(--color-neutral-50);
+  --color-surface: var(--color-neutral-0);
+  --color-surface-raised: var(--color-neutral-0);
+  --color-surface-muted: var(--color-neutral-100);
+  --color-fg: oklch(0.26 0.03 250);
+  --color-fg-muted: oklch(0.5 0.02 250);
+  --color-border: var(--color-neutral-200);
+  --color-border-strong: var(--color-neutral-500);
+  --color-primary: var(--color-brand-700);
+  --color-primary-hover: var(--color-brand-800);
+  --color-primary-fg: var(--color-neutral-0);
+  --color-accent: var(--color-accent-400);
+  --color-accent-hover: var(--color-accent-500);
+  --color-accent-fg: var(--color-accent-950);
+  --color-link: var(--color-brand-700);
+  --color-focus: var(--color-brand-600);
+  --color-focus-on-dark: var(--color-accent-300);
+  --color-success: oklch(0.5 0.11 150);
+  --color-success-fg: var(--color-neutral-0);
+  --color-warning: oklch(0.83 0.14 82);
+  --color-warning-fg: oklch(0.3 0.06 60);
+  --color-danger: oklch(0.52 0.18 27);
+  --color-danger-fg: var(--color-neutral-0);
+
+  /* Section tones: alternate base/soft for rhythm without hard lines. */
+  --color-tone-base-bg: var(--color-bg);
+  --color-tone-base-fg: var(--color-fg);
+  --color-tone-soft-bg: var(--color-brand-50);
+  --color-tone-soft-fg: var(--color-fg);
+  --color-tone-brand-bg: var(--color-brand-800);
+  --color-tone-brand-fg: var(--color-neutral-0);
+  --color-tone-accent-bg: var(--color-accent-100);
+  --color-tone-accent-fg: var(--color-fg);
+  --color-tone-inverse-bg: var(--color-brand-950);
+  --color-tone-inverse-fg: var(--color-neutral-50);
+
+  /* ---------- Typography ---------- */
+  /* --font-*-family are set by next/font in src/config/fonts.ts. */
+  --font-display: var(--font-display-family), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-body-family), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body);
+
+  --text-step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --text-step-1: clamp(1.2rem, 1.13rem + 0.35vw, 1.42rem);
+  --text-step-2: clamp(1.44rem, 1.3rem + 0.7vw, 1.89rem);
+  --text-step-3: clamp(1.73rem, 1.5rem + 1.15vw, 2.52rem);
+  --text-step-4: clamp(2.07rem, 1.7rem + 1.85vw, 3.36rem);
+  --text-step-5: clamp(2.49rem, 1.9rem + 2.9vw, 4.48rem);
+
+  --leading-body: 1.6;
+  --leading-heading: 1.15;
+
+  /* ---------- Space / size ---------- */
+  --spacing: 0.25rem;
+  --space-section: clamp(4rem, 3rem + 5vw, 8rem);
+  --space-section-compact: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+  --container-prose: 42rem;
+  --container-content: 76rem;
+  --container-wide: 90rem;
+
+  /* ---------- Radius / elevation ---------- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px oklch(0.2 0.02 250 / 0.06), 0 1px 1px oklch(0.2 0.02 250 / 0.04);
+  --shadow-md: 0 8px 24px -8px oklch(0.2 0.02 250 / 0.14);
+  --shadow-lg: 0 24px 48px -16px oklch(0.2 0.02 250 / 0.18);
+
+  /* ---------- Motion ---------- */
+  --duration-instant: 100ms;
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1.2);
+  --ease-exit: cubic-bezier(0.3, 0, 1, 1);
+
+  /* ---------- Layer 3: component tokens ---------- */
+  --header-h-expanded: 6rem;
+  --header-h-compact: 4rem;
+  --header-h-mobile: 4rem;
+  /* Expanded − compact: the sticky header's negative top and the compact threshold. */
+  --header-shrink: calc(var(--header-h-expanded) - var(--header-h-compact));
+  --action-bar-h: 4.5rem;
+  --radius-button: var(--radius-pill);
+  --radius-field: var(--radius-sm);
+  --radius-card: var(--radius-lg);
+  --radius-tile: var(--radius-lg);
+  --radius-media: var(--radius-xl);
+}

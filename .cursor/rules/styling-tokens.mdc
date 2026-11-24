@@ -1,0 +1,17 @@
+---
+description: Styling rules (Tailwind v4 + design tokens). Apply when writing classes or CSS.
+globs: src/**/*.tsx,src/**/*.css,src/styles/**
+alwaysApply: false
+---
+# Styling and tokens
+
+- The theme lives in `src/styles/tokens.css` (3 layers: primitives → semantic → component) and is exposed to Tailwind with `@theme` in `globals.css`. Re-theming a client = editing `tokens.css` + `src/config/fonts.ts` only.
+- Use **semantic** utilities only: `bg-surface`, `text-fg`, `text-fg-muted`, `bg-primary text-primary-fg`, `border-border`, `text-step-2`, `rounded-tile`, `shadow-md`. The focus ring is global (`--color-focus`, `--color-focus-on-dark` on brand/inverse tones); don't restyle it per component. Never use raw palette utilities (`bg-blue-500`), hex/rgb/oklch literals, or arbitrary values (`p-[13px]`, `text-[#333]`) in components. If a value is missing, add a token.
+- Mobile-first: base classes = 360px layout; add `sm: md: lg:` upward. Use container queries (`@container`, `@md:`) for sections reused in different widths.
+- Fluid type via `text-step-*` (clamp-based). Headings get `text-balance`, paragraphs `text-pretty`. Measure ≤ 70ch for prose.
+- Spacing: section rhythm via the `Section` primitive's `spacing` prop (`--space-section` / `--space-section-compact`), stacks via `gap-*` (no margin hacks between siblings).
+- Logical properties (`ps-`, `pe-`, `ms-`, `me-`) for future RTL safety.
+- Motion: CSS transitions for hover/press (`duration-fast ease-standard` tokens). Use Motion only for enter/layout transitions. Always provide reduced-motion fallbacks.
+- Use `cn()` from `@/lib/utils` for conditional classes. Prettier sorts classes. Don't fight it.
+- Dark mode is prepared (`@custom-variant dark`) but off. Don't add `dark:` styles unless the task asks.
+- Look at your work: review 360/768/1280 in the browser before claiming a UI task done (no screenshot script; ADR-011). Use the frontend-design skill for visual direction (distinctive, not generic AI layouts).

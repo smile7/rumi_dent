@@ -1,0 +1,17 @@
+---
+description: Sanity Studio schema conventions. Apply when editing src/sanity or sanity.config.ts.
+globs: src/sanity/**,sanity.config.ts,sanity.cli.ts,scripts/seed.ts
+alwaysApply: false
+---
+# Sanity schema conventions
+
+- Follow `docs/CONTENT-MODEL.md` exactly. If a field is missing there, update the doc in the same commit.
+- Icons: import from the subpath (`import { CaseIcon } from '@sanity/icons/Case'`). The v5 root entry types icons as `never`, so a root import typechecks but crashes the Studio; ESLint blocks it.
+- Use `defineType`, `defineField`, `defineArrayMember`. Each type has an `icon`, a `preview` with `select`/`prepare`, and editor-friendly `description`s.
+- i18n: routable types (`page`, `service`, `article`, `legalPage`) have a hidden read-only `language` field (document-internationalization). Other localized fields use `internationalizedArray*` types. Never mix both on the same field.
+- Validation messages are clear for non-technical editors (e.g. "Добавете алтернативен текст – описва снимката за незрящи потребители и Google."). Use warnings for SEO lengths and errors for data integrity (alt text, consent, unique slugs, reserved slugs). `.error(msg)` / `.warning(msg)` set the message for the **whole chain**, including earlier and later `.custom()` messages, so return an array of rules when each check needs its own message: `[rule.required().error('Add …'), rule.max(32).error('Keep …')]`.
+- Singletons: fixed `_id`, restricted document actions, excluded from new-document menus.
+- Never store secrets or personal data beyond what's published (datasets are public on the Free plan).
+- Reserved future types (`priceItem`, `section.priceList`, `section.beforeAfter`, `section.googleReviews`) are registered only behind `features.*` flags.
+- After any schema change: `pnpm typegen`, update seed data if needed, and check the Studio renders without warnings. Use the Sanity MCP to query the dataset and validate assumptions.
+- Schema changes that rename/remove fields need a migration script (`sanity migration create`) when real content exists.

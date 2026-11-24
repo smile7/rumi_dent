@@ -1,0 +1,24 @@
+---
+description: Component structure and accessibility (WCAG 2.2 AA). Apply to all React components.
+globs: src/components/**,src/app/**/*.tsx
+alwaysApply: false
+---
+# Components and accessibility
+
+Structure
+- Server Components by default. `'use client'` only on small leaf islands (menu toggle, tiles state, lightbox, form, consent). Never mark a section or layout as client.
+- Folders: `ui/` (shadcn, Base UI, restyled; no business logic), `primitives/`, `site/`, `sections/` (one per section type + registry), `forms/`, `consent/`, `map/`, `seo/`, `motion/`. One component per file, named export, props type `XProps` above it.
+- Props are domain types. No data fetching inside components (except Server Component pages/layouts via `@/lib/content`).
+- Base UI shadcn components use the `render` prop for composition (not `asChild`). Check the shadcn MCP for the current API.
+
+Accessibility (non-negotiable)
+- Semantic HTML first: landmarks (`header`, `nav` with `aria-label`, `main#main`, `footer`), one `h1` per page, no skipped heading levels (headings levels come from section position), lists for lists, `<table>` for hours, `<address>`, `<time dateTime>`.
+- Every interactive element is keyboard operable with a visible focus indicator (`--color-focus`, 2px + offset; never `outline: none` without a replacement). Focus is not obscured by the sticky header/action bar (`scroll-padding`).
+- Target size ≥ 44×44 px for primary touch targets (≥ 24 px minimum anywhere).
+- Disclosure pattern for tiles/FAQ: `<button aria-expanded aria-controls>` inside the heading. Dialogs (menu, lightbox, preferences) trap focus, close on Escape and restore focus.
+- Images: meaningful `alt` from CMS, `alt=""` only for decorative. Icons `aria-hidden` unless standalone (then `aria-label`). Icon-only buttons need a label from messages.
+- Color contrast ≥ 4.5:1 text / 3:1 large text and UI (tokens are checked by `scripts/check-contrast.ts`). Never convey information by color alone.
+- Forms: visible labels, `autocomplete`, errors in text linked with `aria-describedby`, `aria-invalid`, focus the first invalid field, announce success. No placeholder-as-label.
+- Motion: respect `prefers-reduced-motion` (MotionConfig `reducedMotion="user"`). No autoplay carousels and nothing that flashes. Content is never hidden behind hover only.
+- Language: `lang` on foreign-language snippets.
+- Test: Vitest + Testing Library queries by role/name, including keyboard handlers jsdom can cover. No Playwright/e2e (ADR-011); check focus traps and axe-level issues manually.
