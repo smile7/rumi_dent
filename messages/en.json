@@ -328,5 +328,11 @@
         "purpose": "The mailbox where enquiries arrive and are kept."
       }
     }
+  },
+  "DentokidoHome": {
+    "whyTitle": "Why families choose us",
+    "whyText": "A calm setting, a clear plan and attention for every child.",
+    "contactTitle": "Get in touch",
+    "contactText": "Complete the short form and we will call you back."
   }
 }

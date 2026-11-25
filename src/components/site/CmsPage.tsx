@@ -9,6 +9,7 @@ import type { Href } from '@/lib/i18n/translations'
 import type { WebPageType } from '@/lib/seo/jsonld/webPage'
 
 import { PageHeader } from './PageHeader'
+import { DentokidoHome } from './DentokidoHome'
 import { SetPageTranslations } from './PageTranslations'
 
 export type CmsPageProps = {
@@ -43,6 +44,10 @@ export function CmsPage({
   headerActions,
   children,
 }: CmsPageProps) {
+  if (page.pageKey === 'home' && !wrapSections && !children) {
+    return <DentokidoHome page={page} locale={locale} site={site} />
+  }
+
   const faq = page.sections.find(
     (section): section is FaqSection => section.type === 'faq' && section.emitSchema,
   )
