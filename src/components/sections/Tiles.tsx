@@ -52,7 +52,7 @@ function TileLink({
   children: React.ReactNode
 }) {
   const target = tileHref(item, source)
-  if (!target) return <span className={className}>{children}</span>
+  if (!target) return <span>{children}</span>
   if (target.kind === 'external') {
     return (
       <NextLink href={target.href} className={className}>
