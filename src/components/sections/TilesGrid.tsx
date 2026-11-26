@@ -20,6 +20,53 @@ const audienceFilterClass: Record<NonNullable<TileItem['audience']>, string> = {
   everyone: '',
 }
 
+const TILE_PANEL_ID_PREFIX = 'tile-panel-'
+
+type TilePanelProps = {
+  panelId: string
+  buttonId: string
+  itemKey: string
+  isOpen: boolean
+  className: string
+  onBeforeMatch: (key: string) => void
+  children: ReactNode
+}
+
+export function TilePanel({
+  panelId,
+  buttonId,
+  itemKey,
+  isOpen,
+  className,
+  onBeforeMatch,
+  children,
+}: TilePanelProps) {
+  return (
+    <div
+      id={panelId}
+      role="region"
+      aria-labelledby={buttonId}
+      data-tile-panel=""
+      data-open={isOpen ? 'true' : 'false'}
+      className={className}
+      ref={(node) => {
+        if (!node) return
+        if (isOpen) {
+          node.removeAttribute('hidden')
+        } else {
+          // React 19 treats `hidden` as boolean; set the find-in-page value on the DOM.
+          node.setAttribute('hidden', 'until-found')
+        }
+        const handleBeforeMatch = () => onBeforeMatch(itemKey)
+        node.addEventListener('beforematch', handleBeforeMatch)
+        return () => node.removeEventListener('beforematch', handleBeforeMatch)
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+
 type TilesGridProps = {
   items: Omit<TileItem, 'body'>[]
   bodies: Record<string, ReactNode>
@@ -82,6 +129,13 @@ export function TilesGrid({
     })
   }, [openKeys, items])
 
+  const openFromFind = useCallback((key: string) => {
+    setOpenKeys((prev) => {
+      if (prev.has(key)) return prev
+      return new Set(prev).add(key)
+    })
+  }, [])
+
   const cols =
     density === 'compact'
       ? 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
@@ -91,7 +145,7 @@ export function TilesGrid({
     <ul className={cn('grid grid-flow-dense gap-4', cols)} id={listId}>
       {items.map((item) => {
         const isOpen = openKeys.has(item.key)
-        const panelId = `tile-panel-${item.key}`
+        const panelId = `${TILE_PANEL_ID_PREFIX}${item.key}`
         const buttonId = `tile-${item.key}`
         const body = bodies[item.key]
         return (
@@ -109,7 +163,7 @@ export function TilesGrid({
                   toggle(item)
                 }}
                 className={cn(
-                  'flex min-h-30 w-full flex-col items-start gap-3 rounded-tile border border-border bg-surface p-5 text-left shadow-sm transition-[box-shadow,transform] duration-(--duration-base) ease-standard hover:shadow-md',
+                  'flex min-h-30 w-full flex-col items-start gap-3 rounded-xl border border-border/80 bg-surface/95 p-5 text-left shadow-sm backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-(--duration-base) ease-standard hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md',
                   isOpen && 'shadow-md',
                 )}
               >
@@ -131,16 +185,13 @@ export function TilesGrid({
                 </span>
               </button>
             </Heading>
-            <div
-              id={panelId}
-              role="region"
-              aria-labelledby={buttonId}
-              data-tile-panel=""
-              data-open={isOpen ? 'true' : 'false'}
-              // @ts-expect-error React 19.3: until-found for find-in-page
-              hidden={isOpen ? undefined : 'until-found'}
+            <TilePanel
+              panelId={panelId}
+              buttonId={buttonId}
+              itemKey={item.key}
+              isOpen={isOpen}
+              onBeforeMatch={openFromFind}
               className="col-span-full rounded-card border border-border bg-surface-muted p-6"
-              onBeforeMatch={() => setOpenKeys((prev) => new Set(prev).add(item.key))}
             >
               {body}
               {item.cta?.link ? (
@@ -159,7 +210,7 @@ export function TilesGrid({
                   {t('readMore')}
                 </Link>
               ) : null}
-            </div>
+            </TilePanel>
           </li>
         )
       })}

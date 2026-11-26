@@ -50,6 +50,7 @@ describe('SectionRenderer', () => {
         type: 'faq',
         items: [],
         emitSchema: false,
+        layout: 'accordion',
       },
       {
         ...base,

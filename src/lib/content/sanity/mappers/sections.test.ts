@@ -90,6 +90,7 @@ describe('mapSections', () => {
       type: 'tiles',
       source: 'services',
       density: 'comfortable',
+      layout: 'grid',
       allowMultiple: false,
       items: [{ key: 's1', title: 'Fillings', slug: 'fillings', icon: 'smile', cta: null }],
     })
@@ -139,10 +140,11 @@ describe('mapSections', () => {
     )
     expect(blog).toMatchObject({
       type: 'blogTeaser',
+      layout: 'grid',
       articles: [{ href: '/bg/blog/article-1' }, { id: 'a2' }],
     })
     expect(blog?.type === 'blogTeaser' && blog.articles).toHaveLength(2)
     expect(gallery?.type === 'gallery' && gallery.items).toHaveLength(1)
-    expect(faq).toMatchObject({ type: 'faq', emitSchema: true })
+    expect(faq).toMatchObject({ type: 'faq', emitSchema: true, layout: 'accordion' })
   })
 })

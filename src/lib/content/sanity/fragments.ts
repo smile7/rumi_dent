@@ -108,6 +108,7 @@ export const teamMemberFields = /* groq */ `
   "bio": ${i18n('bio')}[]${richTextSimpleBlock},
   photo{ ${imageFields} },
   featured,
+  yearsExperience,
   "credentials": credentials[]{ "label": ${i18n('label')}, year },
   sameAs
 `
@@ -158,7 +159,7 @@ export const sectionsField = /* groq */ `
     },
     _type == "section.richTextBlock" => { heading, width, body[]${richTextBlock} },
     _type == "section.tiles" => {
-      heading, intro, source, allowMultiple, density,
+      heading, intro, source, allowMultiple, density, layout,
       items[]{
         _key, title, teaser, icon, slug,
         image{ ${imageFields} },
@@ -171,10 +172,10 @@ export const sectionsField = /* groq */ `
       ] | order(orderRank){ ${serviceSummaryFields} })
     },
     _type == "section.processSteps" => {
-      heading, intro, steps[]{ _key, title, text, icon }, cta{ ${ctaFields} }
+      heading, intro, layout, steps[]{ _key, title, text, icon }, cta{ ${ctaFields} }
     },
     _type == "section.faq" => {
-      heading, intro, emitSchema,
+      heading, intro, emitSchema, layout,
       "items": select(
         source == "selected" => items[]->{ ${faqItemFields} },
         source == "category" => *[_type == "faqItem" && category == ^.category]
@@ -183,7 +184,7 @@ export const sectionsField = /* groq */ `
       )
     },
     _type == "section.blogTeaser" => {
-      heading, count,
+      heading, count, layout,
       "articles": select(
         mode == "selected" => articles[]->{ ${articleSummaryFields} },
         *[_type == "article" && language == $locale] | order(publishedAt desc)[0...6]

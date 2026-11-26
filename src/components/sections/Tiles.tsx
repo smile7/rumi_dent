@@ -5,6 +5,7 @@ import type { TilesSection as TilesModel } from '@/lib/content'
 
 import { SectionShell, sectionTitleId } from './SectionShell'
 import { TilesGrid } from './TilesGrid'
+import { TilesOrbitGrid } from './TilesOrbitGrid'
 import { sectionHeadingLevel, subsectionHeadingLevel } from './helpers'
 import type { SectionComponentProps } from './types'
 
@@ -32,6 +33,33 @@ export function TilesSection({
         </Text>
       ) : null}
       <div className="mt-10">
+        {section.layout === 'orbit' ? (
+          <TilesOrbitGrid
+            items={section.items.map((item) => {
+              const { body, ...row } = item
+              void body
+              return row
+            })}
+            bodies={Object.fromEntries(
+              section.items.flatMap((item) =>
+                item.body
+                  ? [
+                      [
+                        item.key,
+                        <div key={item.key} className="prose-theme max-w-(--container-prose)">
+                          <RichText value={item.body} />
+                        </div>,
+                      ],
+                    ]
+                  : [],
+              ),
+            )}
+            allowMultiple={section.allowMultiple}
+            source={section.source}
+            locale={locale}
+            tileHeadingLevel={tileLevel}
+          />
+        ) : (
         <TilesGrid
           items={section.items.map((item) => {
             const { body, ...row } = item
@@ -61,6 +89,7 @@ export function TilesSection({
           locale={locale}
           tileHeadingLevel={tileLevel}
         />
+        )}
       </div>
     </SectionShell>
   )

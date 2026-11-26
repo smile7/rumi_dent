@@ -48,7 +48,7 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
       >
         <div>
           <Link href="/" className="inline-flex min-h-11 items-center rounded-sm">
-            <Wordmark name={settings.brandName} variant="compact" />
+            <Wordmark name={settings.brandName} variant="compact" accent={false} />
           </Link>
           {settings.tagline ? <p className="mt-2 text-fg-muted">{settings.tagline}</p> : null}
           <address className="mt-4 flex flex-col gap-1 not-italic">

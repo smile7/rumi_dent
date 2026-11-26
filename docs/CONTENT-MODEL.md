@@ -219,6 +219,7 @@ Slug uniqueness per language: custom `isUnique` that queries `!defined(*[_type =
 | bio | internationalizedArrayRichTextSimple | F | optional |
 | photo | imageWithAlt | F(alt) | required (real photo) |
 | featured | boolean | — | the featured member is shown first and larger (Rumi Dent: the pediatric dentist) |
+| yearsExperience | number | — | optional; shown on team cards (e.g. 12) |
 | categories | array of reference → serviceCategory | — | links a doctor to children/adults |
 | credentials | array of `{ label [F], year }` | F | optional (education, memberships) |
 | slug | slug | — | **reserved** for future profile pages (hidden) |
@@ -254,14 +255,14 @@ All sections share the base fields: `anchorId` (slug-like, optional, unique with
 | --- | --- | --- |
 | `section.hero` | `heading` (string, req, ≤ 80), `subheading` (text, ≤ 220), `ctas` (array ≤ 2 of cta), `image` (imageWithAlt, req), `variant` (`split cutout fullBleed`), `trustItems` (array ≤ 4 of `{ icon, text ≤ 40 }`) | Only 1 hero per page, and it must be first (custom validation). |
 | `section.textImage` | `heading`, `body` (richText, req), `image` (optional), `imagePosition` (`left right`), `cta` (optional) | |
-| `section.tiles` | `heading`, `intro`, `source` (`manual services`), `items` (manual: array 2–8 of `{ title, teaser, icon, image, body richTextSimple, cta, slug }`), `serviceCategory` (ref, for source=services; empty = all, grouped by category), `allowMultiple` (boolean), `density` (`comfortable compact`) | `items` required when manual. Item `slug` unique (deep link). |
-| `section.faq` | `heading`, `intro`, `source` (`selected category all`), `items` (refs → faqItem), `category`, `emitSchema` (boolean, default true) | At most 1 FAQ section with `emitSchema` per page. |
+| `section.tiles` | `heading`, `intro`, `source` (`manual services`), `items` (manual: array 2–8 of `{ title, teaser, icon, image, body richTextSimple, cta, slug }`), `serviceCategory` (ref, for source=services; empty = all, grouped by category), `allowMultiple` (boolean), `density` (`comfortable compact`), `layout` (`grid orbit`, default `grid`) | `items` required when manual. Item `slug` unique (deep link). |
+| `section.faq` | `heading`, `intro`, `source` (`selected category all`), `items` (refs → faqItem), `category`, `emitSchema` (boolean, default true), `layout` (`accordion split`, default `accordion`) | At most 1 FAQ section with `emitSchema` per page. |
 | `section.ctaBand` | `heading` (req), `text`, `ctas` (1–2) | |
-| `section.team` | `heading`, `intro`, `members` (refs; empty = all by orderRank), `layout` (`featuredFirst grid`) | |
+| `section.team` | `heading`, `intro`, `members` (refs; empty = all by orderRank), `layout` (`featuredFirst grid duo`) | |
 | `section.gallery` | `heading`, `album` (enum or empty = all), `items` (refs, optional override), `limit` (number 1–24, default 9), `showLinkToGallery` (boolean) | |
-| `section.blogTeaser` | `heading`, `mode` (`latest selected`), `articles` (refs ≤ 3), `count` (1–6, default 3) | |
+| `section.blogTeaser` | `heading`, `mode` (`latest selected`), `articles` (refs ≤ 3), `count` (1–6, default 3), `layout` (`grid featured`, default `grid`) | |
 | `section.contactHours` | `heading`, `showMap` (boolean), `showForm` (boolean; contact page only), `note` (text) | Data from siteSettings. |
-| `section.processSteps` | `heading`, `intro`, `steps` (array 3–6 of `{ title ≤ 50, text ≤ 220, icon }`), `cta` | |
+| `section.processSteps` | `heading`, `intro`, `steps` (array 3–6 of `{ title ≤ 50, text ≤ 220, icon }`), `cta`, `layout` (`cards compact`, default `cards`) | |
 | `section.testimonials` | `heading`, `items` (refs → testimonial; empty = featured), `showRating` (boolean) | |
 | `section.richTextBlock` | `heading` (optional), `body` (richText, req), `width` (`prose wide`) | |
 | **Reserved (not built in v1)** | `section.priceList`, `section.beforeAfter`, `section.googleReviews` | Names reserved in the registry. The Studio hides them while `features.*` is false. |

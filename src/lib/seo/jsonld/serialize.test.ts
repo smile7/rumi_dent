@@ -16,6 +16,7 @@ const faq: FaqSection = {
   key: 'faq',
   tone: 'base',
   spacing: 'default',
+  layout: 'accordion',
   emitSchema: true,
   items: [{ id: 'q1', question: `От каква възраст?${marker}`, answer }],
 }

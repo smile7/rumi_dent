@@ -141,10 +141,22 @@
 
 @layer components {
   .hero-cutout-mask {
-    clip-path: ellipse(88% 92% at 52% 48%);
+    clip-path: polygon(8% 0%, 92% 2%, 100% 88%, 78% 100%, 12% 96%, 0% 72%);
   }
 
-  html.js [data-tile-panel][data-open='false'] {
+  @keyframes hero-drift {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-6px) rotate(-1deg);
+    }
+  }
+
+  /* Pre-hydration only: after mount, TilesGrid sets hidden="until-found"
+     so find-in-page can still search closed panels. */
+  html.js [data-tile-panel][data-open='false']:not([hidden='until-found']) {
     display: none;
   }
 

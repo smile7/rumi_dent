@@ -100,6 +100,7 @@
     "mapNotice": "Картата се зарежда от Google Maps. С натискането на бутона Google получава вашия IP адрес и може да постави бисквитки.",
     "mapDirections": "Упътване в Google Maps",
     "blogRead": "Прочетете",
+    "teamYears": "{years} години опит",
     "teamBioExpand": "Покажи биография",
     "teamBioCollapse": "Скрий биография",
     "mapAlwaysAllow": "Винаги зареждай Google Maps"

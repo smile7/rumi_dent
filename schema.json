@@ -2096,6 +2096,10 @@
               {
                 "type": "string",
                 "value": "grid"
+              },
+              {
+                "type": "string",
+                "value": "duo"
               }
             ]
           },
@@ -2380,6 +2384,23 @@
           },
           "optional": true
         },
+        "layout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "grid"
+              },
+              {
+                "type": "string",
+                "value": "featured"
+              }
+            ]
+          },
+          "optional": true
+        },
         "tone": {
           "type": "objectAttribute",
           "value": {
@@ -2584,6 +2605,23 @@
           "type": "objectAttribute",
           "value": {
             "type": "boolean"
+          },
+          "optional": true
+        },
+        "layout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "accordion"
+              },
+              {
+                "type": "string",
+                "value": "split"
+              }
+            ]
           },
           "optional": true
         },
@@ -2919,6 +2957,23 @@
           "value": {
             "type": "inline",
             "name": "cta"
+          },
+          "optional": true
+        },
+        "layout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "cards"
+              },
+              {
+                "type": "string",
+                "value": "compact"
+              }
+            ]
           },
           "optional": true
         },
@@ -3354,6 +3409,23 @@
               {
                 "type": "string",
                 "value": "compact"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "layout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "grid"
+              },
+              {
+                "type": "string",
+                "value": "orbit"
               }
             ]
           },
@@ -6090,6 +6162,13 @@
         "type": "objectAttribute",
         "value": {
           "type": "boolean"
+        },
+        "optional": true
+      },
+      "yearsExperience": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
         },
         "optional": true
       },

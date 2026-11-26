@@ -54,6 +54,7 @@ export const teamSection = defineSection({
         list: [
           { title: 'Featured people first, larger', value: 'featuredFirst' },
           { title: 'Even grid', value: 'grid' },
+          { title: 'Duo (2 people)', value: 'duo' },
         ],
       },
       initialValue: 'featuredFirst',

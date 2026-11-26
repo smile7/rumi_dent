@@ -100,6 +100,7 @@
     "mapNotice": "The map is loaded from Google Maps. When you press the button, Google receives your IP address and may set cookies.",
     "mapDirections": "Directions in Google Maps",
     "blogRead": "Read",
+    "teamYears": "{years} years' experience",
     "teamBioExpand": "Show bio",
     "teamBioCollapse": "Hide bio",
     "mapAlwaysAllow": "Always load Google Maps"

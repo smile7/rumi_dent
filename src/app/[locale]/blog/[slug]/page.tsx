@@ -83,6 +83,7 @@ export default async function ArticlePage({ params }: PageProps<'/[locale]/blog/
             spacing: 'default' as const,
             heading: t('related'),
             articles: article.related,
+            layout: 'grid' as const,
           },
         ]
       : []),

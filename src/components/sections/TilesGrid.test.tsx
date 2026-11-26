@@ -1,5 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 
 import { renderWithIntl } from '@/test/intl'
 
@@ -21,6 +21,10 @@ const defaultProps = {
 }
 
 describe('TilesGrid', () => {
+  afterEach(() => {
+    window.history.replaceState(null, '', window.location.pathname)
+  })
+
   it('toggles aria-expanded when Enter is pressed on the tile button', () => {
     renderWithIntl(<TilesGrid {...defaultProps} />)
     const buttonA = screen.getByRole('button', { name: /Tile A/i })
@@ -49,5 +53,19 @@ describe('TilesGrid', () => {
     fireEvent.click(buttonB)
     expect(buttonB).toHaveAttribute('aria-expanded', 'true')
     expect(buttonA).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('opens a closed until-found panel when find-in-page fires beforematch', () => {
+    renderWithIntl(<TilesGrid {...defaultProps} />)
+    const panel = document.getElementById('tile-panel-a')
+    expect(panel).toHaveAttribute('hidden', 'until-found')
+
+    fireEvent(panel!, new Event('beforematch', { bubbles: true }))
+
+    expect(screen.getByRole('button', { name: /Tile A/i })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+    expect(panel).not.toHaveAttribute('hidden')
   })
 })

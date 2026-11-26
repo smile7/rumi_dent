@@ -193,6 +193,7 @@ export type TeamMember = {
   featured: boolean
   credentials: { label: string; year?: number }[]
   sameAs: string[]
+  yearsExperience?: number
 }
 
 export type FaqItem = {
@@ -340,6 +341,7 @@ export type TilesSection = SectionBase & {
   items: TileItem[]
   allowMultiple: boolean
   density: 'comfortable' | 'compact'
+  layout: 'grid' | 'orbit'
 }
 
 export type ProcessStepsSection = SectionBase & {
@@ -348,6 +350,7 @@ export type ProcessStepsSection = SectionBase & {
   intro?: string
   steps: { key: string; title: string; text?: string; icon?: ContentIcon }[]
   cta: Cta | null
+  layout: 'cards' | 'compact'
 }
 
 export type FaqSection = SectionBase & {
@@ -356,12 +359,14 @@ export type FaqSection = SectionBase & {
   intro?: string
   items: FaqItem[]
   emitSchema: boolean
+  layout: 'accordion' | 'split'
 }
 
 export type BlogTeaserSection = SectionBase & {
   type: 'blogTeaser'
   heading?: string
   articles: ArticleSummary[]
+  layout: 'grid' | 'featured'
 }
 
 export type TestimonialsSection = SectionBase & {
@@ -376,7 +381,7 @@ export type TeamSection = SectionBase & {
   heading?: string
   intro?: string
   members: TeamMember[]
-  layout: 'featuredFirst' | 'grid'
+  layout: 'featuredFirst' | 'grid' | 'duo'
 }
 
 export type GallerySection = SectionBase & {

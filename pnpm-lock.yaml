@@ -171,6 +171,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  magic-string: 0.30.21
+
 importers:
 
   .:
@@ -6469,8 +6472,8 @@ packages:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
 
-  magic-string@1.4.5:
-    resolution: {integrity: sha512-oLLC2+YvQUfAa+vxoufE/yc1icb87M9iXIRqAoR/2EhE/8cb3SF/+Gi0c2By1B+5Vz2e2vQtUvHiu1+63Znh+w==}
+  magic-string@0.30.21:
+    resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
   make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
@@ -12932,7 +12935,7 @@ snapshots:
       enhanced-resolve: 5.27.0
       jiti: 2.7.0
       lightningcss: 1.33.0
-      magic-string: 1.4.5
+      magic-string: 0.30.21
       source-map-js: 1.2.4
       tailwindcss: 4.3.5
 
@@ -13344,7 +13347,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.1.1
       estree-walker: 3.0.3
-      magic-string: 1.4.5
+      magic-string: 0.30.21
     optionalDependencies:
       vite: 8.3.8(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.46.0)(tsx@4.23.15)(yaml@2.9.1)
 
@@ -15750,7 +15753,7 @@ snapshots:
 
   lz-string@1.5.0: {}
 
-  magic-string@1.4.5:
+  magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.6.0
 
@@ -17870,7 +17873,7 @@ snapshots:
       chai: 6.3.0
       es-module-lexer: 2.3.2
       expect-type: 1.4.0
-      magic-string: 1.4.5
+      magic-string: 0.30.21
       obug: 3.0.0
       picomatch: 4.0.7
       std-env: 4.3.0

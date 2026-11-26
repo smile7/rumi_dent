@@ -42,6 +42,7 @@ export function mapTeamMember(row: TeamMemberQueryRow | null, locale: Locale): T
     ...(bio ? { bio } : {}),
     ...(photo ? { photo } : {}),
     featured: Boolean(row.featured),
+    ...(row.yearsExperience != null ? { yearsExperience: row.yearsExperience } : {}),
     credentials: (row.credentials ?? []).flatMap((c) =>
       c.label ? [{ label: c.label, ...(c.year ? { year: c.year } : {}) }] : [],
     ),

@@ -110,6 +110,7 @@ export function mapSection(row: SectionQueryRow, locale: Locale): Section | null
         items,
         allowMultiple: Boolean(row.allowMultiple),
         density: clean(row.density) ?? 'comfortable',
+        layout: clean(row.layout) === 'orbit' ? 'orbit' : 'grid',
       }
     }
     case 'section.processSteps':
@@ -131,6 +132,7 @@ export function mapSection(row: SectionQueryRow, locale: Locale): Section | null
             : [],
         ),
         cta: mapCta(row.cta, locale),
+        layout: clean(row.layout) === 'compact' ? 'compact' : 'cards',
       }
     case 'section.faq':
       return {
@@ -141,6 +143,7 @@ export function mapSection(row: SectionQueryRow, locale: Locale): Section | null
         items: mapList(row.items, (item) => mapFaqItem(item, locale)),
         // Unset counts as on (the schema default), matching the Studio rule.
         emitSchema: row.emitSchema !== false,
+        layout: clean(row.layout) === 'split' ? 'split' : 'accordion',
       }
     case 'section.blogTeaser':
       return {
@@ -151,6 +154,7 @@ export function mapSection(row: SectionQueryRow, locale: Locale): Section | null
           0,
           opt(row.count) ?? 3,
         ),
+        layout: clean(row.layout) === 'featured' ? 'featured' : 'grid',
       }
     case 'section.testimonials':
       return {
@@ -167,7 +171,11 @@ export function mapSection(row: SectionQueryRow, locale: Locale): Section | null
         ...text('heading', row.heading),
         ...text('intro', row.intro),
         members: mapList(row.members, (member) => mapTeamMember(member, locale)),
-        layout: clean(row.layout) ?? 'featuredFirst',
+        layout: (() => {
+          const value = clean(row.layout)
+          if (value === 'grid' || value === 'duo') return value
+          return 'featuredFirst'
+        })(),
       }
     case 'section.gallery':
       return {

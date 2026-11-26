@@ -87,6 +87,7 @@ export default async function ServicePage({ params }: PageProps<'/[locale]/servi
           heading: t('faqHeading'),
           items: service.faq,
           emitSchema: true,
+          layout: 'accordion',
         }
       : null
   const cta = bookingCtaBand(settings, {

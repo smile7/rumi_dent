@@ -5,3 +5,9 @@ allowBuilds:
   sharp: false
   unrs-resolver: false
   workerd: true
+
+# @tailwindcss/node@4.3.5 CJS still require()s magic-string. 1.x is ESM-only, so Turbopack
+# throws ERR_REQUIRE_ESM when PostCSS processes Sanity Studio CSS (e.g. @portabletext/plugin-table).
+# Drop this when Tailwind's CJS build uses import() or magic-string ships a require export.
+overrides:
+  magic-string: 0.30.21

@@ -198,6 +198,20 @@ export const tilesSection = defineSection({
       },
       initialValue: 'comfortable',
     }),
+    defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      options: {
+        layout: 'radio',
+        direction: 'horizontal',
+        list: [
+          { title: 'Grid', value: 'grid' },
+          { title: 'Orbit (mascot in the middle)', value: 'orbit' },
+        ],
+      },
+      initialValue: 'grid',
+    }),
   ],
 })
 
@@ -251,6 +265,20 @@ export const processStepsSection = defineSection({
       ],
     }),
     defineField({ name: 'cta', title: 'Button', type: 'cta' }),
+    defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      options: {
+        layout: 'radio',
+        direction: 'horizontal',
+        list: [
+          { title: 'Cards', value: 'cards' },
+          { title: 'Compact timeline', value: 'compact' },
+        ],
+      },
+      initialValue: 'cards',
+    }),
   ],
 })
 
@@ -308,6 +336,20 @@ export const faqSection = defineSection({
         'Adds FAQ structured data for search engines. Only one FAQ section per page can have it.',
       initialValue: true,
     }),
+    defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      options: {
+        layout: 'radio',
+        direction: 'horizontal',
+        list: [
+          { title: 'Accordion', value: 'accordion' },
+          { title: 'Split (heading + panel)', value: 'split' },
+        ],
+      },
+      initialValue: 'accordion',
+    }),
   ],
 })
 
@@ -360,6 +402,20 @@ export const blogTeaserSection = defineSection({
       hidden: ({ parent }) => (parent as { mode?: string } | undefined)?.mode === 'selected',
       initialValue: 3,
       validation: (rule) => rule.min(1).max(6).integer().error('Choose between 1 and 6.'),
+    }),
+    defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      options: {
+        layout: 'radio',
+        direction: 'horizontal',
+        list: [
+          { title: 'Equal cards', value: 'grid' },
+          { title: 'One featured article', value: 'featured' },
+        ],
+      },
+      initialValue: 'grid',
     }),
   ],
 })

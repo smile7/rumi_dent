@@ -12,9 +12,9 @@ import { SLUG_LIKE, placeholdersIn, sectionProblems } from '../../src/sanity/lib
 import { buildSeed, type SeedDocument } from './build'
 
 const imageNames = readdirSync(resolve(__dirname, '../../seed/images'))
-  .filter((file) => file.endsWith('.jpg'))
-  .map((file) => file.replace(/\.jpg$/, ''))
-const images = Object.fromEntries(imageNames.map((name) => [name, `image-${name}-1x1-jpg`]))
+  .filter((file) => /\.(jpe?g|png|webp)$/i.test(file))
+  .map((file) => file.replace(/\.(jpe?g|png|webp)$/i, ''))
+const images = Object.fromEntries(imageNames.map((name) => [name, `image-${name}-asset`]))
 
 const demo = buildSeed('demo', images)
 const client = buildSeed('client', {})

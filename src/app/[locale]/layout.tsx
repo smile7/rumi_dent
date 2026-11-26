@@ -112,6 +112,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
                       ) : null}
                       <SiteHeader
                         brandName={settings.brandName}
+                        logo={settings.logo}
+                        logoCompact={settings.logoCompact}
                         nav={nav}
                         phone={phone}
                         menu={<MobileNav nav={nav} phone={phone} booking={booking} />}

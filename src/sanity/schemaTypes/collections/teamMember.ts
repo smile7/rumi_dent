@@ -93,6 +93,13 @@ export const teamMemberType = defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'yearsExperience',
+      title: 'Years of experience',
+      type: 'number',
+      description: 'Shown on team cards, e.g. 12.',
+      validation: (rule) => rule.min(0).max(60).integer(),
+    }),
+    defineField({
       name: 'categories',
       title: 'Works in',
       type: 'array',

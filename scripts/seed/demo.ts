@@ -176,6 +176,7 @@ export function demoDocuments(images: SeedImages) {
         en: 'Dr Maria Ivanova in the treatment room',
       }),
       featured: true,
+      yearsExperience: 12,
       categories: refs([id('serviceCategory', 'children')]),
       credentials: keyed(
         [
@@ -208,6 +209,7 @@ export function demoDocuments(images: SeedImages) {
         en: 'Dr Georgi Petrov',
       }),
       featured: true,
+      yearsExperience: 8,
       categories: refs([id('serviceCategory', 'adults')]),
       orderRank: rank(1),
     },
@@ -620,38 +622,14 @@ export function demoDocuments(images: SeedImages) {
               bg: 'Детска и семейна дентална клиника, в която децата влизат с любопитство, а родителите излизат спокойни.',
               en: 'A children’s and family dental clinic where kids walk in curious and parents leave relaxed.',
             }[locale],
-            ctas: keyed([
-              bookCta(locale),
-              cta({ bg: 'Нашите услуги', en: 'Our services' }[locale], 'link', {
-                link: systemLink('services'),
-                style: 'secondary',
-              }),
-            ]),
-            image: image(images, 'hero-family', {
-              bg: 'Майка и дете се усмихват в кабинета',
-              en: 'A mother and child smiling in the treatment room',
+            ctas: keyed([bookCta(locale)]),
+            image: image(images, 'hero-kid', {
+              bg: 'Момиче държи четка за зъби и се усмихва',
+              en: 'A child holding a toothbrush and smiling',
             }),
-            variant: 'split',
-            trustItems: keyed(
-              [
-                {
-                  _type: 'trustItem' as const,
-                  icon: 'baby' as const,
-                  text: { bg: 'Деца от 1 година', en: 'Children from age 1' }[locale],
-                },
-                {
-                  _type: 'trustItem' as const,
-                  icon: 'award' as const,
-                  text: { bg: '12 години опит', en: '12 years of experience' }[locale],
-                },
-                {
-                  _type: 'trustItem' as const,
-                  icon: 'shield-check' as const,
-                  text: { bg: 'Работим с НЗОК', en: 'Health fund partner' }[locale],
-                },
-              ],
-              't',
-            ),
+            variant: 'cutout',
+            tone: 'soft',
+            trustItems: [],
           }),
           section('section.tiles', {
             heading: { bg: 'Услуги', en: 'Services' }[locale],
@@ -662,9 +640,12 @@ export function demoDocuments(images: SeedImages) {
             source: 'services',
             allowMultiple: false,
             density: 'comfortable',
+            layout: 'orbit',
           }),
           section('section.processSteps', {
             heading: { bg: 'Първото посещение', en: 'Your first visit' }[locale],
+            layout: 'compact',
+            spacing: 'compact',
             steps: keyed(
               [
                 {
@@ -697,12 +678,12 @@ export function demoDocuments(images: SeedImages) {
               ],
               'p',
             ),
-            cta: bookCta(locale),
             tone: 'soft',
           }),
           section('section.team', {
             heading: { bg: 'Екипът', en: 'The team' }[locale],
-            layout: 'featuredFirst',
+            layout: 'duo',
+            members: refs([id('teamMember', 'maria'), id('teamMember', 'georgi')]),
           }),
           section('section.testimonials', {
             heading: { bg: 'Какво казват родителите', en: 'What parents say' }[locale],
@@ -713,11 +694,13 @@ export function demoDocuments(images: SeedImages) {
             heading: { bg: 'Често задавани въпроси', en: 'Frequently asked questions' }[locale],
             source: 'all',
             emitSchema: true,
+            layout: 'split',
           }),
           section('section.blogTeaser', {
             heading: { bg: 'От блога', en: 'From the blog' }[locale],
             mode: 'latest',
             count: 3,
+            layout: 'featured',
           }),
           section('section.ctaBand', {
             heading: { bg: 'Време е за преглед?', en: 'Time for a check-up?' }[locale],

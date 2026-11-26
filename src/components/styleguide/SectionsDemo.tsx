@@ -49,6 +49,7 @@ const demoSections = (locale: Locale): Section[] => {
         { key: '3', title: locale === 'bg' ? 'План' : 'Plan', icon: 'clipboard-list' },
       ],
       cta: book,
+      layout: 'cards',
     },
     {
       key: 'rich',
@@ -68,6 +69,7 @@ const demoSections = (locale: Locale): Section[] => {
       source: 'manual',
       allowMultiple: false,
       density: 'comfortable',
+      layout: 'grid',
       items: [
         {
           key: 't1',
@@ -101,6 +103,7 @@ const demoSections = (locale: Locale): Section[] => {
         },
       ],
       emitSchema: false,
+      layout: 'accordion',
     },
     {
       key: 'team',
@@ -170,6 +173,7 @@ const demoSections = (locale: Locale): Section[] => {
           publishedAt: '2026-01-15',
         },
       ],
+      layout: 'grid',
     },
     {
       key: 'cta',

@@ -74,13 +74,14 @@ const imagesDir = resolve(import.meta.dirname, '../seed/images')
 
 /** Sanity dedupes uploads by content hash, so re-running returns the same asset ids. */
 async function uploadImages(): Promise<SeedImages> {
-  const files = (await readdir(imagesDir)).filter((file) => file.endsWith('.jpg'))
+  const files = (await readdir(imagesDir)).filter((file) => /\.(jpe?g|png|webp)$/i.test(file))
   const entries = await Promise.all(
     files.map(async (file) => {
       const asset = await client.assets.upload('image', await readFile(resolve(imagesDir, file)), {
         filename: file,
       })
-      return [basename(file, '.jpg'), asset._id] as const
+      const base = basename(file).replace(/\.(jpe?g|png|webp)$/i, '')
+      return [base, asset._id] as const
     }),
   )
   return Object.fromEntries(entries)
