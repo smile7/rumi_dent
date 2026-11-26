@@ -186,6 +186,8 @@ export type TeamMember = {
   nameLatin?: string
   honorific?: string
   role: string
+  /** Year they started practising; the site derives the years of experience. */
+  practisingSince?: number
   specialties: string[]
   bioShort: string
   bio?: RichTextValue
@@ -362,6 +364,8 @@ export type BlogTeaserSection = SectionBase & {
   type: 'blogTeaser'
   heading?: string
   articles: ArticleSummary[]
+  /** Off on the blog index itself. Default: shown. */
+  linkToBlog?: boolean
 }
 
 export type TestimonialsSection = SectionBase & {

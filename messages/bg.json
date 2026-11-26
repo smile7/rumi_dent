@@ -74,7 +74,6 @@
   },
   "Sections": {
     "opensInNewTab": "(отваря се в нов раздел)",
-    "readMore": "Научете повече",
     "tileExpand": "Покажи подробности",
     "tileCollapse": "Скрий подробности",
     "galleryAll": "Всички",
@@ -89,9 +88,6 @@
     "galleryNext": "Следваща снимка",
     "galleryClose": "Затвори",
     "galleryCounter": "{current} / {total}",
-    "testimonialsList": "Отзиви от клиенти",
-    "testimonialsPrev": "Предишен отзив",
-    "testimonialsNext": "Следващ отзив",
     "ratingStars": "{rating} от 5",
     "hoursClosed": "Затворено",
     "hoursSpecial": "Специално работно време",
@@ -99,10 +95,13 @@
     "mapLoad": "Зареди картата (Google)",
     "mapNotice": "Картата се зарежда от Google Maps. С натискането на бутона Google получава вашия IP адрес и може да постави бисквитки.",
     "mapDirections": "Упътване в Google Maps",
-    "blogRead": "Прочетете",
-    "teamBioExpand": "Покажи биография",
-    "teamBioCollapse": "Скрий биография",
-    "mapAlwaysAllow": "Винаги зареждай Google Maps"
+    "mapAlwaysAllow": "Винаги зареждай Google Maps",
+    "hoursLabel": "Работно време",
+    "addressLabel": "Адрес",
+    "teamYears": "{count, plural, one {година опит} other {години опит}}",
+    "faqHelpTitle": "Още въпроси?",
+    "faqHelpText": "Обадете ни се – с радост ще отговорим и ще намерим удобен час.",
+    "blogAll": "Всички статии"
   },
   "Error": {
     "title": "Нещо се обърка",

@@ -1,7 +1,7 @@
 {
   "primary": "#006a62",
-  "primaryFg": "#ffffff",
-  "bg": "#fcfaf7",
-  "fg": "#11282b",
+  "primaryFg": "#fffefc",
+  "bg": "#fcf9f2",
+  "fg": "#032934",
   "accent": "#ffb05f"
 }

@@ -103,6 +103,7 @@ export const teamMemberFields = /* groq */ `
   nameLatin,
   "honorific": ${i18n('honorific')},
   "role": ${i18n('role')},
+  practisingSince,
   "specialties": specialties[]{ "label": ${i18n('label')} },
   "bioShort": ${i18n('bioShort')},
   "bio": ${i18n('bio')}[]${richTextSimpleBlock},

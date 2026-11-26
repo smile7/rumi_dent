@@ -98,7 +98,6 @@ export function TypeDemo() {
           <div className="flex flex-wrap items-center gap-8">
             <Wordmark name="Rumi Dent" />
             <Wordmark name="Rumi Dent" variant="compact" />
-            <Wordmark name="Rumi Dent" accent={false} />
             <span className="rounded-md bg-tone-brand-bg px-4 py-3">
               <Wordmark name="Rumi Dent" className="text-tone-brand-fg" />
             </span>

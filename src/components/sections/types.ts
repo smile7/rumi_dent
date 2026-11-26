@@ -17,6 +17,7 @@ export type SectionSiteContext = ActionSettings &
     | 'mapEmbedUrl'
     | 'mapPlaceholder'
     | 'brandName'
+    | 'tagline'
     | 'contactForm'
     | 'privacyHref'
   >

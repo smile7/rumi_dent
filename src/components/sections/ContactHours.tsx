@@ -1,10 +1,11 @@
-import { MapPinIcon } from 'lucide-react'
+import { MapPinIcon, PhoneIcon } from 'lucide-react'
 
 import { submitContact } from '@/actions/contact'
 import { LazyContactForm } from '@/components/forms/LazyContactForm'
 import { DirectionsLink } from '@/components/map/DirectionsLink'
 import { MapEmbed } from '@/components/map/MapEmbed'
 import { ContentImage } from '@/components/primitives/ContentImage'
+import { emphasize } from '@/components/primitives/Emphasis'
 import { Heading } from '@/components/primitives/Heading'
 import { readPublicEnv, TURNSTILE_TEST_SITE_KEY } from '@/env'
 import { directionsUrl, primaryPhone } from '@/lib/site/actions'
@@ -49,130 +50,149 @@ export async function ContactHoursSection({
   const phone = site.phones[0]
   const directions = directionsUrl(site)
 
+  const specialHours =
+    site.specialHours.length > 0 ? (
+      <div>
+        <Heading as="h3" size="step-1">
+          {t('hoursSpecial')}
+        </Heading>
+        <ul className="mt-3 space-y-2">
+          {site.specialHours.map((entry) => {
+            const labelSuffix = entry.label ? `${' — '}${entry.label}` : ''
+            const timeSuffix = entry.closed
+              ? `${' · '}${t('hoursClosed')}`
+              : entry.opens && entry.closes
+                ? `${' · '}${formatTimeRange(entry.opens, entry.closes)}`
+                : ''
+            return (
+              <li key={`${entry.date}-${entry.label ?? ''}`} className="text-fg-muted">
+                <time dateTime={entry.date}>{formatDate(locale, entry.date, site.timeZone)}</time>
+                {labelSuffix ? <span>{labelSuffix}</span> : null}
+                {timeSuffix ? <span className="tabular-nums">{timeSuffix}</span> : null}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    ) : null
+
+  const map =
+    section.showMap && site.mapEmbedUrl ? (
+      <div className="overflow-hidden rounded-xl">
+        <MapEmbed
+          embedUrl={site.mapEmbedUrl}
+          title={t('mapTitle', { name: site.brandName })}
+          loadLabel={t('mapLoad')}
+          notice={t('mapNotice')}
+          alwaysAllowLabel={t('mapAlwaysAllow')}
+        >
+          {site.mapPlaceholder ? (
+            <ContentImage
+              image={site.mapPlaceholder}
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full flex-col items-center pt-6 text-center sm:pt-10">
+              <MapPinIcon aria-hidden="true" className="size-10 text-primary" />
+              <Text className="mt-2 font-semibold">{site.brandName}</Text>
+              <Text tone="muted">{addressLines(site.address)[0]}</Text>
+            </div>
+          )}
+        </MapEmbed>
+      </div>
+    ) : null
+
   return (
     <SectionShell section={section} labelledBy={section.heading ? titleId : undefined}>
-      {section.heading ? (
-        <Heading as={level} size="step-3" id={titleId}>
-          {section.heading}
-        </Heading>
-      ) : null}
-      <div className="mt-10 grid gap-10 lg:grid-cols-2">
-        <address className="not-italic">
-          <Text className="font-semibold">{site.brandName}</Text>
-          {addressLines(site.address).map((line) => (
-            <Text key={line} tone="muted">
-              {line}
-            </Text>
-          ))}
-          {phone ? (
-            <a
-              href={formatPhone(phone.e164).href}
-              className="mt-4 inline-flex min-h-11 items-center font-semibold text-link tabular-nums"
-            >
-              {phone.display || formatPhone(phone.e164).display}
-            </a>
+      <div className="grid gap-x-16 gap-y-14 lg:grid-cols-12">
+        <div className="flex flex-col gap-10 lg:col-span-5">
+          {section.heading ? (
+            <Heading as={level} size="step-4" id={titleId} className="text-balance">
+              {emphasize(section.heading)}
+            </Heading>
           ) : null}
-          {site.email ? (
-            <div className="mt-2">
-              <a href={`mailto:${site.email}`} className="text-link underline underline-offset-4">
+          <address className="flex flex-col gap-6 not-italic">
+            {phone ? (
+              <a
+                href={formatPhone(phone.e164).href}
+                className="group/call inline-flex items-center gap-4 self-start font-display text-step-3 font-light tabular-nums transition-colors hover:text-primary"
+              >
+                <span className="grid size-14 place-items-center rounded-pill bg-accent text-accent-fg transition-transform duration-(--duration-base) group-hover/call:rotate-12">
+                  <PhoneIcon aria-hidden="true" className="size-6" />
+                </span>
+                {phone.display || formatPhone(phone.e164).display}
+              </a>
+            ) : null}
+            <div>
+              <p className="eyebrow">{t('addressLabel')}</p>
+              <p className="mt-2 font-display text-step-1">
+                {addressLines(site.address).map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </p>
+              {section.showMap && directions ? (
+                <DirectionsLink
+                  href={directions}
+                  label={t('mapDirections')}
+                  opensInNewTab={t('opensInNewTab')}
+                  className="mt-4"
+                />
+              ) : null}
+            </div>
+            {site.email ? (
+              <a
+                href={`mailto:${site.email}`}
+                className="self-start text-link underline underline-offset-4"
+              >
                 {site.email}
               </a>
+            ) : null}
+          </address>
+          <div>
+            <p className="eyebrow">{t('hoursLabel')}</p>
+            <table className="mt-3 w-full border-collapse text-left text-step-0">
+              <caption className="sr-only">{t('hoursLabel')}</caption>
+              <tbody>
+                {rows.map((row) => (
+                  <tr key={row.days} className="border-b border-border">
+                    <th scope="row" className="py-3 pe-4 font-semibold">
+                      {row.days}
+                    </th>
+                    <td className="py-3 text-end text-fg-muted tabular-nums">
+                      {row.time ?? t('hoursClosed')}
+                      {row.note ? <span className="block text-step--1">{row.note}</span> : null}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {specialHours}
+          {section.note ? (
+            <p className="max-w-[30rem] rounded-lg bg-tone-soft-bg p-5 text-step--1 leading-relaxed">
+              {section.note}
+            </p>
+          ) : null}
+        </div>
+        <div className="flex flex-col gap-10 lg:col-span-7">
+          {section.showForm ? (
+            <div className="rounded-xl border border-border bg-surface p-6 shadow-sm md:p-10">
+              <LazyContactForm
+                action={submitContact.bind(null, locale)}
+                phone={primaryPhone(site)}
+                privacyHref={site.privacyHref}
+                successMessage={site.contactForm.successMessage}
+                turnstileSiteKey={turnstileSiteKey()}
+              />
             </div>
           ) : null}
-        </address>
-        <table className="w-full border-collapse text-left text-step-0">
-          <caption className="sr-only">{section.heading}</caption>
-          <tbody>
-            {rows.map((row) => (
-              <tr key={row.days} className="border-b border-border">
-                <th scope="row" className="py-3 pe-4 font-semibold">
-                  {row.days}
-                </th>
-                <td className="py-3 text-fg-muted tabular-nums">
-                  {row.time ?? t('hoursClosed')}
-                  {row.note ? <span className="block text-step--1">{row.note}</span> : null}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          {map}
+        </div>
       </div>
-      {site.specialHours.length > 0 ? (
-        <div className="mt-8">
-          <Heading as="h3" size="step-1">
-            {t('hoursSpecial')}
-          </Heading>
-          <ul className="mt-4 space-y-2">
-            {site.specialHours.map((entry) => {
-              const labelSuffix = entry.label ? `${' — '}${entry.label}` : ''
-              const timeSuffix = entry.closed
-                ? `${' · '}${t('hoursClosed')}`
-                : entry.opens && entry.closes
-                  ? `${' · '}${formatTimeRange(entry.opens, entry.closes)}`
-                  : ''
-              return (
-                <li key={`${entry.date}-${entry.label ?? ''}`} className="text-fg-muted">
-                  <time dateTime={entry.date}>{formatDate(locale, entry.date, site.timeZone)}</time>
-                  {labelSuffix ? <span>{labelSuffix}</span> : null}
-                  {timeSuffix ? <span className="tabular-nums">{timeSuffix}</span> : null}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      ) : null}
-      {section.showMap && (site.mapEmbedUrl || directions) ? (
-        <div className="mt-10">
-          {site.mapEmbedUrl ? (
-            <MapEmbed
-              embedUrl={site.mapEmbedUrl}
-              title={t('mapTitle', { name: site.brandName })}
-              loadLabel={t('mapLoad')}
-              notice={t('mapNotice')}
-              alwaysAllowLabel={t('mapAlwaysAllow')}
-            >
-              {site.mapPlaceholder ? (
-                <ContentImage
-                  image={site.mapPlaceholder}
-                  sizes="(min-width: 1280px) 1200px, 100vw"
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                <div className="flex h-full flex-col items-center pt-6 text-center sm:pt-10">
-                  <MapPinIcon aria-hidden="true" className="size-10 text-primary" />
-                  <Text className="mt-2 font-semibold">{site.brandName}</Text>
-                  <Text tone="muted">{addressLines(site.address)[0]}</Text>
-                </div>
-              )}
-            </MapEmbed>
-          ) : null}
-          {directions ? (
-            <DirectionsLink
-              href={directions}
-              label={t('mapDirections')}
-              opensInNewTab={t('opensInNewTab')}
-              className="mt-4"
-            />
-          ) : null}
-        </div>
-      ) : null}
-      {section.note ? (
-        <Text tone="muted" className="mt-8 max-w-(--container-prose)">
-          {section.note}
-        </Text>
-      ) : null}
-      {section.showForm ? (
-        <div className="mt-10 max-w-(--container-prose)">
-          <LazyContactForm
-            action={submitContact.bind(null, locale)}
-            phone={primaryPhone(site)}
-            privacyHref={site.privacyHref}
-            successMessage={site.contactForm.successMessage}
-            turnstileSiteKey={turnstileSiteKey()}
-          />
-        </div>
-      ) : null}
     </SectionShell>
   )
 }

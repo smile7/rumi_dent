@@ -1,18 +1,21 @@
 /*
  * Client fonts (DESIGN-SYSTEM §3). Every family must ship the Cyrillic subset.
- * Rumi Dent: rounded, friendly display face + neutral body. Alternatives are compared in /styleguide.
+ * Rumi Dent: Noto Serif Display is the face the wordmark was drawn from (BRIEF §6.4), so headings
+ * and the logo speak the same language; Manrope is the friendly, open body face (BRIEF §6.3).
+ * The italic carries the emotional accent words in headings. Alternatives are compared in /styleguide.
  */
-import { Nunito, Onest } from 'next/font/google'
+import { Manrope, Noto_Serif_Display } from 'next/font/google'
 
-export const displayFont = Nunito({
+export const displayFont = Noto_Serif_Display({
   subsets: ['latin', 'cyrillic'],
+  weight: 'variable',
+  style: ['normal', 'italic'],
   display: 'swap',
   variable: '--font-display-family',
   adjustFontFallback: true,
-  preload: false,
 })
 
-export const bodyFont = Onest({
+export const bodyFont = Manrope({
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
   variable: '--font-body-family',

@@ -74,7 +74,6 @@
   },
   "Sections": {
     "opensInNewTab": "(opens in a new tab)",
-    "readMore": "Read more",
     "tileExpand": "Show details",
     "tileCollapse": "Hide details",
     "galleryAll": "All",
@@ -89,9 +88,6 @@
     "galleryNext": "Next photo",
     "galleryClose": "Close",
     "galleryCounter": "{current} / {total}",
-    "testimonialsList": "Customer reviews",
-    "testimonialsPrev": "Previous review",
-    "testimonialsNext": "Next review",
     "ratingStars": "{rating} out of 5",
     "hoursClosed": "Closed",
     "hoursSpecial": "Special opening hours",
@@ -99,10 +95,13 @@
     "mapLoad": "Load the map (Google)",
     "mapNotice": "The map is loaded from Google Maps. When you press the button, Google receives your IP address and may set cookies.",
     "mapDirections": "Directions in Google Maps",
-    "blogRead": "Read",
-    "teamBioExpand": "Show bio",
-    "teamBioCollapse": "Hide bio",
-    "mapAlwaysAllow": "Always load Google Maps"
+    "mapAlwaysAllow": "Always load Google Maps",
+    "hoursLabel": "Opening hours",
+    "addressLabel": "Address",
+    "teamYears": "{count, plural, one {year of experience} other {years of experience}}",
+    "faqHelpTitle": "More questions?",
+    "faqHelpText": "Give us a call – we are happy to answer and find a time that suits you.",
+    "blogAll": "All articles"
   },
   "Error": {
     "title": "Something went wrong",

@@ -2,7 +2,12 @@
 
 import type { ReactNode } from 'react'
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
 type FaqAccordionItem = {
   id: string
@@ -17,7 +22,7 @@ type FaqAccordionProps = {
 
 export function FaqAccordion({ items, idPrefix }: FaqAccordionProps) {
   return (
-    <Accordion className="mt-8">
+    <Accordion className="border-t border-border">
       {items.map((item) => (
         <AccordionItem key={item.id} value={item.id}>
           <AccordionTrigger id={`${idPrefix}-${item.id}`}>{item.question}</AccordionTrigger>

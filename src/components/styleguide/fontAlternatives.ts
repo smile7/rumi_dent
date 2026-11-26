@@ -25,7 +25,7 @@ export type FontPairing = {
 }
 
 export const fontPairings: FontPairing[] = [
-  { name: 'Nunito + Onest (current)' },
+  { name: 'Noto Serif Display + Manrope (current)' },
   {
     name: 'M PLUS Rounded 1c + Manrope',
     displayClass: mPlusRounded.className,

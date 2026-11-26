@@ -10,10 +10,10 @@ import { formatPhone } from '@/lib/i18n/format'
 import { addressLines, hoursRows } from '@/lib/site/footer'
 
 import { NavLink } from './NavLink'
-import { Wordmark } from './Wordmark'
+import { SiteLogo } from './SiteLogo'
 
 const linkClass = 'inline-block py-1 underline-offset-4 hover:text-link hover:underline'
-const headingClass = 'mb-3 font-display text-step-0 font-bold'
+const headingClass = 'eyebrow mb-4'
 
 export type SiteFooterProps = {
   locale: Locale
@@ -41,17 +41,26 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
   ].filter(Boolean)
 
   return (
-    <footer className="bg-tone-soft-bg text-tone-soft-fg">
+    <footer className="relative overflow-hidden bg-neutral-100 text-fg">
       <Container
         width="wide"
-        className="grid gap-10 py-12 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:py-16"
+        className="grid gap-10 pt-16 pb-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(3,1fr)] lg:pt-24"
       >
-        <div>
+        <div className="sm:col-span-2 lg:col-span-1">
           <Link href="/" className="inline-flex min-h-11 items-center rounded-sm">
-            <Wordmark name={settings.brandName} variant="compact" />
+            <SiteLogo
+              name={settings.brandName}
+              logo={settings.logo}
+              variant="full"
+              className="h-10 md:h-12"
+            />
           </Link>
-          {settings.tagline ? <p className="mt-2 text-fg-muted">{settings.tagline}</p> : null}
-          <address className="mt-4 flex flex-col gap-1 not-italic">
+          {settings.tagline ? (
+            <p className="mt-4 max-w-[20rem] font-display text-step-1 text-fg-muted italic">
+              {settings.tagline}
+            </p>
+          ) : null}
+          <address className="mt-6 flex flex-col gap-1 not-italic">
             {addressLines(settings.address).map((line) => (
               <span key={line}>{line}</span>
             ))}
@@ -128,7 +137,13 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
         ) : null}
       </Container>
 
-      <div className="border-t border-border">
+      <p
+        aria-hidden="true"
+        className="pointer-events-none mx-auto -mb-[0.22em] max-w-(--container-wide) px-5 font-display text-[clamp(4rem,1rem+13vw,15rem)] leading-none font-light tracking-[-0.04em] whitespace-nowrap text-ink-900/6 select-none md:px-8"
+      >
+        {settings.brandName}
+      </p>
+      <div className="relative border-t border-border bg-neutral-100">
         <Container width="wide" className="flex flex-col gap-3 py-6 text-step--1 text-fg-muted">
           <nav aria-label={t('legal')}>
             <ul className="flex flex-wrap gap-x-6">

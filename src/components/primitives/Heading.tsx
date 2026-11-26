@@ -14,13 +14,14 @@ export const defaultHeadingSize: Record<HeadingLevel, HeadingSize> = {
   h6: 'step-0',
 }
 
+// Display serif: large steps stay light and tight (editorial), small steps get a little weight.
 const sizeClass: Record<HeadingSize, string> = {
-  'step-0': 'text-step-0 font-bold',
-  'step-1': 'text-step-1 font-bold',
-  'step-2': 'text-step-2 font-bold',
-  'step-3': 'text-step-3 font-extrabold tracking-[-0.01em]',
-  'step-4': 'text-step-4 font-extrabold tracking-[-0.015em]',
-  'step-5': 'text-step-5 font-extrabold tracking-[-0.02em]',
+  'step-0': 'text-step-0 font-semibold',
+  'step-1': 'text-step-1 font-medium',
+  'step-2': 'text-step-2 font-normal tracking-[-0.01em]',
+  'step-3': 'text-step-3 font-light tracking-[-0.02em]',
+  'step-4': 'text-step-4 font-light tracking-[-0.025em]',
+  'step-5': 'text-step-5 font-light tracking-[-0.03em]',
 }
 
 type HeadingProps = {

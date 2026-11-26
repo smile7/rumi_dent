@@ -12,7 +12,7 @@
  * Needs NEXT_PUBLIC_SANITY_PROJECT_ID and a SANITY_WRITE_TOKEN (Editor robot token) in `.env.local`.
  */
 import { readFile, readdir } from 'node:fs/promises'
-import { basename, resolve } from 'node:path'
+import { basename, extname, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 
 import { createClient } from '@sanity/client'
@@ -43,7 +43,9 @@ const fail = (message: string): never => {
 }
 
 if (values.reset && values.client) {
-  fail('refusing --reset with --client; client seed keeps seed-* ids and reset would delete edited content')
+  fail(
+    'refusing --reset with --client; client seed keeps seed-* ids and reset would delete edited content',
+  )
 }
 
 // --force never unlocks demo content in production.
@@ -71,16 +73,17 @@ const client = createClient({
 })
 
 const imagesDir = resolve(import.meta.dirname, '../seed/images')
+const IMAGE_FILE = /\.(jpe?g|png|webp|svg)$/i
 
 /** Sanity dedupes uploads by content hash, so re-running returns the same asset ids. */
 async function uploadImages(): Promise<SeedImages> {
-  const files = (await readdir(imagesDir)).filter((file) => file.endsWith('.jpg'))
+  const files = (await readdir(imagesDir)).filter((file) => IMAGE_FILE.test(file))
   const entries = await Promise.all(
     files.map(async (file) => {
       const asset = await client.assets.upload('image', await readFile(resolve(imagesDir, file)), {
         filename: file,
       })
-      return [basename(file, '.jpg'), asset._id] as const
+      return [basename(file, extname(file)), asset._id] as const
     }),
   )
   return Object.fromEntries(entries)

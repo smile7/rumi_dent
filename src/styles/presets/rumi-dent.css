@@ -1,6 +1,7 @@
 /*
  * THE theme file. A new client edits this file (+ src/config/fonts.ts) and nothing else.
- * Preset: Rumi Dent (DESIGN-SYSTEM §13): calm mint-teal brand, sunny apricot accent, warm neutrals.
+ * Preset: Rumi Dent, bespoke (2026-11): warm paper, lagoon teal, petrol ink from the logo, an
+ * apricot sun. Geometry follows the wordmark: round bowls (circles, arches), hairline strokes.
  * Components use semantic tokens (Layer 2) only. `pnpm contrast` checks the text/UI pairs.
  * `static` keeps every token as a CSS variable, including those only read through var().
  */
@@ -9,18 +10,28 @@
   --color-*: initial;
 
   /* ---------- Layer 1: primitives ---------- */
-  --color-brand-50: oklch(0.975 0.018 186);
-  --color-brand-100: oklch(0.948 0.036 186);
-  --color-brand-200: oklch(0.9 0.062 186);
-  --color-brand-300: oklch(0.83 0.09 186);
-  --color-brand-400: oklch(0.74 0.105 186);
-  --color-brand-500: oklch(0.64 0.105 186);
+  /* Lagoon teal: the brand colour (buttons, links, accents). */
+  --color-brand-50: oklch(0.972 0.016 186);
+  --color-brand-100: oklch(0.945 0.032 186);
+  --color-brand-200: oklch(0.9 0.055 186);
+  --color-brand-300: oklch(0.83 0.08 186);
+  --color-brand-400: oklch(0.74 0.095 186);
+  --color-brand-500: oklch(0.64 0.1 186);
   --color-brand-600: oklch(0.55 0.095 186);
   --color-brand-700: oklch(0.47 0.085 186);
-  --color-brand-800: oklch(0.39 0.07 188);
-  --color-brand-900: oklch(0.31 0.055 190);
-  --color-brand-950: oklch(0.23 0.04 192);
+  --color-brand-800: oklch(0.39 0.07 190);
+  --color-brand-900: oklch(0.31 0.055 194);
+  --color-brand-950: oklch(0.23 0.04 200);
 
+  /* Petrol ink: the logo colour (#005b74). Text and the deep contrast bands. */
+  --color-ink-300: oklch(0.78 0.04 222);
+  --color-ink-500: oklch(0.55 0.06 222);
+  --color-ink-700: oklch(0.42 0.07 222);
+  --color-ink-800: oklch(0.33 0.055 222);
+  --color-ink-900: oklch(0.26 0.045 222);
+  --color-ink-950: oklch(0.205 0.035 222);
+
+  /* Apricot sun. */
   --color-accent-50: oklch(0.982 0.018 78);
   --color-accent-100: oklch(0.958 0.042 76);
   --color-accent-200: oklch(0.918 0.075 72);
@@ -33,27 +44,35 @@
   --color-accent-900: oklch(0.37 0.08 42);
   --color-accent-950: oklch(0.27 0.055 42);
 
-  --color-neutral-0: oklch(1 0 0);
-  --color-neutral-50: oklch(0.986 0.005 90);
-  --color-neutral-100: oklch(0.966 0.007 90);
-  --color-neutral-200: oklch(0.928 0.008 90);
-  --color-neutral-300: oklch(0.87 0.009 90);
-  --color-neutral-400: oklch(0.72 0.01 90);
-  --color-neutral-500: oklch(0.58 0.011 90);
-  --color-neutral-600: oklch(0.48 0.012 90);
-  --color-neutral-700: oklch(0.4 0.012 90);
-  --color-neutral-800: oklch(0.31 0.012 90);
-  --color-neutral-900: oklch(0.24 0.012 90);
-  --color-neutral-950: oklch(0.18 0.01 90);
+  /* Small decorative tints (the mascots' cheeks and sky): never for text. */
+  --color-blush-200: oklch(0.9 0.05 22);
+  --color-blush-400: oklch(0.76 0.11 22);
+  --color-sky-100: oklch(0.95 0.025 232);
+  --color-sky-300: oklch(0.84 0.06 232);
+
+  /* Warm paper neutrals. */
+  --color-neutral-0: oklch(0.997 0.003 85);
+  --color-neutral-50: oklch(0.982 0.01 85);
+  --color-neutral-100: oklch(0.962 0.016 82);
+  --color-neutral-150: oklch(0.945 0.022 80);
+  --color-neutral-200: oklch(0.91 0.02 80);
+  --color-neutral-300: oklch(0.85 0.018 80);
+  --color-neutral-400: oklch(0.72 0.016 80);
+  --color-neutral-500: oklch(0.56 0.02 222);
+  --color-neutral-600: oklch(0.47 0.022 222);
+  --color-neutral-700: oklch(0.39 0.025 222);
+  --color-neutral-800: oklch(0.31 0.03 222);
+  --color-neutral-900: oklch(0.24 0.035 222);
+  --color-neutral-950: oklch(0.18 0.03 222);
 
   /* ---------- Layer 2: semantic (what components use) ---------- */
   --color-bg: var(--color-neutral-50);
   --color-surface: var(--color-neutral-0);
   --color-surface-raised: var(--color-neutral-0);
   --color-surface-muted: var(--color-neutral-100);
-  --color-fg: oklch(0.26 0.03 205);
-  --color-fg-muted: oklch(0.5 0.02 205);
-  --color-border: var(--color-neutral-200);
+  --color-fg: var(--color-ink-900);
+  --color-fg-muted: oklch(0.44 0.03 222);
+  --color-border: oklch(0.26 0.045 222 / 0.12);
   --color-border-strong: var(--color-neutral-500);
   --color-primary: var(--color-brand-700);
   --color-primary-hover: var(--color-brand-800);
@@ -71,52 +90,55 @@
   --color-danger: oklch(0.52 0.18 27);
   --color-danger-fg: var(--color-neutral-0);
 
-  /* Section tones: alternate base/soft for rhythm without hard lines. */
+  /* Section tones: paper → mint → sand → deep teal → ink. Never the same tone twice in a row. */
   --color-tone-base-bg: var(--color-bg);
   --color-tone-base-fg: var(--color-fg);
   --color-tone-soft-bg: var(--color-brand-50);
   --color-tone-soft-fg: var(--color-fg);
   --color-tone-brand-bg: var(--color-brand-800);
-  --color-tone-brand-fg: var(--color-neutral-0);
-  --color-tone-accent-bg: var(--color-accent-100);
+  --color-tone-brand-fg: var(--color-neutral-50);
+  --color-tone-accent-bg: var(--color-neutral-150);
   --color-tone-accent-fg: var(--color-fg);
-  --color-tone-inverse-bg: var(--color-brand-950);
+  --color-tone-inverse-bg: var(--color-ink-950);
   --color-tone-inverse-fg: var(--color-neutral-50);
 
   /* ---------- Typography ---------- */
   /* --font-*-family are set by next/font in src/config/fonts.ts. */
-  --font-display: var(--font-display-family), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-family), ui-serif, Georgia, serif;
   --font-body: var(--font-body-family), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-body);
 
+  --text-step--2: 0.75rem;
   --text-step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
   --text-step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
-  --text-step-1: clamp(1.2rem, 1.13rem + 0.35vw, 1.42rem);
-  --text-step-2: clamp(1.44rem, 1.3rem + 0.7vw, 1.89rem);
-  --text-step-3: clamp(1.73rem, 1.5rem + 1.15vw, 2.52rem);
-  --text-step-4: clamp(2.07rem, 1.7rem + 1.85vw, 3.36rem);
-  --text-step-5: clamp(2.49rem, 1.9rem + 2.9vw, 4.48rem);
+  --text-step-1: clamp(1.18rem, 1.1rem + 0.35vw, 1.45rem);
+  --text-step-2: clamp(1.45rem, 1.25rem + 0.9vw, 2.05rem);
+  --text-step-3: clamp(1.9rem, 1.4rem + 2.1vw, 3.25rem);
+  --text-step-4: clamp(2.3rem, 1.55rem + 3.3vw, 4.75rem);
+  --text-step-5: clamp(2.8rem, 1.65rem + 5vw, 6.6rem);
 
   --leading-body: 1.6;
-  --leading-heading: 1.15;
+  --leading-heading: 1.08;
 
   /* ---------- Space / size ---------- */
   --spacing: 0.25rem;
-  --space-section: clamp(4rem, 3rem + 5vw, 8rem);
+  --space-section: clamp(4.5rem, 3rem + 6vw, 9.5rem);
   --space-section-compact: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
   --container-prose: 42rem;
-  --container-content: 76rem;
+  --container-content: 78rem;
   --container-wide: 90rem;
 
   /* ---------- Radius / elevation ---------- */
   --radius-sm: 0.5rem;
   --radius-md: 0.875rem;
-  --radius-lg: 1.25rem;
-  --radius-xl: 2rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2.25rem;
   --radius-pill: 999px;
-  --shadow-sm: 0 1px 2px oklch(0.2 0.02 205 / 0.06), 0 1px 1px oklch(0.2 0.02 205 / 0.04);
-  --shadow-md: 0 8px 24px -8px oklch(0.2 0.02 205 / 0.14);
-  --shadow-lg: 0 24px 48px -16px oklch(0.2 0.02 205 / 0.18);
+  /* Arch: a round top like the bowls of the wordmark, a softly squared base. */
+  --radius-arch: 999px 999px var(--radius-lg) var(--radius-lg);
+  --shadow-sm: 0 1px 2px oklch(0.26 0.045 222 / 0.06), 0 1px 1px oklch(0.26 0.045 222 / 0.04);
+  --shadow-md: 0 14px 30px -18px oklch(0.26 0.045 222 / 0.28);
+  --shadow-lg: 0 40px 80px -40px oklch(0.26 0.045 222 / 0.35);
 
   /* ---------- Motion ---------- */
   --duration-instant: 100ms;
@@ -129,14 +151,14 @@
   --ease-exit: cubic-bezier(0.3, 0, 1, 1);
 
   /* ---------- Layer 3: component tokens ---------- */
-  --header-h-expanded: 6rem;
-  --header-h-compact: 4rem;
+  --header-h-expanded: 6.5rem;
+  --header-h-compact: 4.25rem;
   --header-h-mobile: 4rem;
   /* Expanded − compact: the sticky header's negative top and the compact threshold. */
   --header-shrink: calc(var(--header-h-expanded) - var(--header-h-compact));
   --action-bar-h: 4.5rem;
   --radius-button: var(--radius-pill);
-  --radius-field: var(--radius-sm);
+  --radius-field: var(--radius-md);
   --radius-card: var(--radius-lg);
   --radius-tile: var(--radius-lg);
   --radius-media: var(--radius-xl);

@@ -37,6 +37,7 @@ export function mapTeamMember(row: TeamMemberQueryRow | null, locale: Locale): T
     ...(row.nameLatin ? { nameLatin: row.nameLatin } : {}),
     ...(row.honorific ? { honorific: row.honorific } : {}),
     role: row.role,
+    ...(row.practisingSince ? { practisingSince: row.practisingSince } : {}),
     specialties: (row.specialties ?? []).flatMap((s) => (s.label ? [s.label] : [])),
     bioShort: row.bioShort ?? '',
     ...(bio ? { bio } : {}),

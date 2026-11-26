@@ -47,6 +47,7 @@ export async function BlogList({ articles, page, pages, locale, site }: BlogList
             spacing: 'compact',
             heading: t('listHeading'),
             articles,
+            linkToBlog: false,
           },
         ]}
         locale={locale}

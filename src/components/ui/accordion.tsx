@@ -29,7 +29,7 @@ function AccordionTrigger({ className, children, ...props }: AccordionPrimitive.
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          'group/accordion-trigger relative flex min-h-12 flex-1 cursor-pointer items-center justify-between gap-4 rounded-sm py-4 text-left font-display text-step-1 font-bold transition-colors hover:text-primary aria-disabled:pointer-events-none aria-disabled:opacity-50',
+          'group/accordion-trigger relative flex min-h-12 flex-1 cursor-pointer items-center justify-between gap-6 rounded-sm py-6 text-left font-display text-step-1 font-normal text-pretty transition-colors hover:text-primary aria-disabled:pointer-events-none aria-disabled:opacity-50',
           className,
         )}
         {...props}
@@ -37,7 +37,7 @@ function AccordionTrigger({ className, children, ...props }: AccordionPrimitive.
         {children}
         <span
           aria-hidden="true"
-          className="grid size-9 shrink-0 place-items-center rounded-pill bg-tone-soft-bg text-primary transition-[transform,background-color] duration-(--duration-base) ease-standard group-hover/accordion-trigger:bg-accent group-hover/accordion-trigger:text-accent-fg group-aria-expanded/accordion-trigger:rotate-45"
+          className="grid size-10 shrink-0 place-items-center rounded-pill border border-border bg-surface text-primary transition-[transform,background-color] duration-(--duration-base) ease-standard group-hover/accordion-trigger:border-accent group-hover/accordion-trigger:bg-accent group-hover/accordion-trigger:text-accent-fg group-aria-expanded/accordion-trigger:rotate-45 group-aria-expanded/accordion-trigger:border-primary group-aria-expanded/accordion-trigger:bg-primary group-aria-expanded/accordion-trigger:text-primary-fg"
         >
           <PlusIcon className="size-5" strokeWidth={2} />
         </span>
@@ -55,7 +55,7 @@ function AccordionContent({ className, children, ...props }: AccordionPrimitive.
     >
       <div
         className={cn(
-          'h-(--accordion-panel-height) max-w-(--container-prose) pt-0 pb-6 text-fg-muted data-ending-style:h-0 data-starting-style:h-0 [&_a]:text-link [&_a]:underline [&_a]:underline-offset-4 [&_p:not(:last-child)]:mb-4',
+          'h-(--accordion-panel-height) max-w-(--container-prose) pe-14 pt-0 pb-7 leading-relaxed text-fg-muted data-ending-style:h-0 data-starting-style:h-0 [&_a]:text-link [&_a]:underline [&_a]:underline-offset-4 [&_p:not(:last-child)]:mb-4',
           className,
         )}
       >

@@ -6024,6 +6024,13 @@
         },
         "optional": true
       },
+      "practisingSince": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
       "specialties": {
         "type": "objectAttribute",
         "value": {

@@ -38,6 +38,19 @@ export const teamMemberType = defineType({
       validation: (rule) => rule.custom(validateI18n({ required: 'Add the role.', max: 60 })),
     }),
     defineField({
+      name: 'practisingSince',
+      title: 'Practising since (year)',
+      type: 'number',
+      description:
+        'Optional. The year they started practising, e.g. 2012. The site shows the years of experience and keeps them up to date.',
+      validation: (rule) =>
+        rule
+          .integer()
+          .min(1960)
+          .max(new Date().getFullYear())
+          .error('Enter a year between 1960 and this year.'),
+    }),
+    defineField({
       name: 'specialties',
       title: 'Specialties',
       type: 'array',

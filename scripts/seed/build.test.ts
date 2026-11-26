@@ -12,8 +12,8 @@ import { SLUG_LIKE, placeholdersIn, sectionProblems } from '../../src/sanity/lib
 import { buildSeed, type SeedDocument } from './build'
 
 const imageNames = readdirSync(resolve(__dirname, '../../seed/images'))
-  .filter((file) => file.endsWith('.jpg'))
-  .map((file) => file.replace(/\.jpg$/, ''))
+  .filter((file) => /\.(jpe?g|png|webp|svg)$/i.test(file))
+  .map((file) => file.replace(/\.[a-z]+$/i, ''))
 const images = Object.fromEntries(imageNames.map((name) => [name, `image-${name}-1x1-jpg`]))
 
 const demo = buildSeed('demo', images)

@@ -19,7 +19,7 @@ const base = {
 export const heroSplitBg: HeroSection = {
   ...base,
   type: 'hero',
-  heading: 'Усмивки без страх',
+  heading: 'Усмивки *без* страх',
   subheading: 'Детска и семейна дентална клиника.',
   image: fixtureImage,
   variant: 'split',
