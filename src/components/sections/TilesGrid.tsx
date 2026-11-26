@@ -109,23 +109,29 @@ export function TilesGrid({
                   toggle(item)
                 }}
                 className={cn(
-                  'flex min-h-30 w-full flex-col items-start gap-3 rounded-tile border border-border bg-surface p-5 text-left shadow-sm transition-[box-shadow,transform] duration-(--duration-base) ease-standard hover:shadow-md',
-                  isOpen && 'shadow-md',
+                  'flex min-h-32 w-full flex-col items-start gap-3 rounded-tile bg-surface p-6 text-left',
+                  'shadow-sm ring-1 ring-border/60 transition-[box-shadow,ring-color] duration-(--duration-base) ease-standard',
+                  'hover:shadow-md hover:ring-brand-200',
+                  isOpen && 'shadow-md ring-brand-300',
                 )}
               >
                 <span className="flex w-full items-start justify-between gap-3">
                   <span className="flex flex-col gap-2">
-                    {item.icon ? <ContentIcon name={item.icon} className="text-accent" /> : null}
-                    <span className="font-display text-step-1 font-bold">{item.title}</span>
+                    {item.icon ? (
+                      <span className="flex size-10 items-center justify-center rounded-full bg-brand-50 text-primary">
+                        <ContentIcon name={item.icon} />
+                      </span>
+                    ) : null}
+                    <span className="font-display text-step-1 font-bold leading-snug">{item.title}</span>
                     {item.teaser ? (
-                      <span className="text-step--1 text-fg-muted">{item.teaser}</span>
+                      <span className="text-step--1 leading-snug text-fg-muted">{item.teaser}</span>
                     ) : null}
                   </span>
                   <ChevronDownIcon
                     aria-hidden="true"
                     className={cn(
-                      'size-6 shrink-0 text-primary transition-transform duration-(--duration-base)',
-                      isOpen && 'rotate-180',
+                      'size-5 shrink-0 text-fg-muted transition-transform duration-(--duration-base)',
+                      isOpen && 'rotate-180 text-primary',
                     )}
                   />
                 </span>

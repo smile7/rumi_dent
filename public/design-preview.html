@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Руми Дент – Design Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Design tokens ──────────────────────────────────────────────── */
+:root {
+  --font-display: 'Nunito', system-ui, sans-serif;
+  --font-body: 'Onest', system-ui, sans-serif;
+
+  --color-brand-50:  oklch(0.975 0.018 186);
+  --color-brand-100: oklch(0.948 0.036 186);
+  --color-brand-200: oklch(0.9   0.062 186);
+  --color-brand-300: oklch(0.83  0.09  186);
+  --color-brand-700: oklch(0.47  0.085 186);
+  --color-brand-800: oklch(0.39  0.07  188);
+  --color-brand-950: oklch(0.23  0.04  192);
+
+  --color-accent-100: oklch(0.958 0.042 76);
+  --color-accent-200: oklch(0.918 0.075 72);
+  --color-accent-400: oklch(0.82  0.135 64);
+  --color-accent-500: oklch(0.75  0.15  56);
+  --color-accent-950: oklch(0.27  0.055 42);
+
+  --color-neutral-0:   oklch(1 0 0);
+  --color-neutral-50:  oklch(0.986 0.005 90);
+  --color-neutral-100: oklch(0.966 0.007 90);
+  --color-neutral-200: oklch(0.928 0.008 90);
+
+  --color-bg:          var(--color-neutral-50);
+  --color-surface:     var(--color-neutral-0);
+  --color-fg:          oklch(0.26 0.03 205);
+  --color-fg-muted:    oklch(0.5  0.02 205);
+  --color-border:      var(--color-neutral-200);
+  --color-primary:     var(--color-brand-700);
+  --color-primary-fg:  var(--color-neutral-0);
+  --color-accent:      var(--color-accent-400);
+
+  --text-step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-step-0:  clamp(1rem,     0.97rem + 0.15vw, 1.0625rem);
+  --text-step-1:  clamp(1.2rem,   1.13rem + 0.35vw, 1.42rem);
+  --text-step-2:  clamp(1.44rem,  1.3rem  + 0.7vw,  1.89rem);
+  --text-step-3:  clamp(1.73rem,  1.5rem  + 1.15vw, 2.52rem);
+  --text-step-4:  clamp(2.07rem,  1.7rem  + 1.85vw, 3.36rem);
+
+  --radius-sm:  0.5rem;
+  --radius-md:  0.875rem;
+  --radius-lg:  1.5rem;
+  --radius-xl:  2.5rem;
+  --radius-2xl: 3.5rem;
+  --radius-pill: 999px;
+
+  --space-section: clamp(4.5rem, 3.5rem + 5vw, 9rem);
+  --container-content: 76rem;
+  --container-wide: 90rem;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-step-0);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.1;
+  text-wrap: balance;
+  margin: 0;
+}
+p { margin: 0; }
+a { color: var(--color-primary); }
+img { max-width: 100%; display: block; }
+
+/* ── Helpers ────────────────────────────────────────────────────── */
+.container { max-width: var(--container-content); margin: 0 auto; padding: 0 1.25rem; }
+.section { padding: var(--space-section) 0; }
+.section--soft { background: var(--color-brand-50); }
+.section--brand { background: var(--color-brand-800); color: white; }
+.section--accent { background: var(--color-accent-100); }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.75rem; border-radius: var(--radius-pill);
+  font-family: var(--font-display); font-weight: 800;
+  font-size: var(--text-step-0); text-decoration: none; cursor: pointer; border: none;
+  transition: transform 120ms, box-shadow 120ms;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.14); }
+.btn--primary { background: var(--color-brand-700); color: white; }
+.btn--outline { background: transparent; color: var(--color-brand-700); border: 2px solid var(--color-brand-700); }
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 0.25rem 0.75rem; border-radius: var(--radius-pill);
+  font-size: var(--text-step--1); font-weight: 600;
+  background: var(--color-brand-50); color: var(--color-primary);
+  border: 1px solid var(--color-brand-200);
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+.header {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-brand-100);
+  backdrop-filter: blur(8px);
+}
+.header-inner {
+  max-width: var(--container-wide); margin: 0 auto; padding: 0 1.25rem;
+  display: flex; align-items: center; gap: 1.5rem; height: 4rem;
+}
+.logo {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: var(--text-step-1); color: var(--color-primary);
+  text-decoration: none; letter-spacing: -0.015em;
+  margin-right: auto;
+}
+.nav { display: flex; gap: 0.25rem; }
+.nav a {
+  padding: 0.5rem 0.75rem; border-radius: var(--radius-pill);
+  font-weight: 600; text-decoration: none; color: var(--color-fg);
+  font-size: var(--text-step--1);
+}
+.nav a:hover { background: var(--color-brand-50); color: var(--color-primary); }
+.phone-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 1rem; border-radius: var(--radius-pill);
+  background: var(--color-brand-700); color: white;
+  font-weight: 700; font-size: var(--text-step--1); text-decoration: none;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────── */
+.hero {
+  padding: var(--space-section) 0;
+  overflow: hidden; position: relative;
+}
+.hero-inner {
+  max-width: var(--container-content); margin: 0 auto; padding: 0 1.25rem;
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: center;
+}
+.hero-text {}
+.hero-eyebrow {
+  font-size: var(--text-step--1); font-weight: 700;
+  color: var(--color-primary); letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.hero-h1 {
+  font-size: var(--text-step-4); letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+.hero-lead {
+  margin-top: 1.25rem;
+  font-size: var(--text-step-1); color: var(--color-fg-muted);
+  line-height: 1.6; max-width: 36ch;
+}
+.hero-cta { margin-top: 2rem; }
+.hero-tooth-deco {
+  position: absolute; opacity: 0.1;
+  user-select: none; pointer-events: none;
+}
+.hero-image-col { position: relative; }
+.hero-image-blob {
+  position: absolute; inset: 0;
+  background: var(--color-brand-100);
+  border-radius: 50%; transform: scale(0.9); filter: blur(48px);
+  z-index: 0;
+}
+.hero-image-col img.main-photo {
+  position: relative; z-index: 1;
+  border-radius: var(--radius-2xl);
+  width: 100%;
+  box-shadow: 0 32px 64px -24px rgba(0,80,80,.22);
+  filter: drop-shadow(0 20px 40px rgba(0,80,80,.18));
+}
+.hero-mascot-corner {
+  position: absolute; bottom: -16px; right: -16px; z-index: 2;
+  width: 100px; opacity: 0.85; transform: rotate(8deg);
+}
+
+/* ── Services (Tiles) ────────────────────────────────────────────── */
+.tiles-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem;
+}
+.tile {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 0 0 1px var(--color-border);
+  display: flex; flex-direction: column; gap: 0.75rem;
+  transition: box-shadow 240ms;
+}
+.tile:hover { box-shadow: 0 8px 24px -8px rgba(0,0,0,.14), 0 0 0 1px var(--color-brand-200); }
+.tile-icon {
+  width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  background: var(--color-brand-50); display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: var(--color-primary);
+}
+.tile-title { font-family: var(--font-display); font-size: var(--text-step-1); font-weight: 800; }
+.tile-teaser { font-size: var(--text-step--1); color: var(--color-fg-muted); line-height: 1.5; }
+
+/* ── Process Steps ───────────────────────────────────────────────── */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 3.5rem; }
+.step { position: relative; display: flex; gap: 1.25rem; padding-right: 2.5rem; }
+.step::after {
+  content: ''; position: absolute;
+  top: 1.25rem; left: calc(2.5rem + 1.25rem); right: 0;
+  height: 2px; background: linear-gradient(to right, var(--color-brand-200), var(--color-brand-100));
+}
+.step:last-child::after { display: none; }
+.step-num {
+  width: 2.5rem; height: 2.5rem; border-radius: 50%; flex-shrink: 0;
+  background: var(--color-brand-700); color: white;
+  font-family: var(--font-display); font-size: var(--text-step-0); font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,80,80,.2);
+  z-index: 1; position: relative;
+}
+.step-content { padding-top: 0.1rem; }
+.step-title { font-family: var(--font-display); font-size: var(--text-step-1); font-weight: 800; margin-bottom: 0.5rem; }
+.step-text { font-size: var(--text-step--1); color: var(--color-fg-muted); line-height: 1.6; }
+
+/* ── Team ────────────────────────────────────────────────────────── */
+.team-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; }
+.team-card {
+  display: grid; grid-template-columns: 2fr 3fr;
+  border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: 0 8px 24px -8px rgba(0,0,0,.14);
+  min-height: 22rem;
+}
+.team-card--flip { direction: rtl; }
+.team-card--flip > * { direction: ltr; }
+.team-photo { overflow: hidden; }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.team-body { display: flex; flex-direction: column; justify-content: center; gap: 1rem; padding: 2.25rem; }
+.team-accent { width: 2.5rem; height: 4px; border-radius: 999px; background: var(--color-accent); }
+.team-name { font-size: var(--text-step-2); font-family: var(--font-display); font-weight: 900; }
+.team-role { color: var(--color-fg-muted); font-weight: 600; }
+.team-bio { color: var(--color-fg-muted); line-height: 1.65; }
+.team-creds { display: flex; flex-direction: column; gap: 0.25rem; border-top: 1px solid var(--color-border); padding-top: 1rem; }
+.team-cred { display: flex; align-items: baseline; gap: 0.5rem; font-size: var(--text-step--1); color: var(--color-fg-muted); }
+.team-cred::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); flex-shrink: 0; margin-top: 2px; }
+
+/* ── Testimonials ────────────────────────────────────────────────── */
+.testimonials-scroll { display: flex; gap: 1.25rem; overflow-x: auto; padding-bottom: 0.5rem; margin-top: 2rem; }
+.testimonial-card {
+  flex-shrink: 0; width: min(100%, 26rem);
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: 0 8px 24px -8px rgba(0,0,0,.12), 0 0 0 1px var(--color-border);
+  display: flex; flex-direction: column; gap: 1.25rem;
+}
+.testimonial-stars { color: var(--color-accent); font-size: var(--text-step-1); letter-spacing: 2px; }
+.testimonial-openquote {
+  font-family: var(--font-display); font-size: 3rem; line-height: 1;
+  color: var(--color-brand-200); margin-bottom: -0.75rem; margin-top: -0.25rem;
+}
+.testimonial-quote { flex: 1; line-height: 1.65; }
+.testimonial-footer { display: flex; align-items: center; gap: 0.75rem; border-top: 1px solid var(--color-border); padding-top: 1rem; }
+.testimonial-avatar {
+  width: 2.25rem; height: 2.25rem; border-radius: 50%;
+  background: var(--color-brand-100); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: var(--text-step-0); font-weight: 800; color: var(--color-primary);
+}
+.testimonial-author { font-weight: 700; }
+
+/* ── Blog ────────────────────────────────────────────────────────── */
+.blog-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 1.5rem; margin-top: 2.5rem; }
+.blog-card { background: var(--color-surface); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 8px 24px -8px rgba(0,0,0,.12); }
+.blog-card-image { height: 18rem; overflow: hidden; }
+.blog-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms; }
+.blog-card:hover .blog-card-image img { transform: scale(1.03); }
+.blog-card-body { padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.blog-date { font-size: var(--text-step--1); color: var(--color-fg-muted); }
+.blog-title { font-family: var(--font-display); font-size: var(--text-step-2); font-weight: 800; line-height: 1.25; }
+.blog-title a { text-decoration: none; color: inherit; }
+.blog-title a:hover { color: var(--color-primary); }
+.blog-excerpt { color: var(--color-fg-muted); line-height: 1.6; }
+.blog-read { margin-top: auto; display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; color: var(--color-primary); text-decoration: none; }
+.blog-read:hover { text-decoration: underline; }
+.blog-side { display: flex; flex-direction: column; gap: 1.5rem; }
+.blog-side .blog-card { display: flex; }
+.blog-side .blog-card-image { width: 40%; height: auto; min-height: 10rem; flex-shrink: 0; }
+.blog-side .blog-card-body { padding: 1.25rem; }
+.blog-side .blog-title { font-size: var(--text-step-1); }
+
+/* ── CTA Band ─────────────────────────────────────────────────────── */
+.cta-band { padding: var(--space-section) 0; background: var(--color-brand-800); color: white; }
+.cta-band-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: var(--container-content); margin: 0 auto; padding: 0 1.25rem; }
+.cta-band h2 { font-size: var(--text-step-3); color: white; }
+.cta-band p { margin-top: 1rem; opacity: 0.85; font-size: var(--text-step-0); line-height: 1.6; }
+.cta-band-actions { margin-top: 2rem; display: flex; gap: 1rem; }
+.btn--white { background: white; color: var(--color-brand-800); }
+.btn--outline-white { background: transparent; color: white; border: 2px solid rgba(255,255,255,.5); }
+.cta-contact-card {
+  background: rgba(255,255,255,.1); border-radius: var(--radius-lg);
+  padding: 2rem; display: flex; flex-direction: column; gap: 1.25rem;
+  backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,.15);
+}
+.cta-contact-row { display: flex; align-items: flex-start; gap: 1rem; }
+.cta-contact-icon { opacity: 0.8; flex-shrink: 0; margin-top: 2px; }
+.cta-contact-row address { font-style: normal; opacity: 0.9; }
+.cta-contact-row a { color: white; font-weight: 700; text-decoration: none; }
+.cta-contact-row a:hover { text-decoration: underline; }
+.cta-hours { font-size: var(--text-step--1); opacity: 0.85; display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.75rem; }
+
+/* ── Footer ───────────────────────────────────────────────────────── */
+.footer { background: var(--color-brand-50); padding: 3rem 0 1.5rem; border-top: 1px solid var(--color-brand-100); }
+.footer-grid { max-width: var(--container-wide); margin: 0 auto; padding: 0 1.25rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; }
+.footer-logo { font-family: var(--font-display); font-weight: 900; font-size: var(--text-step-1); color: var(--color-primary); }
+.footer-tagline { margin-top: 0.5rem; font-size: var(--text-step--1); color: var(--color-fg-muted); }
+.footer-address { margin-top: 1rem; font-style: normal; font-size: var(--text-step--1); line-height: 1.8; color: var(--color-fg-muted); }
+.footer-heading { font-family: var(--font-display); font-weight: 800; margin-bottom: 0.75rem; font-size: var(--text-step-0); }
+.footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.footer-links a { text-decoration: none; font-size: var(--text-step--1); color: var(--color-fg-muted); }
+.footer-links a:hover { color: var(--color-primary); text-decoration: underline; }
+.footer-bottom { max-width: var(--container-wide); margin: 2rem auto 0; padding: 1rem 1.25rem 0; border-top: 1px solid var(--color-brand-100); font-size: var(--text-step--1); color: var(--color-fg-muted); }
+
+/* ── Section header utility ─────────────────────────────────────── */
+.section-header { max-width: 40rem; }
+.section-header h2 { font-size: var(--text-step-3); }
+.section-header p { margin-top: 0.75rem; color: var(--color-fg-muted); }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════════════ -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo">Руми Дент</a>
+    <nav class="nav">
+      <a href="#">Услуги</a>
+      <a href="#">За нас</a>
+      <a href="#">Галерия</a>
+      <a href="#">Блог</a>
+      <a href="#">Контакти</a>
+    </nav>
+    <a href="tel:+35982841190" class="phone-btn">📞 082 841 190</a>
+  </div>
+</header>
+
+<!-- ══ HERO ════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <!-- Floating tooth decorations -->
+  <img src="/brand/tooth-mascot.png" alt="" class="hero-tooth-deco" style="width:70px;top:-20px;right:40%;transform:rotate(-14deg);">
+  <img src="/brand/tooth-mascot.png" alt="" class="hero-tooth-deco" style="width:48px;bottom:40px;left:8%;transform:rotate(12deg);">
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Детски дентален център · Русе</p>
+      <h1 class="hero-h1">Усмивки без страх, от първото зъбче</h1>
+      <p class="hero-lead">Детска дентална клиника в Русе, в която децата влизат с любопитство, а родителите излизат спокойни.</p>
+      <div class="hero-cta">
+        <a href="tel:+35982841190" class="btn btn--primary">📅 Запишете час</a>
+      </div>
+    </div>
+
+    <div class="hero-image-col">
+      <div class="hero-image-blob"></div>
+      <img src="/brand/hero-kid.png" alt="Дете чисти зъбите си" class="main-photo">
+      <img src="/brand/tooth-mascot.png" alt="" class="hero-mascot-corner">
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Нашите услуги</h2>
+      <p>Всичко за здравите зъби на цялото семейство.</p>
+    </div>
+    <div class="tiles-grid">
+      <div class="tile">
+        <div class="tile-icon">😊</div>
+        <div class="tile-title">Профилактичен преглед за деца</div>
+        <div class="tile-teaser">Спокоен преглед, съвети за родителите и награда за смелите.</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">❤️</div>
+        <div class="tile-title">Адаптация към кабинета</div>
+        <div class="tile-teaser">Първото посещение е само запознанство — без лечение, без страх.</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">🛡️</div>
+        <div class="tile-title">Силанти</div>
+        <div class="tile-teaser">Защитно покритие на дъвкателните зъби — без пробиване.</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">🦷</div>
+        <div class="tile-title">Лечение на кариес</div>
+        <div class="tile-teaser">Фотополимерни възстановявания в цвета на зъба.</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">✨</div>
+        <div class="tile-title">Професионално почистване</div>
+        <div class="tile-teaser">Почистване на зъбен камък и полиране.</div>
+      </div>
+      <div class="tile">
+        <div class="tile-icon">⚡</div>
+        <div class="tile-title">Орална хирургия</div>
+        <div class="tile-teaser">Екстракции и малки хирургични процедури в спокойна обстановка.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FIRST VISIT ═════════════════════════════════════════════════ -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-header">
+      <h2>Първото посещение</h2>
+      <p>Три прости стъпки — след които детето ще иска да дойде пак.</p>
+    </div>
+    <ol class="steps" style="list-style:none;padding:0;">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Обаждате се</div>
+          <p class="step-text">Записваме удобен час. Без чакалня.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Запознаваме се</div>
+          <p class="step-text">Детето разглежда кабинета, сяда на стола и брои зъбчетата с д-р Купенова.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Ясен план</div>
+          <p class="step-text">Получавате пълен план и цени преди всяко следващо посещение.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══ TEAM ════════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Нашият екип</h2>
+      <p>Д-р Купенова и д-р Йорданов приемат заедно в Русе от 2015 г.</p>
+    </div>
+    <ul class="team-list" style="list-style:none;padding:0;">
+      <li>
+        <div class="team-card">
+          <div class="team-photo">
+            <img src="/seed/images/team-maria.jpg" alt="Д-р Румяна Купенова">
+          </div>
+          <div class="team-body">
+            <div class="team-accent"></div>
+            <div>
+              <div class="team-name">Д-р Румяна Купенова</div>
+              <div class="team-role">Детски стоматолог</div>
+            </div>
+            <p class="team-bio">Д-р Купенова ръководи клиниката и приема деца от 1-годишна възраст. Вярва, че доверието е по-важно от лечението.</p>
+            <ul class="team-creds" style="list-style:none;padding:0;">
+              <li class="team-cred">Специалност „Детска дентална медицина"</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="team-card team-card--flip">
+          <div class="team-photo">
+            <img src="/seed/images/team-georgi.jpg" alt="Д-р Георги Йорданов">
+          </div>
+          <div class="team-body">
+            <div class="team-accent"></div>
+            <div>
+              <div class="team-name">Д-р Георги Йорданов</div>
+              <div class="team-role">Стоматолог за възрастни</div>
+            </div>
+            <p class="team-bio">Д-р Йорданов приема пациенти на всякаква възраст. Работи внимателно, без бързане, с ясни цени предварително.</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ════════════════════════════════════════════════ -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-header">
+      <h2>Родителите казват</h2>
+    </div>
+    <div class="testimonials-scroll">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-openquote">„</div>
+        <p class="testimonial-quote">Борис се страхуваше от зъболекари. След първото посещение пита кога пак ще ходим при д-р Купенова.</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">И</div>
+          <div>
+            <div class="testimonial-author">Ива, майка на Борис (5 г.)</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-openquote">„</div>
+        <p class="testimonial-quote">Точни часове, без чакане и ясни цени предварително. Цялото семейство вече ходи тук.</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">Н</div>
+          <div>
+            <div class="testimonial-author">Николай П.</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-openquote">„</div>
+        <p class="testimonial-quote">Много внимателно почистване и обяснения за всичко. Препоръчвам!</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">М</div>
+          <div>
+            <div class="testimonial-author">Мила</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BLOG ════════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>От блога</h2>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-card-image">
+          <img src="/seed/images/article-first-visit.jpg" alt="">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-date">5 октомври 2026</div>
+          <div class="blog-title"><a href="#">Кога да заведем детето на първи преглед при зъболекар</a></div>
+          <p class="blog-excerpt">Първото посещение е по-рано, отколкото повечето родители мислят. Ето кога, защо и как да подготвите детето, за да мине леко.</p>
+          <a href="#" class="blog-read">Прочетете повече →</a>
+        </div>
+      </div>
+      <div class="blog-side">
+        <div class="blog-card">
+          <div class="blog-card-image">
+            <img src="/seed/images/article-brushing.jpg" alt="">
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-date">2 ноември 2026</div>
+            <div class="blog-title"><a href="#">Как да научим детето да мие зъбите си</a></div>
+            <a href="#" class="blog-read">Прочетете →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BAND ════════════════════════════════════════════════════ -->
+<section class="cta-band">
+  <div class="cta-band-inner">
+    <div>
+      <h2>Запишете час при Руми Дент</h2>
+      <p>Намираме се на ул. „Плиска" 54, ж.к. Възраждане, Русе. Обадете ни се — ще изберем удобен час.</p>
+      <div class="cta-band-actions">
+        <a href="tel:+35982841190" class="btn btn--white">📅 Запишете час</a>
+        <a href="tel:+35982841190" class="btn btn--outline-white">📞 Обадете се</a>
+      </div>
+    </div>
+    <div class="cta-contact-card">
+      <div class="cta-contact-row">
+        <span class="cta-contact-icon">📍</span>
+        <address>ул. „Плиска" 54, ж.к. Възраждане, 7004 Русе</address>
+      </div>
+      <div class="cta-contact-row">
+        <span class="cta-contact-icon">📞</span>
+        <a href="tel:+35982841190">082 841 190</a>
+      </div>
+      <div class="cta-contact-row">
+        <span class="cta-contact-icon">🕐</span>
+        <dl class="cta-hours">
+          <dt>Пон, Вт, Чет</dt><dd>9:00 – 18:00</dd>
+          <dt>Ср, Пет</dt><dd>9:00 – 14:00</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Руми Дент</div>
+      <div class="footer-tagline">Детски дентален център, Русе</div>
+      <address class="footer-address">
+        ул. „Плиска" 54, ж.к. Възраждане<br>
+        7004 Русе, България<br>
+        <a href="tel:+35982841190" style="color:inherit">082 841 190</a>
+      </address>
+    </div>
+    <div>
+      <div class="footer-heading">Клиника</div>
+      <ul class="footer-links">
+        <li><a href="#">За нас</a></li>
+        <li><a href="#">Галерия</a></li>
+        <li><a href="#">Блог</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Пациенти</div>
+      <ul class="footer-links">
+        <li><a href="#">Услуги</a></li>
+        <li><a href="#">Първо посещение</a></li>
+        <li><a href="#">Контакти</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Работно време</div>
+      <dl style="font-size:var(--text-step--1);color:var(--color-fg-muted);display:grid;grid-template-columns:auto 1fr;gap:0.25rem 0.75rem;">
+        <dt style="opacity:.7">Пон, Вт, Чет</dt><dd>9:00 – 18:00</dd>
+        <dt style="opacity:.7">Ср, Пет</dt><dd>9:00 – 14:00</dd>
+        <dt style="opacity:.7">Съб, Нед</dt><dd>Почивен</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Руми Дент ЕООД · Всички права запазени
+  </div>
+</footer>
+
+</body>
+</html>

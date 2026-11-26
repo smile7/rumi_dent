@@ -144,6 +144,12 @@
     clip-path: ellipse(88% 92% at 52% 48%);
   }
 
+  /* Hero image frame: organically shaped container (editorial hero variant) */
+  .hero-frame {
+    border-radius: var(--radius-2xl, 3.5rem) var(--radius-2xl, 3.5rem) 40% 50% / var(--radius-2xl, 3.5rem) var(--radius-2xl, 3.5rem) 36% 44%;
+    overflow: hidden;
+  }
+
   html.js [data-tile-panel][data-open='false'] {
     display: none;
   }
@@ -151,5 +157,22 @@
   html:not(.js) [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Step connector for ProcessSteps */
+  .step-connector::after {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    left: calc(100% + 0.5rem);
+    width: calc(100% - 1rem);
+    height: 2px;
+    background: linear-gradient(to right, var(--color-brand-200), var(--color-brand-100));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step-connector::after {
+      display: none;
+    }
   }
 }

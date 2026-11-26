@@ -12,7 +12,7 @@ import { fixtureSite } from './__fixtures__/site'
 import { HeroSection } from './Hero'
 
 describe('HeroSection', () => {
-  it('renders the heading and trust row', async () => {
+  it('renders the heading', async () => {
     const ui = await HeroSection({
       section: heroSplitBg,
       index: 0,
@@ -23,6 +23,18 @@ describe('HeroSection', () => {
     })
     renderWithIntl(<>{ui}</>)
     expect(screen.getByRole('heading', { level: 1, name: heroSplitBg.heading })).toBeInTheDocument()
-    expect(screen.getByText('Children from age 1')).toBeInTheDocument()
+  })
+
+  it('renders the subheading', async () => {
+    const ui = await HeroSection({
+      section: heroSplitBg,
+      index: 0,
+      sections: [heroSplitBg],
+      locale: 'bg',
+      site: fixtureSite,
+      imagePriority: false,
+    })
+    renderWithIntl(<>{ui}</>)
+    expect(screen.getByText(heroSplitBg.subheading!)).toBeInTheDocument()
   })
 })

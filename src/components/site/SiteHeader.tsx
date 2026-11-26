@@ -5,7 +5,7 @@ import type { ReactNode } from 'react'
 import { Container } from '@/components/primitives/Container'
 import { buttonVariants } from '@/components/ui/button'
 import { Link } from '@/i18n/navigation'
-import type { NavItem } from '@/lib/content'
+import type { ImageAsset, NavItem } from '@/lib/content'
 import type { PhoneLink } from '@/lib/site/actions'
 import { cn } from '@/lib/utils'
 
@@ -18,6 +18,10 @@ const HEADER_ID = 'site-header'
 
 export type SiteHeaderProps = {
   brandName: string
+  /** Logo image from Sanity. When present, renders an `<img>` instead of text. */
+  logo?: ImageAsset
+  /** Compact/mobile logo variant. Falls back to `logo`. */
+  logoCompact?: ImageAsset
   nav: NavItem[]
   phone: PhoneLink | null
   /** Mobile menu trigger, shown below `xl`. */
@@ -29,8 +33,9 @@ export type SiteHeaderProps = {
  * `-(--header-shrink)`, so only the compact height stays visible; `data-compact` then moves the
  * bar into that visible part and scales the wordmark. Nothing re-lays out, so there's no CLS.
  */
-export async function SiteHeader({ brandName, nav, phone, menu }: SiteHeaderProps) {
+export async function SiteHeader({ brandName, logo, logoCompact, nav, phone, menu }: SiteHeaderProps) {
   const t = await getTranslations('Header')
+  const activeLogo = logoCompact ?? logo
 
   return (
     <>
@@ -45,9 +50,10 @@ export async function SiteHeader({ brandName, nav, phone, menu }: SiteHeaderProp
         >
           <Link
             href="/"
+            aria-label={brandName}
             className="me-auto inline-flex min-h-11 origin-left items-center rounded-sm transition-transform duration-(--duration-base) ease-standard group-data-compact/header:scale-90 md:scale-140 md:group-data-compact/header:scale-100"
           >
-            <Wordmark name={brandName} variant="compact" />
+            <Wordmark name={brandName} logo={activeLogo} variant="compact" />
           </Link>
 
           {nav.length > 0 ? (

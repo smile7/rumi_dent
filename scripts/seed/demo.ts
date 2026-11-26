@@ -67,11 +67,11 @@ const cta = (
 const id = (type: string, key: string) => `${seedPrefix}${type}-${key}`
 
 const demoDetails: LegalDetails = {
-  legalName: { bg: 'Демо Дентал ЕООД', en: 'Demo Dental EOOD' },
+  legalName: { bg: 'Руми Дент ЕООД', en: 'Rumi Dent EOOD' },
   uic: { bg: '000000000', en: '000000000' },
-  address: { bg: 'ул. „Демо“ 1, 7000 Русе', en: '1 Demo St, 7000 Ruse' },
-  email: { bg: 'hello@example.com', en: 'hello@example.com' },
-  phone: { bg: '082 000 000', en: '+359 82 000 000' },
+  address: { bg: 'ж.к. Възраждане, ул. „Плиска“ 54, 7004 Русе', en: '54 Pliska St, Vazrazhdane, 7004 Ruse' },
+  email: { bg: 'info@rumident.bg', en: 'info@rumident.bg' },
+  phone: { bg: '082 841 190', en: '+359 82 841 190' },
   dpo: { bg: 'не е определено', en: 'not appointed' },
   retention: { bg: '12 месеца', en: '12 months' },
 }
@@ -138,12 +138,12 @@ export function demoDocuments(images: SeedImages) {
 
   const team: SeedDoc<TeamMember>[] = [
     {
-      _id: id('teamMember', 'maria'),
+      _id: id('teamMember', 'rumyana'),
       _type: 'teamMember',
-      name: 'Мария Иванова',
-      nameLatin: 'Maria Ivanova',
+      name: 'Румяна Купенова',
+      nameLatin: 'Rumyana Kupenova',
       honorific: i18nString({ bg: 'Д-р', en: 'Dr' }),
-      role: i18nString({ bg: 'Детски зъболекар', en: 'Paediatric dentist' }),
+      role: i18nString({ bg: 'Детски стоматолог', en: 'Paediatric dentist' }),
       specialties: keyed(
         [
           {
@@ -158,8 +158,8 @@ export function demoDocuments(images: SeedImages) {
         'sp',
       ),
       bioShort: i18nText({
-        bg: 'Д-р Иванова работи с деца над 12 години. Вярва, че първото посещение трябва да е игра, а не изпитание.',
-        en: 'Dr Ivanova has treated children for over 12 years. She believes a first visit should feel like play, not a test.',
+        bg: 'Д-р Купенова ръководи клиниката и приема деца от 1-годишна възраст. Вярва, че доверието е по-важно от лечението.',
+        en: 'Dr Kupenova leads the clinic and sees children from age one. She believes trust matters more than treatment.',
       }),
       bio: i18nRichTextSimple({
         bg: simpleText(
@@ -172,8 +172,8 @@ export function demoDocuments(images: SeedImages) {
         ),
       }),
       photo: image(images, 'team-maria', {
-        bg: 'Д-р Мария Иванова в кабинета',
-        en: 'Dr Maria Ivanova in the treatment room',
+        bg: 'Д-р Румяна Купенова в кабинета',
+        en: 'Dr Rumyana Kupenova in the treatment room',
       }),
       featured: true,
       categories: refs([id('serviceCategory', 'children')]),
@@ -195,13 +195,13 @@ export function demoDocuments(images: SeedImages) {
     {
       _id: id('teamMember', 'georgi'),
       _type: 'teamMember',
-      name: 'Георги Петров',
-      nameLatin: 'Georgi Petrov',
+      name: 'Георги Йорданов',
+      nameLatin: 'Georgi Yordanov',
       honorific: i18nString({ bg: 'Д-р', en: 'Dr' }),
-      role: i18nString({ bg: 'Лекар по дентална медицина', en: 'Dentist' }),
+      role: i18nString({ bg: 'Стоматолог за възрастни', en: 'General dentist' }),
       bioShort: i18nText({
-        bg: 'Д-р Петров се грижи за родителите: профилактика, лечение и естетика без бързане.',
-        en: 'Dr Petrov looks after the parents: prevention, treatment and cosmetic care, never rushed.',
+        bg: 'Д-р Йорданов приема пациенти на всякаква възраст. Работи внимателно, без бързане, с ясни цени предварително.',
+        en: 'Dr Yordanov sees patients of all ages. He works carefully, never rushed, with prices agreed in advance.',
       }),
       photo: image(images, 'team-georgi', {
         bg: 'Д-р Георги Петров',
@@ -214,12 +214,12 @@ export function demoDocuments(images: SeedImages) {
     {
       _id: id('teamMember', 'elena'),
       _type: 'teamMember',
-      name: 'Елена Димитрова',
+      name: 'Елена Петрова',
       nameLatin: 'Elena Dimitrova',
       role: i18nString({ bg: 'Дентален асистент', en: 'Dental assistant' }),
       bioShort: i18nText({
-        bg: 'Елена посреща пациентите, подготвя кабинета и винаги има стикер за смелите.',
-        en: 'Elena welcomes patients, prepares the room and always has a sticker for brave kids.',
+        bg: 'Елена посреща пациентите и координира записванията. Тя се грижи всяко посещение да минава гладко.',
+        en: 'Elena welcomes patients and manages appointments. She makes sure every visit runs smoothly.',
       }),
       photo: image(images, 'team-elena', { bg: 'Елена Димитрова', en: 'Elena Dimitrova' }),
       featured: false,
@@ -307,7 +307,7 @@ export function demoDocuments(images: SeedImages) {
         { bg: 'Детският кът с книжки и играчки', en: 'The kids corner with books and toys' },
       ],
       ['clinic-waiting', 'clinic', { bg: 'Чакалнята', en: 'The waiting area' }],
-      ['team-maria', 'team', { bg: 'Д-р Мария Иванова', en: 'Dr Maria Ivanova' }],
+      ['team-maria', 'team', { bg: 'Д-р Румяна Купенова', en: 'Dr Rumyana Kupenova' }],
       ['team-georgi', 'team', { bg: 'Д-р Георги Петров', en: 'Dr Georgi Petrov' }],
     ] as const
   ).map(([name, album, alt], index) => ({
@@ -425,7 +425,21 @@ export function demoDocuments(images: SeedImages) {
         ],
       },
       faq: [id('faqItem', 'firstVisit'), id('faqItem', 'children')],
-      doctors: [id('teamMember', 'maria')],
+      doctors: [id('teamMember', 'rumyana')],
+    },
+    {
+      key: 'adaptation',
+      category: 'children',
+      icon: 'heart',
+      title: { bg: 'Адаптация към кабинета', en: 'Getting to know the clinic' },
+      teaser: {
+        bg: 'Първото посещение е само запознанство — без лечение, без страх.',
+        en: 'The first visit is just a meet-and-greet — no treatment, no fear.',
+      },
+      summary: {
+        bg: ['Детето разглежда кабинета, брои зъбчетата и получава стикер за смелост.'],
+        en: ['Your child explores the room, counts their teeth and earns a bravery sticker.'],
+      },
     },
     {
       key: 'sealants',
@@ -433,8 +447,8 @@ export function demoDocuments(images: SeedImages) {
       icon: 'shield-check',
       title: { bg: 'Силанти', en: 'Fissure sealants' },
       teaser: {
-        bg: 'Защитно покритие на дъвкателните зъби, без пробиване.',
-        en: 'A protective coating for the back teeth, no drilling.',
+        bg: 'Защитно покритие на дъвкателните зъби — без пробиване.',
+        en: 'A protective coating for the back teeth — no drilling.',
       },
       summary: {
         bg: ['Запечатваме браздите на постоянните зъби, където кариесът започва най-често.'],
@@ -476,17 +490,17 @@ export function demoDocuments(images: SeedImages) {
       durationNote: { bg: 'около 45 минути', en: 'about 45 minutes' },
     },
     {
-      key: 'whitening',
+      key: 'surgery',
       category: 'adults',
-      icon: 'wand-sparkles',
-      title: { bg: 'Избелване', en: 'Teeth whitening' },
+      icon: 'sparkles',
+      title: { bg: 'Орална хирургия', en: 'Oral surgery' },
       teaser: {
-        bg: 'По-светла усмивка, безопасно и под контрол на лекар.',
-        en: 'A brighter smile, safely and under a dentist’s care.',
+        bg: 'Екстракции и малки хирургични процедури в спокойна обстановка.',
+        en: 'Extractions and minor surgical procedures in a calm setting.',
       },
       summary: {
-        bg: ['Домашно избелване с индивидуални шини или процедура в кабинета.'],
-        en: ['At-home whitening with custom trays, or a treatment in the clinic.'],
+        bg: ['Премахване на зъби и корени, при необходимост под местна упойка.'],
+        en: ['Tooth and root extractions, under local anaesthetic when needed.'],
       },
     },
   ]
@@ -548,8 +562,8 @@ export function demoDocuments(images: SeedImages) {
             ],
           }[locale],
         ),
-        author: ref(id('teamMember', 'maria')),
-        reviewedBy: ref(id('teamMember', 'maria')),
+        author: ref(id('teamMember', 'rumyana')),
+        reviewedBy: ref(id('teamMember', 'rumyana')),
         publishedAt: '2026-10-05T08:00:00Z',
         related: refs([routableId('article', 'brushing', locale)]),
       }
@@ -590,7 +604,7 @@ export function demoDocuments(images: SeedImages) {
             ],
           }[locale],
         ),
-        author: ref(id('teamMember', 'maria')),
+        author: ref(id('teamMember', 'rumyana')),
         publishedAt: '2026-11-02T08:00:00Z',
       }
     }),
@@ -617,41 +631,16 @@ export function demoDocuments(images: SeedImages) {
               en: 'Fear-free smiles, from the very first tooth',
             }[locale],
             subheading: {
-              bg: 'Детска и семейна дентална клиника, в която децата влизат с любопитство, а родителите излизат спокойни.',
-              en: 'A children’s and family dental clinic where kids walk in curious and parents leave relaxed.',
+              bg: 'Детска дентална клиника в Русе, в която децата влизат с любопитство, а родителите излизат спокойни.',
+              en: 'A paediatric dental clinic in Ruse where kids walk in curious and parents leave relaxed.',
             }[locale],
-            ctas: keyed([
-              bookCta(locale),
-              cta({ bg: 'Нашите услуги', en: 'Our services' }[locale], 'link', {
-                link: systemLink('services'),
-                style: 'secondary',
-              }),
-            ]),
-            image: image(images, 'hero-family', {
-              bg: 'Майка и дете се усмихват в кабинета',
-              en: 'A mother and child smiling in the treatment room',
+            ctas: keyed([bookCta(locale)]),
+            image: image(images, 'hero-kid', {
+              bg: 'Дете чисти зъбите си с четка',
+              en: 'A child brushing their teeth',
             }),
             variant: 'split',
-            trustItems: keyed(
-              [
-                {
-                  _type: 'trustItem' as const,
-                  icon: 'baby' as const,
-                  text: { bg: 'Деца от 1 година', en: 'Children from age 1' }[locale],
-                },
-                {
-                  _type: 'trustItem' as const,
-                  icon: 'award' as const,
-                  text: { bg: '12 години опит', en: '12 years of experience' }[locale],
-                },
-                {
-                  _type: 'trustItem' as const,
-                  icon: 'shield-check' as const,
-                  text: { bg: 'Работим с НЗОК', en: 'Health fund partner' }[locale],
-                },
-              ],
-              't',
-            ),
+            trustItems: keyed([], 't'),
           }),
           section('section.tiles', {
             heading: { bg: 'Услуги', en: 'Services' }[locale],
@@ -665,6 +654,10 @@ export function demoDocuments(images: SeedImages) {
           }),
           section('section.processSteps', {
             heading: { bg: 'Първото посещение', en: 'Your first visit' }[locale],
+            intro: {
+              bg: 'Три прости стъпки, след които детето ще иска да дойде пак.',
+              en: 'Three simple steps — after which your child will want to come back.',
+            }[locale],
             steps: keyed(
               [
                 {
@@ -672,17 +665,17 @@ export function demoDocuments(images: SeedImages) {
                   icon: 'phone' as const,
                   title: { bg: 'Обаждате се', en: 'You call us' }[locale],
                   text: {
-                    bg: 'Избираме удобен час, без чакане.',
-                    en: 'We pick a time that suits you, no waiting.',
+                    bg: 'Записваме удобен час. Без чакалня.',
+                    en: 'We book a time that works for you. No waiting room surprises.',
                   }[locale],
                 },
                 {
                   _type: 'processStep' as const,
                   icon: 'smile' as const,
-                  title: { bg: 'Запознаваме се', en: 'We get to know each other' }[locale],
+                  title: { bg: 'Запознаваме се', en: 'We meet and play' }[locale],
                   text: {
-                    bg: 'Детето разглежда кабинета и играе.',
-                    en: 'Your child explores the room and plays.',
+                    bg: 'Детето разглежда кабинета, сяда на стола и брои зъбчетата с д-р Купенова.',
+                    en: 'Your child explores the room, sits in the chair and counts teeth with Dr Kupenova.',
                   }[locale],
                 },
                 {
@@ -690,22 +683,25 @@ export function demoDocuments(images: SeedImages) {
                   icon: 'clipboard-list' as const,
                   title: { bg: 'Ясен план', en: 'A clear plan' }[locale],
                   text: {
-                    bg: 'Получавате план и цени предварително.',
-                    en: 'You get a plan and prices up front.',
+                    bg: 'Получавате пълен план и цени преди всяко следващо посещение.',
+                    en: 'You receive a full treatment plan and prices before the next appointment.',
                   }[locale],
                 },
               ],
               'p',
             ),
-            cta: bookCta(locale),
             tone: 'soft',
           }),
           section('section.team', {
-            heading: { bg: 'Екипът', en: 'The team' }[locale],
+            heading: { bg: 'Нашият екип', en: 'Meet our team' }[locale],
+            intro: {
+              bg: 'Д-р Купенова и д-р Йорданов приемат заедно в Русе от 2015 г.',
+              en: 'Dr Kupenova and Dr Yordanov have been practising together in Ruse since 2015.',
+            }[locale],
             layout: 'featuredFirst',
           }),
           section('section.testimonials', {
-            heading: { bg: 'Какво казват родителите', en: 'What parents say' }[locale],
+            heading: { bg: 'Родителите казват', en: 'What parents say' }[locale],
             showRating: true,
             tone: 'soft',
           }),
@@ -720,10 +716,10 @@ export function demoDocuments(images: SeedImages) {
             count: 3,
           }),
           section('section.ctaBand', {
-            heading: { bg: 'Време е за преглед?', en: 'Time for a check-up?' }[locale],
+            heading: { bg: 'Запишете час при Руми Дент', en: 'Book your visit at Rumi Dent' }[locale],
             text: {
-              bg: 'Запишете час онлайн или ни се обадете.',
-              en: 'Book online or give us a call.',
+              bg: 'Намираме се на ул. \u201eПлиска\u201c 54, ж.к. Възраждане, Русе. Обадете ни се — ще изберем удобен час.',
+              en: 'Find us at 54 Pliska St, Vazrazhdane, Ruse. Give us a call — we will find a time that suits you.',
             }[locale],
             ctas: keyed([bookCta(locale), callCta(locale)]),
             tone: 'brand',
@@ -768,13 +764,13 @@ export function demoDocuments(images: SeedImages) {
       pageKey: 'about',
       title: { bg: 'За нас', en: 'About us' }[locale],
       intro: {
-        bg: 'Екипът, историята и ценностите зад Демо Дентал.',
-        en: 'The team, the story and the values behind Demo Dental.',
+        bg: 'Екипът, историята и ценностите зад Руми Дент.',
+        en: 'The team, the story and the values behind Rumi Dent.',
       }[locale],
       sections: keyed(
         [
           section('section.textImage', {
-            heading: { bg: 'Клиника, създадена за деца', en: 'A clinic designed for children' }[
+            heading: { bg: 'Детска клиника, създадена с любов', en: 'A clinic designed with love for children' }[
               locale
             ],
             body: richText(
@@ -787,9 +783,9 @@ export function demoDocuments(images: SeedImages) {
                 en: 'The rooms are bright, there is a kids corner, and we never rush.',
               }[locale],
             ),
-            image: image(images, 'clinic-kids-corner', {
-              bg: 'Детският кът в клиниката',
-              en: 'The kids corner at the clinic',
+            image: image(images, 'hero-family', {
+              bg: 'Д-р Купенова с млад пациент в кабинета',
+              en: 'Dr Kupenova with a young patient in the treatment room',
             }),
             imagePosition: 'right',
           }),
@@ -813,6 +809,10 @@ export function demoDocuments(images: SeedImages) {
           }),
           section('section.team', {
             heading: { bg: 'Запознайте се с нас', en: 'Meet us' }[locale],
+            intro: {
+              bg: 'Два лекари, едно семейство, стотици усмивки.',
+              en: 'Two dentists, one family practice, hundreds of smiles.',
+            }[locale],
             layout: 'grid',
           }),
           section('section.gallery', {
@@ -855,8 +855,8 @@ export function demoDocuments(images: SeedImages) {
       pageKey: 'contact',
       title: { bg: 'Контакти', en: 'Contact' }[locale],
       intro: {
-        bg: 'Адрес, работно време и как да се свържете с нас.',
-        en: 'Address, opening hours and how to reach us.',
+        bg: 'Намерете ни на ул. \u201eПлиска\u201c 54 в Русе. Работим пон-вт-чет 9–18 ч. и ср-пет 9–14 ч.',
+        en: 'Find us at 54 Pliska St in Ruse. We are open Mon-Tue-Thu 9–18 and Wed-Fri 9–14.',
       }[locale],
       sections: keyed(
         [
@@ -972,19 +972,19 @@ export function demoDocuments(images: SeedImages) {
   const settings: SeedDoc<SiteSettings> = {
     _id: 'siteSettings',
     _type: 'siteSettings',
-    brandName: i18nString({ bg: 'Демо Дентал', en: 'Demo Dental' }),
+    brandName: i18nString({ bg: 'Руми Дент', en: 'Rumi Dent' }),
     tagline: i18nString({
-      bg: 'Детска и семейна дентална клиника',
-      en: 'Children’s and family dental clinic',
+      bg: 'Детски дентален център, Русе',
+      en: 'Paediatric dental centre, Ruse',
     }),
     businessType: 'Dentist',
     areaServed: i18nString({ bg: 'Русе и областта', en: 'Ruse and the region' }),
     priceRange: '€€',
     address: {
       _type: 'address',
-      street: i18nString({ bg: 'ул. „Демо“ 1', en: '1 Demo St' }),
+      street: i18nString({ bg: 'ул. „Плиска“ 54', en: '54 Pliska St' }),
       city: i18nString({ bg: 'Русе', en: 'Ruse' }),
-      postalCode: '7000',
+      postalCode: '7004',
       countryCode: 'BG',
     },
     geo: { _type: 'geo', lat: 43.8486, lng: 25.9542 },
@@ -993,14 +993,14 @@ export function demoDocuments(images: SeedImages) {
         {
           _type: 'phone' as const,
           key: 'primary' as const,
-          e164: '+35982000000',
-          display: '082 000 000',
+          e164: '+35982841190',
+          display: '082 841 190',
           label: i18nString({ bg: 'Рецепция', en: 'Reception' }),
         },
       ],
       'ph',
     ),
-    email: 'hello@example.com',
+    email: 'info@rumident.bg',
     mapPlaceholder: image(images, 'map-placeholder', {
       bg: 'Карта с местоположението на клиниката',
       en: 'Map showing the clinic location',
@@ -1009,11 +1009,16 @@ export function demoDocuments(images: SeedImages) {
       [
         {
           _type: 'openingHoursSpec' as const,
-          days: ['Mo', 'Tu', 'We', 'Th', 'Fr'],
+          days: ['Mo', 'Tu', 'Th'],
           opens: '09:00',
-          closes: '19:00',
+          closes: '18:00',
         },
-        { _type: 'openingHoursSpec' as const, days: ['Sa'], opens: '09:00', closes: '13:00' },
+        {
+          _type: 'openingHoursSpec' as const,
+          days: ['We', 'Fr'],
+          opens: '09:00',
+          closes: '14:00',
+        },
       ],
       'h',
     ),
@@ -1035,7 +1040,7 @@ export function demoDocuments(images: SeedImages) {
         {
           _type: 'socialLink' as const,
           platform: 'facebook' as const,
-          url: 'https://www.facebook.com/example',
+          url: 'https://www.facebook.com/rumident',
         },
       ],
       'so',
@@ -1045,7 +1050,7 @@ export function demoDocuments(images: SeedImages) {
       mode: 'phone',
     },
     contactForm: {
-      recipient: 'hello@example.com',
+      recipient: 'info@rumident.bg',
       subjectPrefix: i18nString({ bg: 'Запитване от сайта', en: 'Website enquiry' }),
       successMessage: i18nText({
         bg: 'Благодарим! Ще Ви се обадим в рамките на работния ден.',
@@ -1056,7 +1061,7 @@ export function demoDocuments(images: SeedImages) {
       _type: 'legalEntity',
       legalName: demoDetails.legalName.bg,
       uic: demoDetails.uic.bg,
-      representative: 'Мария Иванова',
+      representative: 'Румяна Купенова',
       privacyEmail: 'privacy@example.com',
       professionalBody: i18nString({
         bg: 'Български зъболекарски съюз',
@@ -1070,14 +1075,14 @@ export function demoDocuments(images: SeedImages) {
       'l',
     ),
     footerNote: i18nText({
-      bg: 'Демо съдържание. Заменете преди пускане.',
-      en: 'Demo content. Replace before launch.',
+      bg: 'Руми Дент · Детски дентален център · Русе',
+      en: 'Rumi Dent · Paediatric Dental Centre · Ruse',
     }),
     seoDefaults: {
-      titleTemplate: i18nString({ bg: '%s · Демо Дентал', en: '%s · Demo Dental' }),
+      titleTemplate: i18nString({ bg: '%s · Руми Дент', en: '%s · Rumi Dent' }),
       description: i18nText({
-        bg: 'Детска и семейна дентална клиника в Русе: прегледи без страх, профилактика и лечение за деца и възрастни.',
-        en: 'A children’s and family dental clinic in Ruse: fear-free check-ups, prevention and treatment for kids and adults.',
+        bg: 'Руми Дент — детски дентален център в Русе. Прегледи без страх, профилактика и лечение за деца и цялото семейство.',
+        en: 'Rumi Dent — paediatric dental centre in Ruse. Fear-free check-ups, prevention and treatment for children and families.',
       }),
       ogImage: image(images, 'og-default', {
         bg: 'Демо Дентал, детска дентална клиника',

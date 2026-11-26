@@ -47,8 +47,8 @@ export async function SiteFooter({ locale, settings, columns }: SiteFooterProps)
         className="grid gap-10 py-12 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:py-16"
       >
         <div>
-          <Link href="/" className="inline-flex min-h-11 items-center rounded-sm">
-            <Wordmark name={settings.brandName} variant="compact" />
+          <Link href="/" aria-label={settings.brandName} className="inline-flex min-h-11 items-center rounded-sm">
+            <Wordmark name={settings.brandName} logo={settings.logoCompact ?? settings.logo} variant="compact" />
           </Link>
           {settings.tagline ? <p className="mt-2 text-fg-muted">{settings.tagline}</p> : null}
           <address className="mt-4 flex flex-col gap-1 not-italic">

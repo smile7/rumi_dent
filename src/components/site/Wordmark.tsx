@@ -1,12 +1,15 @@
+import Image from 'next/image'
+
+import type { ImageAsset } from '@/lib/content/types'
 import { cn } from '@/lib/utils'
 
 type WordmarkProps = {
   /** The brand name (from site settings / `src/config/site.ts`), never hard-coded here. */
   name: string
+  /** Logo image from Sanity settings; shown instead of text when present. */
+  logo?: ImageAsset
   /** `full` at the top of the page, `compact` in the shrunk header. */
   variant?: 'full' | 'compact'
-  /** Small accent-colored smile arc after the name. */
-  accent?: boolean
   className?: string
 }
 
@@ -15,34 +18,33 @@ const sizeByVariant = {
   compact: 'text-step-1',
 } as const
 
-/** Text logo set in the display font. Used when the client has no logo SVG. */
-export function Wordmark({ name, variant = 'full', accent = true, className }: WordmarkProps) {
+/** Brand mark — image logo when available, text wordmark otherwise. */
+export function Wordmark({ name, logo, variant = 'full', className }: WordmarkProps) {
+  if (logo) {
+    const height = variant === 'compact' ? 36 : 48
+    const width = Math.round((logo.width / logo.height) * height)
+    return (
+      <Image
+        src={logo.src}
+        alt={name}
+        width={width}
+        height={height}
+        className={cn('h-auto', className)}
+        style={{ maxHeight: `${height}px`, width: 'auto' }}
+      />
+    )
+  }
+
   return (
     <span
       data-slot="wordmark"
       className={cn(
-        'inline-flex items-baseline gap-[0.12em] font-display leading-none font-extrabold tracking-[-0.015em] text-primary',
+        'inline-flex items-baseline font-display leading-none font-extrabold tracking-[-0.015em] text-primary',
         sizeByVariant[variant],
         className,
       )}
     >
-      <span>{name}</span>
-      {accent ? (
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          viewBox="0 0 24 12"
-          className="h-[0.42em] w-[0.84em] self-end text-accent-500"
-        >
-          <path
-            d="M3 3c2.4 4.2 5.3 6.3 9 6.3S18.6 7.2 21 3"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
-        </svg>
-      ) : null}
+      {name}
     </span>
   )
 }
